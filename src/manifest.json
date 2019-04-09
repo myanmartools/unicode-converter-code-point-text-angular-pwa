@@ -1,0 +1,267 @@
+{
+  "name": "Unicode Converter - Covert UTF-16 Code Points and Text",
+  "short_name": "Unicode Converter",
+  "description": "Unicode converter for converting UTF-16 code point sequences to text and vice versa - Angular Progressive Web Application (PWA).",
+  "theme_color": "#795548",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "orientation": "portrait",
+  "start_url": "/",
+  "scope": "/",
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "assets/images/appicons/v1/android/android-launchericon-512x512.png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "assets/images/appicons/v1/android/android-launchericon-192x192.png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "assets/images/appicons/v1/android/android-launchericon-144x144.png",
+      "sizes": "144x144"
+    },
+    {
+      "src": "assets/images/appicons/v1/android/android-launchericon-96x96.png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "assets/images/appicons/v1/android/android-launchericon-72x72.png",
+      "sizes": "72x72"
+    },
+    {
+      "src": "assets/images/appicons/v1/android/android-launchericon-48x48.png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "assets/images/appicons/v1/ios/ios-appicon-1024x1024.png",
+      "sizes": "1024x1024"
+    },
+    {
+      "src": "assets/images/appicons/v1/ios/ios-appicon-180x180.png",
+      "sizes": "180x180"
+    },
+    {
+      "src": "assets/images/appicons/v1/ios/ios-appicon-152x152.png",
+      "sizes": "152x152"
+    },
+    {
+      "src": "assets/images/appicons/v1/ios/ios-appicon-120x120.png",
+      "sizes": "120x120"
+    },
+    {
+      "src": "assets/images/appicons/v1/ios/ios-appicon-76x76.png",
+      "sizes": "76x76"
+    },
+    {
+      "src": "assets/images/appicons/v1/ios/ios-launchimage-750x1334.png",
+      "sizes": "750x1334"
+    },
+    {
+      "src": "assets/images/appicons/v1/ios/ios-launchimage-1334x750.png",
+      "sizes": "1334x750"
+    },
+    {
+      "src": "assets/images/appicons/v1/ios/ios-launchimage-1242x2208.png",
+      "sizes": "1242x2208"
+    },
+    {
+      "src": "assets/images/appicons/v1/ios/ios-launchimage-2208x1242.png",
+      "sizes": "2208x1242"
+    },
+    {
+      "src": "assets/images/appicons/v1/ios/ios-launchimage-640x960.png",
+      "sizes": "640x960"
+    },
+    {
+      "src": "assets/images/appicons/v1/ios/ios-launchimage-640x1136.png",
+      "sizes": "640x1136"
+    },
+    {
+      "src": "assets/images/appicons/v1/ios/ios-launchimage-1536x2048.png",
+      "sizes": "1536x2048"
+    },
+    {
+      "src": "assets/images/appicons/v1/ios/ios-launchimage-2048x1536.png",
+      "sizes": "2048x1536"
+    },
+    {
+      "src": "assets/images/appicons/v1/ios/ios-launchimage-768x1024.png",
+      "sizes": "768x1024"
+    },
+    {
+      "src": "assets/images/appicons/v1/ios/ios-launchimage-1024x768.png",
+      "sizes": "1024x768"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Square71x71Logo.scale-400.png",
+      "sizes": "284x284"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Square71x71Logo.scale-200.png",
+      "sizes": "142x142"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Square71x71Logo.scale-100.png",
+      "sizes": "71x71"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Square71x71Logo.scale-150.png",
+      "sizes": "107x107"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Square71x71Logo.scale-125.png",
+      "sizes": "89x89"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Square150x150Logo.scale-400.png",
+      "sizes": "600x600"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Square150x150Logo.scale-200.png",
+      "sizes": "300x300"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Square150x150Logo.scale-100.png",
+      "sizes": "150x150"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Square150x150Logo.scale-150.png",
+      "sizes": "225x225"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Square150x150Logo.scale-125.png",
+      "sizes": "188x188"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Wide310x150Logo.scale-400.png",
+      "sizes": "1240x600"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Wide310x150Logo.scale-200.png",
+      "sizes": "620x300"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Wide310x150Logo.scale-100.png",
+      "sizes": "310x150"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Wide310x150Logo.scale-150.png",
+      "sizes": "465x225"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Wide310x150Logo.scale-125.png",
+      "sizes": "388x188"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Square310x310Logo.scale-400.png",
+      "sizes": "1240x1240"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Square310x310Logo.scale-200.png",
+      "sizes": "620x620"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Square310x310Logo.scale-100.png",
+      "sizes": "310x310"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Square310x310Logo.scale-150.png",
+      "sizes": "465x465"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Square310x310Logo.scale-125.png",
+      "sizes": "388x388"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Square44x44Logo.scale-400.png",
+      "sizes": "176x176"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Square44x44Logo.scale-200.png",
+      "sizes": "88x88"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Square44x44Logo.scale-100.png",
+      "sizes": "44x44"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Square44x44Logo.scale-150.png",
+      "sizes": "66x66"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Square44x44Logo.scale-125.png",
+      "sizes": "55x55"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Square44x44Logo.targetsize-256.png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Square44x44Logo.targetsize-48.png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Square44x44Logo.targetsize-24.png",
+      "sizes": "24x24"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Square44x44Logo.targetsize-256_altform-unplated.png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Square44x44Logo.targetsize-48_altform-unplated.png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Square44x44Logo.targetsize-24_altform-unplated.png",
+      "sizes": "24x24"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/Square44x44Logo.targetsize-16_altform-unplated.png",
+      "sizes": "16x16"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/StoreLogo.scale-400.png",
+      "sizes": "200x200"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/StoreLogo.scale-200.png",
+      "sizes": "100x100"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/StoreLogo.scale-150.png",
+      "sizes": "75x75"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/StoreLogo.scale-125.png",
+      "sizes": "63x63"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/StoreLogo.scale-100.png",
+      "sizes": "50x50"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/SplashScreen.scale-400.png",
+      "sizes": "2480x1200"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/SplashScreen.scale-200.png",
+      "sizes": "1240x600"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/SplashScreen.scale-150.png",
+      "sizes": "930x450"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/SplashScreen.scale-125.png",
+      "sizes": "775x375"
+    },
+    {
+      "src": "assets/images/appicons/v1/windows/SplashScreen.scale-100.png",
+      "sizes": "620x300"
+    }
+  ]
+}
