@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en-US" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <title>Unicode Converter - Covert UTF-16 Code Points and Text | Myanmar Tools</title>
+    <meta name="description"
+        content="One of Myanmar Tools open source projects super-powered by DagonMetric for converting UTF-16 code point sequences to text and vice versa.">
+    <meta name="keywords" content="unicode converter,code points text,myanmar tools">
+    <base href="/">
+
+    <link rel="canonical" href="https://unicode-code-points-text-converter.myanmartools.org/">
+
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#795548">
+
+    <!-- IoS app title -->
+    <meta name="apple-mobile-web-app-title" content="Unicode Converter - Covert UTF-16 Code Points and Text">
+    <!-- IoS webapp capable config -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- IoS statusbar style -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- IoS app icons -->
+    <link rel="apple-touch-icon" href="assets/images/appicons/v1/ios/ios-appicon-180x180.png">
+    <!-- iPhone(first generation or 2G), iPhone 3G, iPhone 3GS -->
+    <!-- <link rel="apple-touch-icon" sizes="56x56" href="assets/images/appicons/v1/ios/ios-appicon-56x56.png"> -->
+    <!-- iPad and iPad mini @1x -->
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/images/appicons/v1/ios/ios-appicon-76x76.png">
+    <!-- iPhone 4, iPhone 4s, iPhone 5, iPhone 5c, iPhone 5s, iPhone 6, iPhone 6s, iPhone 7, iPhone 7s, iPhone8 -->
+    <link rel="apple-touch-icon" sizes="120x120" href="assets/images/appicons/v1/ios/ios-appicon-120x120.png">
+    <!-- iPad and iPad mini @2x -->
+    <link rel="apple-touch-icon" sizes="152x152" href="assets/images/appicons/v1/ios/ios-appicon-152x152.png">
+    <!-- iPad Pro -->
+    <!-- <link rel="apple-touch-icon" sizes="167x167" href="assets/images/appicons/v1/ios/ios-appicon-167x167.png"> -->
+    <!-- iPhone X, iPhone 8 Plus, iPhone 7 Plus, iPhone 6s Plus, iPhone 6 Plus -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/appicons/v1/ios/ios-appicon-180x180.png">
+
+    <!-- IoS startup images -->
+    <!-- iPhone < 5 retina startup image -->
+    <link rel="apple-touch-startup-image" href="assets/images/appicons/v1/ios/ios-launchimage-640x960.png"
+        media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <!-- iPhone 5/SE startup image -->
+    <link rel="apple-touch-startup-image" href="assets/images/appicons/v1/ios/ios-launchimage-640x1136.png"
+        media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <!-- iPhone 6s/7/8 landscape startup image -->
+    <link rel="apple-touch-startup-image" href="assets/images/appicons/v1/ios/ios-launchimage-1334x750.png"
+        media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <!-- iPhone 6s/7/8 portrait startup image -->
+    <link rel="apple-touch-startup-image" href="assets/images/appicons/v1/ios/ios-launchimage-750x1334.png"
+        media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <!-- iPhone 6 Plus/7 Plus/8 Plus landscape startup image -->
+    <link rel="apple-touch-startup-image" href="assets/images/appicons/v1/ios/ios-launchimage-2208x1242.png"
+        media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)">
+    <!-- iPhone 6 Plus/7 Plus/8 Plus portrait startup image -->
+    <link rel="apple-touch-startup-image" href="assets/images/appicons/v1/ios/ios-launchimage-1242x2208.png"
+        media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <!-- iPhone X landscape startup image -->
+    <link rel="apple-touch-startup-image" href="assets/images/appicons/v1/ios/ios-launchimage-2436x1125.png"
+        media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <!-- iPhone X portrait startup image -->
+    <link rel="apple-touch-startup-image" href="assets/images/appicons/v1/ios/ios-launchimage-1125x2436.png"
+        media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <!-- iPad non-retina landscape startup image -->
+    <link rel="apple-touch-startup-image" href="assets/images/appicons/v1/ios/ios-launchimage-1024x768.png"
+        media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: landscape)">
+    <!-- iPad non-retina portrait startup image -->
+    <link rel="apple-touch-startup-image" href="assets/images/appicons/v1/ios/ios-launchimage-768x1024.png"
+        media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: portrait)">
+    <!-- iPad mini 4/9.7" iPad landscape startup image -->
+    <link rel="apple-touch-startup-image" href="assets/images/appicons/v1/ios/ios-launchimage-2048x1536.png"
+        media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <!-- iPad mini 4/9.7" iPad portrait startup image -->
+    <link rel="apple-touch-startup-image" href="assets/images/appicons/v1/ios/ios-launchimage-1536x2048.png"
+        media="(min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+    <!-- iPad Pro 15" portrait startup image -->
+    <link rel="apple-touch-startup-image" href="assets/images/appicons/v1/ios/ios-launchimage-1668x2224.png"
+        media="(min-device-width: 834px) and (max-device-width: 834px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+    <!-- iPad Pro 12.9" portrait startup image -->
+    <link rel="apple-touch-startup-image" href="assets/images/appicons/v1/ios/ios-launchimage-2048x2732.png"
+        media="(min-device-width: 1024px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+
+    <!-- Safari -->
+    <link rel="mask-icon" href="assets/images/appicons/v1/safari/safari-pinned-tab.svg" color="#795548">
+
+    <!-- IE10 WP8 -->
+    <meta name="msapplication-tap-highlight" content="no">
+    <link rel="msapplication-starturl" href="/">
+
+    <!-- Windows Tiles -->
+    <meta name="application-name" content="Unicode Converter - Covert UTF-16 Code Points and Text">
+    <meta name="msapplication-TileColor" content="#795548">
+    <meta name="msapplication-square70x70logo"
+        content="assets/images/appicons/v1/windows/Square71x71Logo.scale-100.png">
+    <meta name="msapplication-square150x150logo"
+        content="assets/images/appicons/v1/windows/Square150x150Logo.scale-100.png">
+    <meta name="msapplication-wide310x150logo"
+        content="assets/images/appicons/v1/windows/Wide310x150Logo.scale-100.png">
+    <meta name="msapplication-square310x310logo"
+        content="assets/images/appicons/v1/windows/Square310x310Logo.scale-100.png">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/appicons/v1/favicon-32x32.png">
+    <link rel="icon" type="image/png" href="assets/images/appicons/v1/android/android-launchericon-96x96.png"
+        sizes="96x96">
+    <link rel="icon" type="image/png" sizes="16x16" href="ssets/images/appicons/v1/favicon-16x16.png">
+    <link rel="icon" type="image/png" href="assets/images/appicons/v1/android/android-launchericon-192x192.png"
+        sizes="192x192">
+
+    <link rel="shortcut icon" href="assets/images/appicons/v1/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/images/appicons/v1/favicon.ico" type="image/x-icon">
+
+    <!-- Twitter card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@myanmartools">
+    <meta name="twitter:creator" content="@DagonMetric">
+    <meta name="twitter:title" content="Unicode Code Point Sequences Text Converter">
+    <meta name="twitter:description"
+        content="Unicode converter for converting UTF-16 code point sequences to text and vice versa.">
+    <meta name="twitter:image"
+        content="https://unicode-code-points-text-converter.myanmartools.org/assets/images/appicons/v1/og-image-square.png">
+
+    <!-- Open Graph data -->
+    <meta content="en_US" property="og:locale">
+    <meta content="https://unicode-code-points-text-converter.myanmartools.org/" property="og:url">
+    <meta content="Unicode Converter" property="og:site_name">
+    <meta content="Unicode Code Point Sequences Text Converter" property="og:title">
+    <meta content="Unicode converter for converting UTF-16 code point sequences to text and vice versa"
+        property="og:description">
+    <meta content="2365420053714776" property="fb:app_id">
+    <meta content="website" property="og:type">
+    <meta
+        content="https://unicode-code-points-text-converter.myanmartools.org/assets/images/appicons/v1/og-image-wide.jpg"
+        property="og:image">
+    <meta content="image/jpeg" property="og:image:type">
+    <meta content="1200" property="og:image:width">
+    <meta content="630" property="og:image:height">
+
+    <!-- NOTE: These need to be kept in sync with `ngsw-config.json`. -->
+    <link rel="stylesheet" href="https://fontassets.firebaseapp.com/zawgyione/v1/font.css">
+    <link rel="stylesheet" href="https://fontassets.firebaseapp.com/notosansmyanmarui/v1/font.css">
+</head>
+
+<body>
+    <h1
+        style="position:absolute !important;overflow:hidden !important;clip:rect(1px, 1px, 1px, 1px) !important;width:1px !important;height:1px !important;border:0 !important;padding:0 !important; margin: 0 !important;">
+        Unicode Converter - Covert UTF-16 Code Points and Text | Myanmar Tools</h1>
+    <app-root></app-root>
+    <noscript>Please enable JavaScript to continue using this application.</noscript>
+</body>
+
+</html>
