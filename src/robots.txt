@@ -1,0 +1,5 @@
+# Allow all URLs (see http://www.robotstxt.org/robotstxt.html)
+User-agent: *
+Disallow:
+
+Sitemap: https://unicode-code-points-text-converter.myanmartools.org/sitemap.xml
