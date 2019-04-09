@@ -1,0 +1,51 @@
+@mixin app-theme($theme) {
+    $primary: map-get($theme, primary);
+    // accent: map-get($theme, accent);
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    body {
+        color: mat-color($foreground, text);
+        background: mat-color($background, background); // #f1f1f1
+    }
+
+    /*::selection {
+        text-shadow: none;
+        color: #fff;
+        background: mat-color($primary);
+    }*/
+
+    footer.app-footer {
+        color: mat-color($foreground, secondary-text);
+
+          a {
+            color: inherit;
+            text-decoration: none;
+            outline: 0;
+            -webkit-tap-highlight-color: transparent;
+            background: transparent;
+            position: relative;
+
+            &:hover, &:focus, &:active {
+                color: mat-color($primary);
+            }
+        }
+
+        .about-section {
+            .app-version {
+                font-weight: 500;
+            }
+        }
+
+        h3 {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        ul {
+            font-size: 14px;
+            line-height: 24px;
+        }
+    }
+}
