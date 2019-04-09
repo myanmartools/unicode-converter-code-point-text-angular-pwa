@@ -1,0 +1,28 @@
+@mixin cdk-textarea-syncsize {
+
+    textarea.cdk-textarea-syncsize,
+    textarea.cdk-textarea-autosize {
+        resize: none;
+    }
+
+    textarea.cdk-textarea-syncsize-measuring {
+        height: auto !important;
+        overflow: hidden !important;
+        padding: 2px 0 !important;
+        box-sizing: content-box !important;
+    }
+
+    textarea.cdk-textarea-syncsize-lineheight-measuring {
+        border: none !important;
+        padding: 0 !important;
+        min-height: auto !important;
+        max-height: auto !important;
+        height: auto !important;
+    }
+
+
+    // Prevents IE from always adding a scrollbar by default.
+    textarea.mat-input-element.cdk-textarea-syncsize {
+        resize: none;
+    }
+}
