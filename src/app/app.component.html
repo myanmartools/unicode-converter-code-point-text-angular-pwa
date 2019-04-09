@@ -1,0 +1,70 @@
+<header class="app-header" role="banner">
+    <mat-toolbar color="primary">
+        <a mat-button class="nav-img-btn nav-brand" [href]="baseUrl" [attr.aria-label]="title">
+            <img class="nav-img site-logo-img" [src]="appImageUrl" alt="{{title}}" role="presentation"
+                aria-hidden="true">
+            <span role="presentation" aria-hidden="true">{{title}}</span>
+            <span role="presentation" aria-hidden="true" fxHide.xs> - Covert UTF-16 Code Points and Text</span>
+        </a>
+        <div class="flex-spacer" fxFlex="1 1 auto"></div>
+        <a mat-button class="nav-img-btn" [href]="githubRepoUrl" aria-label="GitHub Repository">
+            <img class="nav-img" [src]="githubImageUrl" alt="{{githubImageAlt}}" role="presentation" aria-hidden="true">
+            <span role="presentation" aria-hidden="true" fxHide.xs>GitHub</span>
+        </a>
+    </mat-toolbar>
+</header>
+<main class="container page">
+    <div class="form-container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="24px">
+        <div class="form-field-container" fxLayout="column" fxFlex="1 1 100%">
+            <mat-form-field floatLabel="never">
+                <textarea spellcheck="false" matInput placeholder="Code points or text" [(ngModel)]="sourceText"
+                    [class.my-uni]="sourceFontEnc == 'uni'" [class.my-zg]="sourceFontEnc == 'zg'" cdkTextareaSyncSize
+                    cdkAutosizeMinRows="10" #sourceTextareaSyncSize="cdkTextareaSyncSize"></textarea>
+            </mat-form-field>
+        </div>
+        <div class="form-field-container" fxLayout="column" fxFlex="1 1 100%" [fxHide.xs]="!outText">
+            <mat-form-field floatLabel="never">
+                <textarea spellcheck="false" matInput placeholder="Formatted output" [ngModel]="outText"
+                    [class.my-uni]="targetFontEnc == 'uni'" [class.my-zg]="targetFontEnc == 'zg'" [readonly]="!outText"
+                    cdkTextareaSyncSize cdkAutosizeMinRows="10" #outTextareaSyncSize="cdkTextareaSyncSize"></textarea>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="form-container" fxLayout="column" fxLayoutGap="24px">
+        <mat-checkbox [(ngModel)]="formatEscapseChars">New line, tab to \n, \t etc.</mat-checkbox>
+    </div>
+</main>
+<footer class="app-footer">
+    <div class="container">
+        <div fxLayout="column" class="footer-section-grid about-description">
+            <p>
+                One of Myanmar Tools open source projects super-powered by DagonMetric for converting UTF-16 code point
+                sequences to text and vice versa.
+            </p>
+            <div class="app-version">Version: {{appVersion}}</div>
+        </div>
+        <div fxLayout="column" class="footer-section-grid">
+            <section class="footer-section" fxLayout="column">
+                <ul fxLayout="row" fxLayout.xs="column" fxLayoutGap="24px">
+                    <li>
+                        <a href="https://myanmartools.org">Myanmar Tools Home</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/myanmartools">GitHub</a>
+                    </li>
+                    <li>
+                        <a href="https://gitter.im/myanmartools/community">Gitter Chat</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/myanmartools/unicode-code-points-text-converter-angular-pwa/issues">Report
+                            Issues</a>
+                    </li>
+                    <li>
+                        <a
+                            href="https://github.com/myanmartools/unicode-code-points-text-converter-angular-pwa/blob/master/CONTRIBUTING.md">Contribute</a>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </div>
+</footer>
