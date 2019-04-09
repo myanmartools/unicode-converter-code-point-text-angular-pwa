@@ -1,0 +1,27 @@
+branches:
+  only:
+    - master
+    - '/v(?:0|[1-9]\d*)(\.(?:0|[1-9]\d*))?(\.(?:0|[1-9]\d*))?(?:-[\da-z-]+(?:\.[\da-z-]+)*)?(?:\+[\da-z-]+(?:\.[\da-z-]+)*)?/'
+clone_depth: 1
+environment:
+  nodejs_version: "10"
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - ps: |
+  - yarn global add firebase-tools
+  # - yarn install --frozen-lockfile --network-timeout=500000
+  - yarn install
+build_script:
+  - yarn run lint
+  - yarn run build
+  # - yarn run test
+test: "off"
+cache:
+  - node_modules -> yarn.lock
+  - "%LOCALAPPDATA%\\Yarn"
+deploy_script:
+  - ps: |
+      if ($env:firebase_token)
+      {
+        iex "firebase deploy --only hosting:unicode-code-points-text-converter --token $env:firebase_token"
+      }
