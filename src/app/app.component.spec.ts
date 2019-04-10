@@ -59,6 +59,6 @@ describe('AppComponent', () => {
         fixture.detectChanges();
         const compiled = fixture.debugElement.nativeElement as HTMLElement;
         const ele = compiled.querySelector('h1');
-        expect(ele && ele.textContent).toContain('Unicode Converter - Covert UTF-16 Code Points and Text');
+        expect(ele && ele.textContent).toContain('Unicode Converter - Convert between Unicode Code Point Sequences and Text');
     });
 });
