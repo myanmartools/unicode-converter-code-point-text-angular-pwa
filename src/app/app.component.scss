@@ -42,6 +42,16 @@ textarea.mat-input-element.my-uni {
     flex: 1 1 100%;
 }
 
+.about-description {
+    justify-content: center;
+    text-align: center;
+    margin-top: $default-gap-width;
+
+    .app-version {
+        margin-top: default-gap-width;
+    }
+}
+
 // header
 // ------------------------------------------------------------
 header.app-header {
@@ -56,54 +66,29 @@ header.app-header {
     -ms-user-select: none;
     user-select: none;
 
-    .site-logo-img {
-        // box-sizing: border-box;
-        // display: inline-block;
-        // width: 26px;
-        // height: 26px;
-        // line-height: 26px;
+    .nav-img-btn {
+        &.mat-button {
+            padding-left: 0;
+            padding-right: 0;
+            min-width: 0;
+        }
 
-        animation: brand-logo-animation 2.8s ease-in .2s forwards;
+        img+span {
+            margin-left: $default-gap-width / 2;
+        }
     }
 
-    h1 {}
-}
+    .nav-img {
+        height: $header-nav-img-height;
+        vertical-align: middle;
 
-.nav-img-btn {
-    &.mat-button {
-        padding-left: 0;
-        padding-right: 0;
-        min-width: 0;
-    }
+        &.site-logo-img {
+            width: 38px;
+            height: 38px;
+            line-height: 38px;
 
-    img+span {
-        margin-left: $default-gap-width / 2;
-    }
-}
-
-.nav-img {
-    height: $header-nav-img-height;
-    vertical-align: middle;
-}
-
-@keyframes brand-logo-animation {
-    0% {
-        filter: saturate(100%) brightness(100%) invert(0);
-        /* color: #687689; */
-    }
-
-    50% {
-        filter: saturate(50%) brightness(150%) invert(0);
-    }
-
-    99.99% {
-        filter: saturate(0) brightness(300%) invert(0);
-        /* color: #687689; */
-    }
-
-    100% {
-        filter: saturate(0) brightness(0) invert(1);
-        /* color: rgb(255, 255, 255); */
+            animation: brand-logo-animation 2.8s ease-in .2s forwards;
+        }
     }
 }
 
@@ -115,12 +100,10 @@ footer.app-footer {
     padding-top: $default-gap-width;
     padding-bottom: $default-gap-width * 2;
 
-    .about-description {
-        margin-bottom: $default-gap-width;
 
-        .app-version {
-            margin-top: default-gap-width;
-        }
+    .footer-section-grid {
+        justify-content: center;
+        text-align: center;
     }
 
     ul {
@@ -142,9 +125,4 @@ footer.app-footer {
             // padding: $default-gap-width / 6 0;
         }
     }
-}
-
-.footer-section-grid {
-    justify-content: center;
-    text-align: center;
 }
