@@ -1,7 +1,7 @@
 {
-  "name": "Unicode Converter - Covert UTF-16 Code Points and Text",
+  "name": "Unicode Converter - Convert between Unicode Code Point Sequences and Text",
   "short_name": "Unicode Converter",
-  "description": "Unicode converter for converting UTF-16 code point sequences to text and vice versa - Angular Progressive Web Application (PWA).",
+  "description": "Unicode converter for converting UTF-32/UTF-16/UTF-8 code point sequences to text and vice versa.",
   "theme_color": "#795548",
   "background_color": "#ffffff",
   "display": "standalone",
