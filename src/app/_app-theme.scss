@@ -9,11 +9,25 @@
         background: mat-color($background, background); // #f1f1f1
     }
 
-    /*::selection {
-        text-shadow: none;
-        color: #fff;
-        background: mat-color($primary);
-    }*/
+    header.app-header {
+        .mat-toolbar.mat-primary {
+            animation: header-background-animation 2.8s ease-in 0s forwards;
+        }
+
+        .nav-img {
+            &.site-logo-img {
+                animation: brand-logo-animation 2.8s ease-in .2s forwards;
+            }
+        }
+    }
+
+    .about-description {
+        color: mat-color($foreground, secondary-text);
+
+        .app-version {
+            font-weight: 500;
+        }
+    }
 
     footer.app-footer {
         color: mat-color($foreground, secondary-text);
@@ -31,12 +45,6 @@
             }
         }
 
-        .about-section {
-            .app-version {
-                font-weight: 500;
-            }
-        }
-
         h3 {
             font-size: 14px;
             font-weight: 500;
@@ -46,6 +54,37 @@
         ul {
             font-size: 14px;
             line-height: 24px;
+        }
+    }
+
+    @keyframes header-background-animation {
+        0% {
+            background: mat-color($primary, 800);
+        }
+
+        100% {
+            background: mat-color($primary, 500);
+        }
+    }
+
+    @keyframes brand-logo-animation {
+        0% {
+            filter: saturate(100%) brightness(100%) invert(0);
+            /* color: #687689; */
+        }
+
+        50% {
+            filter: saturate(50%) brightness(150%) invert(0);
+        }
+
+        99.99% {
+            filter: saturate(0) brightness(300%) invert(0);
+            /* color: #687689; */
+        }
+
+        100% {
+            filter: saturate(0) brightness(0) invert(1);
+            /* color: rgb(255, 255, 255); */
         }
     }
 }
