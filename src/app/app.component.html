@@ -1,10 +1,10 @@
 <header class="app-header" role="banner">
     <mat-toolbar color="primary">
-        <a mat-button class="nav-img-btn nav-brand" [href]="baseUrl" [attr.aria-label]="title">
-            <img class="nav-img site-logo-img" [src]="appImageUrl" alt="{{title}}" role="presentation"
+        <a mat-button class="nav-img-btn nav-brand" [href]="baseUrl" [attr.aria-label]="titleWithSuffix">
+            <img class="nav-img site-logo-img" [src]="appImageUrl" alt="{{titleWithSuffix}}" role="presentation"
                 aria-hidden="true">
             <span role="presentation" aria-hidden="true">{{title}}</span>
-            <span role="presentation" aria-hidden="true" fxHide.xs> - Covert UTF-16 Code Points and Text</span>
+            <span role="presentation" aria-hidden="true" fxHide.xs>{{titleSuffix}}</span>
         </a>
         <div class="flex-spacer" fxFlex="1 1 auto"></div>
         <a mat-button class="nav-img-btn" [href]="githubRepoUrl" aria-label="GitHub Repository">
@@ -33,16 +33,16 @@
     <div class="form-container" fxLayout="column" fxLayoutGap="24px">
         <mat-checkbox [(ngModel)]="formatEscapseChars">New line, tab to \n, \t etc.</mat-checkbox>
     </div>
+    <div fxLayout="column" class="about-description">
+        <p>
+            One of Myanmar Tools open source projects super-powered by DagonMetric for converting UTF-32/UTF-16/UTF-8
+            code point sequences to text and vice versa.
+        </p>
+        <div class="app-version">Version: {{appVersion}}</div>
+    </div>
 </main>
 <footer class="app-footer">
     <div class="container">
-        <div fxLayout="column" class="footer-section-grid about-description">
-            <p>
-                One of Myanmar Tools open source projects super-powered by DagonMetric for converting UTF-16 code point
-                sequences to text and vice versa.
-            </p>
-            <div class="app-version">Version: {{appVersion}}</div>
-        </div>
         <div fxLayout="column" class="footer-section-grid">
             <section class="footer-section" fxLayout="column">
                 <ul fxLayout="row" fxLayout.xs="column" fxLayoutGap="24px">
