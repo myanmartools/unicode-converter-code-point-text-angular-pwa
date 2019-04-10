@@ -1,4 +1,6 @@
 // tslint:disable: directive-class-suffix
+// tslint:disable: directive-selector
+// tslint:disable: no-host-metadata-property
 
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Platform } from '@angular/cdk/platform';
@@ -16,10 +18,8 @@ import { fromEvent, Subject } from 'rxjs';
 import { auditTime, takeUntil } from 'rxjs/operators';
 
 @Directive({
-    // tslint:disable-next-line: directive-selector
     selector: 'textarea[cdkTextareaSyncSize]',
     exportAs: 'cdkTextareaSyncSize',
-    // tslint:disable-next-line: use-host-property-decorator
     host: {
         class: 'cdk-textarea-autosize cdk-textarea-syncsize',
         rows: '1',
