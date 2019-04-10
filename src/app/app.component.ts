@@ -26,6 +26,7 @@ export interface UnicodeFormatterResult extends ZgUniDetectResult {
 })
 export class AppComponent implements OnInit, OnDestroy {
     title = 'Unicode Converter';
+    titleSuffix = ' - Covert UTF-16 Code Points and Text';
 
     githubRepoUrl = 'https://github.com/myanmartools/unicode-code-points-text-converter-angular-pwa';
     githubImageAlt = 'Unicode (UTF-16) Code Points Text Converter GitHub Repo';
@@ -41,6 +42,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
     get appVersion(): string {
         return VERSION.full;
+    }
+
+    get titleWithSuffix(): string {
+        return `${this.title}${this.titleSuffix}`;
     }
 
     get baseUrl(): string {
