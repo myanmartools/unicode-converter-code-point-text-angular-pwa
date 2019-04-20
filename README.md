@@ -1,15 +1,15 @@
 [![Build Status](https://dev.azure.com/myanmartools/unicode-code-points-text-converter-angular-pwa/_apis/build/status/myanmartools.unicode-code-points-text-converter-angular-pwa?branchName=master)](https://dev.azure.com/myanmartools/unicode-code-points-text-converter-angular-pwa/_build/latest?definitionId=4&branchName=master)
 [![Build status](https://ci.appveyor.com/api/projects/status/ieefc2r743et56q4?svg=true)](https://ci.appveyor.com/project/admindagonmetriccom/unicode-code-points-text-converter-angular-pwa)
 
-# Unicode Converter - Convert between Unicode Code Point Sequences and Text
+# Unicode Code Point Text Converter (Myanmar Tools)
 
 [![Gitter](https://badges.gitter.im/myanmartools/community.svg)](https://gitter.im/myanmartools/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-Unicode converter for converting UTF-32/UTF-16/UTF-8 code point sequences to text and vice versa - Angular Progressive Web Application (PWA).
+Angular Progressive Web Application (PWA) for converting UTF-32/UTF-16/UTF-8 code point sequences to text and vice versa.
 
-## Live Website (Angular PWA)
+## Live Website (Unicode Code Point Text Converter - Angular PWA)
 
-[![Unicode Converter](https://unicode-code-points-text-converter.myanmartools.org/assets/images/appicons/v1/ios/ios-appicon-180x180.png)](https://unicode-code-points-text-converter.myanmartools.org)
+[![Unicode Code Point Text Converter](https://unicode-code-points-text-converter.myanmartools.org/assets/images/appicons/v1/ios/ios-appicon-180x180.png)](https://unicode-code-points-text-converter.myanmartools.org)
 
 [https://unicode-code-points-text-converter.myanmartools.org](https://unicode-code-points-text-converter.myanmartools.org)
 
