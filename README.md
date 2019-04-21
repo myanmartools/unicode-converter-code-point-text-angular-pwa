@@ -31,14 +31,13 @@ Angular Progressive Web Application (PWA) for converting UTF-32/UTF-16/UTF-8 cod
 * Progress Web App (PWA) with Angular Service Worker
 * Optimize use of RxJS
 
-## Main Packages Used by This Application
+## Myanmar Tools Home
 
-[@myanmartools/ng-zawgyi-detector](https://www.npmjs.com/package/@myanmartools/ng-zawgyi-detector)
+[![Myanmar Tools](https://myanmartools.org/assets/images/appicons/v1/ios/ios-appicon-180x180.png)](https://myanmartools.org)
 
-[![npm (scoped)](https://img.shields.io/npm/v/@myanmartools/ng-zawgyi-detector.svg)](https://www.npmjs.com/package/@myanmartools/ng-zawgyi-detector)
-[![npm](https://img.shields.io/npm/dm/@myanmartools/ng-zawgyi-detector.svg)](https://www.npmjs.com/package/@myanmartools/ng-zawgyi-detector)
+[https://myanmartools.org](https://myanmartools.org)
 
-Zawgyi-One / Myanmar Unicode font encoding detection package for Angular.
+A collection of useful open source projects for Myanmar specific applications, libraries, productivity tools and utilities.
 
 ## Feedback and Contributing
 
