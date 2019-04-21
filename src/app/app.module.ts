@@ -28,7 +28,7 @@ import { AppComponent } from './app.component';
         AppComponent
     ],
     imports: [
-        BrowserModule.withServerTransition({ appId: 'unicode-code-points-text-converter-angular-pwa' }),
+        BrowserModule.withServerTransition({ appId: 'unicode-code-points-text-converter' }),
         CommonModule,
         HttpClientModule,
         FormsModule,

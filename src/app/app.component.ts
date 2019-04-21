@@ -25,8 +25,8 @@ export interface UnicodeFormatterResult extends ZgUniDetectResult {
     encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit, OnDestroy {
-    title = 'Unicode Converter';
-    titleSuffix = ' - Convert between Code Points and Text';
+    title = 'Unicode Code Points Text Converter';
+    titleSuffix = ' - Myanmar Tools';
 
     githubRepoUrl = 'https://github.com/myanmartools/unicode-code-points-text-converter-angular-pwa';
     githubImageAlt = 'Unicode Code Points Text Converter GitHub Repo';

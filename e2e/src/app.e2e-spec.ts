@@ -15,7 +15,7 @@ describe('workspace-project App', () => {
         page.navigateTo();
 
         // tslint:disable-next-line: no-floating-promises
-        expect(page.getTitleText()).toEqual('Unicode Converter - Convert between Unicode Code Point Sequences and Text');
+        expect(page.getTitleText()).toEqual('Unicode Code Points Text Converter - Myanmar Tools');
     });
 
     afterEach(async () => {
