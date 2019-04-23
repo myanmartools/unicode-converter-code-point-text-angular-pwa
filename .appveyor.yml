@@ -3,14 +3,15 @@ branches:
     - master
     - '/v(?:0|[1-9]\d*)(\.(?:0|[1-9]\d*))?(\.(?:0|[1-9]\d*))?(?:-[\da-z-]+(?:\.[\da-z-]+)*)?(?:\+[\da-z-]+(?:\.[\da-z-]+)*)?/'
 clone_depth: 1
+skip_non_tags: true
 environment:
   nodejs_version: "10"
 install:
   - ps: Install-Product node $env:nodejs_version
   - ps: |
   - yarn global add firebase-tools
-  # - yarn install --frozen-lockfile --network-timeout=500000
-  - yarn install
+  - yarn install --frozen-lockfile --network-timeout=500000
+  # - yarn install
 build_script:
   - yarn run lint
   - yarn run build
