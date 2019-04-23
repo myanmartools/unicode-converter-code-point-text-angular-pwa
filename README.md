@@ -9,7 +9,7 @@ Angular Progressive Web Application (PWA) for converting UTF-32/UTF-16/UTF-8 cod
 
 ## Live Website (Unicode Code Points Text Converter - Angular PWA)
 
-[![Unicode Code Points Text Converter](https://unicode-code-points-text-converter.myanmartools.org/assets/images/appicons/v1/ios/ios-appicon-180x180.png)](https://unicode-code-points-text-converter.myanmartools.org)
+[![Unicode Code Points Text Converter](https://unicode-code-points-text-converter.myanmartools.org/assets/images/appicons/v1/screenshot.jpg)](https://unicode-code-points-text-converter.myanmartools.org)
 
 [https://unicode-code-points-text-converter.myanmartools.org](https://unicode-code-points-text-converter.myanmartools.org)
 
