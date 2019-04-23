@@ -30,15 +30,48 @@
             </mat-form-field>
         </div>
     </div>
-    <div class="form-container" fxLayout="column" fxLayoutGap="24px">
-        <mat-checkbox [(ngModel)]="formatEscapseChars">New line, tab to \n, \t etc.</mat-checkbox>
-    </div>
+    <ng-template [ngIf]="cpOutOptionsVisible" [ngIfElse]="cpInOptions">
+        <div *ngIf="sourceText" class="form-container" fxLayout="column" fxLayoutGap="24px">
+            <mat-radio-group aria-label="Select output format" [(ngModel)]="cpOutFormat" fxLayout="row"
+                fxLayout.xs="column" fxLayoutGap="24px">
+                <mat-radio-button value="js">JavaScript/Java style - \uXXXX</mat-radio-button>
+                <mat-radio-button value="es6">ES6 style - \u&#123;XXXX&#125;</mat-radio-button>
+                <mat-radio-button value="uPlus">U+HEX style - U+XXXX</mat-radio-button>
+            </mat-radio-group>
+            <mat-checkbox [(ngModel)]="cpOutPreserveASCII">Preserve ASCII chars</mat-checkbox>
+            <mat-checkbox *ngIf="cpOutFormat == 'js' || cpOutFormat == 'es6'" [(ngModel)]="cpOutFormatEscapse">New line,
+                tab
+                to \n, \t, etc.</mat-checkbox>
+            <mat-checkbox *ngIf="cpOutFormat == 'uPlus'" [(ngModel)]="cpOutConvertNewLineTabToCP">New line, tab to code
+                points</mat-checkbox>
+        </div>
+    </ng-template>
+    <ng-template #cpInOptions>
+        <div *ngIf="sourceText" class="form-container" fxLayout="column" fxLayoutGap="24px">
+            <mat-checkbox [(ngModel)]="cpInConvertEscapsesToChars">Convert \n, \t to New line, tab, etc.</mat-checkbox>
+        </div>
+    </ng-template>
     <div fxLayout="column" class="about-description">
-        <p>
-            One of Myanmar Tools open source projects super-powered by DagonMetric for converting UTF-32/UTF-16/UTF-8
-            code point sequences to text and vice versa.
-        </p>
-        <div class="app-version">Version: {{appVersion}}</div>
+        <p>Convert between Unicode code point numbers/sequences (UTF-32/UTF-16/UTF-8 code units in hex) to text (Unicode
+            characters) - Myanmar Tools by DagonMetric.</p>
+        <div class="app-version">Version: <a [href]="githubReleaseUrl">{{appVersion}}</a></div>
+        <div class="about-features">
+            <p>
+                Supported input coide point formats: C style (\U0000), Javascript/Java style (\u0000), ES6 style
+                (\u&#123;0000&#125;),
+                U+HEX style (U+0000), \x hex numbers style (\x0000)
+            </p>
+            <p>
+                Supported output coide point formats: Javascript/Java style (\u0000), ES6 style (\u&#123;0000&#125;),
+                U+HEX style (U+0000)
+            </p>
+
+        </div>
+        <div class="about-category">
+            Category: UtilitiesApplication, Utilities and Productivity, Progressive Web Application, Unicode Tools, Open Source, Online Tools,
+            Decode/Encode Unicode text,
+            JavaScript Unicode Escapes, Unicode Converter, Unicode Lookup
+        </div>
     </div>
 </main>
 <footer class="app-footer">
