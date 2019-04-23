@@ -24,6 +24,21 @@
     .about-description {
         color: mat-color($foreground, secondary-text);
 
+        a {
+            color: inherit;
+            text-decoration: none;
+            outline: 0;
+            -webkit-tap-highlight-color: transparent;
+            background: transparent;
+            position: relative;
+
+            &:hover,
+            &:focus,
+            &:active {
+                color: mat-color($primary);
+            }
+        }
+
         .app-version {
             font-weight: 500;
         }
@@ -32,7 +47,7 @@
     footer.app-footer {
         color: mat-color($foreground, secondary-text);
 
-          a {
+        a {
             color: inherit;
             text-decoration: none;
             outline: 0;
@@ -40,7 +55,9 @@
             background: transparent;
             position: relative;
 
-            &:hover, &:focus, &:active {
+            &:hover,
+            &:focus,
+            &:active {
                 color: mat-color($primary);
             }
         }
