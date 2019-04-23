@@ -17,8 +17,10 @@ Angular Progressive Web Application (PWA) for converting UTF-32/UTF-16/UTF-8 cod
 
 * Responsive and progressive web design
 * Can be used offline (Progessive Web Application! - PWA)
-* On the fly converting Unicode characters in UTF-32, UTF-16, and UTF-8 formats to their Unicode
+* On the fly converting Unicode hex numbers in UTF-32, UTF-16, and UTF-8 formats to their Unicode characters
 * Auto detect Zawgyi and Myanmar Unicode font encoding and display correctly
+* Supported input coide point formats: C style (\U0000), Javascript/Java style (\u0000), ES6 style (\u{0000}), U+HEX style (U+0000), \x hex numbers style (\x0000)
+* Supported output coide point formats: Javascript/Java style (\u0000), ES6 style (\u{0000}), U+HEX style (U+0000)
 
 ## Programming Languages & Frameworks
 
@@ -33,7 +35,7 @@ Angular Progressive Web Application (PWA) for converting UTF-32/UTF-16/UTF-8 cod
 
 ## Myanmar Tools Home
 
-[![Myanmar Tools](https://myanmartools.org/assets/images/appicons/v1/ios/ios-appicon-180x180.png)](https://myanmartools.org)
+[![Myanmar Tools](https://myanmartools.org/assets/images/appicons/v1/android/android-launchericon-192x192.png)](https://myanmartools.org)
 
 [https://myanmartools.org](https://myanmartools.org)
 
