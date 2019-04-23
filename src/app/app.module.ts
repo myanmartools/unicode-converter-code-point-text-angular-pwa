@@ -12,6 +12,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
+import {MatRadioModule} from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { ZawgyiDetectorModule } from '@myanmartools/ng-zawgyi-detector';
@@ -39,6 +40,7 @@ import { AppComponent } from './app.component';
         MatButtonModule,
         MatCheckboxModule,
         MatInputModule,
+        MatRadioModule,
         MatToolbarModule,
 
         CdkTextareaSyncSizeModule,
