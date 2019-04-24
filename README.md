@@ -33,6 +33,10 @@ Angular Progressive Web Application (PWA) for converting UTF-32/UTF-16/UTF-8 cod
 * Progress Web App (PWA) with Angular Service Worker
 * Optimize use of RxJS
 
+## Usage Guide
+
+[A Guide to Using Unicode Code Points Converter](https://youtu.be/SDN-ej-1P40)  @YouTube
+
 ## Myanmar Tools Home
 
 [![Myanmar Tools](https://myanmartools.org/assets/images/appicons/v1/android/android-launchericon-192x192.png)](https://myanmartools.org)
