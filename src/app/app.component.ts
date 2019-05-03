@@ -4,7 +4,7 @@
 import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 
 import { Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, filter, map, switchMap, takeUntil } from 'rxjs/operators';
+import { map, switchMap, takeUntil } from 'rxjs/operators';
 
 import { ZawgyiDetector, ZgUniDetectResult } from '@myanmartools/ng-zawgyi-detector';
 
@@ -35,9 +35,6 @@ export class AppComponent implements OnInit, OnDestroy {
     githubRepoUrl = 'https://github.com/myanmartools/unicode-code-points-text-converter-angular-pwa';
     githubImageAlt = 'Unicode Code Points Text Converter GitHub Repo';
     githubReleaseUrl = 'https://github.com/myanmartools/unicode-code-points-text-converter-angular-pwa/releases';
-
-    sourceFontEnc: FontEncType;
-    targetFontEnc: FontEncType;
 
     @ViewChild('sourceTextareaSyncSize')
     sourceTextareaSyncSize: CdkTextareaSyncSize;
@@ -72,6 +69,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
     private _sourceText = '';
     private _outText = '';
+    private _sourceFontEnc: FontEncType;
+    private _targetFontEnc: FontEncType;
 
     private _cpOutOptionsVisible = false;
     private _cpOutFormat: CpOutFormatType = 'js';
@@ -87,6 +86,20 @@ export class AppComponent implements OnInit, OnDestroy {
     set sourceText(value: string) {
         this._sourceText = value;
         this.convertNext();
+    }
+
+    get sourceFontEnc(): FontEncType {
+        return this._sourceFontEnc;
+    }
+    set sourceFontEnc(value: FontEncType) {
+        this._sourceFontEnc = value;
+    }
+
+    get targetFontEnc(): FontEncType {
+        return this._targetFontEnc;
+    }
+    set targetFontEnc(value: FontEncType) {
+        this._targetFontEnc = value;
     }
 
     get cpOutFormat(): CpOutFormatType {
@@ -144,40 +157,35 @@ export class AppComponent implements OnInit, OnDestroy {
         this.outTextareaSyncSize.secondCdkTextareaSyncSize = this.sourceTextareaSyncSize;
 
         this._convertSubject.pipe(
-            distinctUntilChanged(),
-            filter(formattedInput => formattedInput && formattedInput.indexOf('|') > 1 ? true : false),
             takeUntil(this._destroyed),
-            switchMap(formattedInput => {
-                let input = formattedInput.substr(formattedInput.indexOf('|'));
-                input = input.length === 1 ? '' : input.substr(1);
-
-                return this.convert(input);
+            switchMap(() => {
+                return this.convert(this.sourceText);
             })
         ).subscribe(result => {
             if (result.inputIsCodePoints) {
                 this._cpOutOptionsVisible = false;
-                this.sourceFontEnc = null;
+                this._sourceFontEnc = null;
 
                 if (result.detectedEnc === 'zg') {
-                    this.targetFontEnc = 'zg';
+                    this._targetFontEnc = 'zg';
                 } else if (result.detectedEnc === 'uni') {
-                    this.targetFontEnc = 'uni';
+                    this._targetFontEnc = 'uni';
                 } else {
-                    this.targetFontEnc = null;
+                    this._targetFontEnc = null;
                 }
             } else {
                 if (result.formattedOutput && result.formattedOutput.length > 0) {
                     this._cpOutOptionsVisible = true;
                 }
 
-                this.targetFontEnc = null;
+                this._targetFontEnc = null;
 
                 if (result.detectedEnc === 'zg') {
-                    this.sourceFontEnc = 'zg';
+                    this._sourceFontEnc = 'zg';
                 } else if (result.detectedEnc === 'uni') {
-                    this.sourceFontEnc = 'uni';
+                    this._sourceFontEnc = 'uni';
                 } else {
-                    this.sourceFontEnc = null;
+                    this._sourceFontEnc = null;
                 }
             }
 
@@ -191,7 +199,10 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     private convertNext(): void {
-        const formattedInput = `${this.cpOutFormat},
+        const formattedInput = `
+        ${this.sourceFontEnc},
+        ${this.targetFontEnc},
+        ${this.cpOutFormat},
         ${this.cpOutFormatEscapse},
         ${this.cpOutConvertNewLineTabToCP},
         ${this.cpInConvertEscapsesToChars},

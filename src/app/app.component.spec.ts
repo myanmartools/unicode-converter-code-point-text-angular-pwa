@@ -15,7 +15,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { NoopTranslitRuleLoaderModule, TranslitModule } from '@myanmartools/ng-translit';
 import { NoopZgUniRuleLoaderModule, ZawgyiDetectorModule } from '@myanmartools/ng-zawgyi-detector';
 
 import { AppComponent } from './app.component';
@@ -38,9 +37,6 @@ describe('AppComponent', () => {
                 MatIconModule,
                 MatInputModule,
                 MatToolbarModule,
-
-                TranslitModule,
-                NoopTranslitRuleLoaderModule,
 
                 ZawgyiDetectorModule,
                 NoopZgUniRuleLoaderModule

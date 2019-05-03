@@ -44,11 +44,22 @@
                 to \n, \t, etc.</mat-checkbox>
             <mat-checkbox *ngIf="cpOutFormat == 'uPlus'" [(ngModel)]="cpOutConvertNewLineTabToCP">New line, tab to code
                 points</mat-checkbox>
+            <mat-radio-group aria-label="Select Font" *ngIf="sourceFontEnc" [(ngModel)]="sourceFontEnc" fxLayout="row"
+                fxLayout.xs="column" fxLayoutGap="24px">
+                <mat-radio-button value="zg">Zawgyi</mat-radio-button>
+                <mat-radio-button value="uni">Myanmar Unicode</mat-radio-button>
+            </mat-radio-group>
+
         </div>
     </ng-template>
     <ng-template #cpInOptions>
         <div *ngIf="sourceText" class="form-container" fxLayout="column" fxLayoutGap="24px">
             <mat-checkbox [(ngModel)]="cpInConvertEscapsesToChars">Convert \n, \t to New line, tab, etc.</mat-checkbox>
+            <mat-radio-group aria-label="Select Font" *ngIf="targetFontEnc" [(ngModel)]="targetFontEnc" fxLayout="row"
+                fxLayout.xs="column" fxLayoutGap="24px">
+                <mat-radio-button value="zg">Zawgyi</mat-radio-button>
+                <mat-radio-button value="uni">Myanmar Unicode</mat-radio-button>
+            </mat-radio-group>
         </div>
     </ng-template>
     <div fxLayout="column" class="about-description">
@@ -68,7 +79,8 @@
 
         </div>
         <div class="about-category">
-            Category: UtilitiesApplication, Utilities and Productivity, Progressive Web Application, Unicode Tools, Open Source, Online Tools,
+            Category: UtilitiesApplication, Utilities and Productivity, Progressive Web Application, Unicode Tools, Open
+            Source, Online Tools,
             Decode/Encode Unicode text,
             JavaScript Unicode Escapes, Unicode Converter, Unicode Lookup
         </div>
