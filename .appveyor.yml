@@ -1,3 +1,4 @@
+version: 1.0.0-preview2+{build}
 branches:
   only:
     - master
@@ -10,8 +11,8 @@ install:
   - ps: Install-Product node $env:nodejs_version
   - ps: |
   - yarn global add firebase-tools
-  # - yarn install --frozen-lockfile --network-timeout=500000
-  - yarn install
+  - yarn install --frozen-lockfile --network-timeout=500000
+  # - yarn install
 build_script:
   - yarn run lint
   - yarn run build
