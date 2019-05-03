@@ -4,7 +4,6 @@
             <img class="nav-img site-logo-img" [src]="appImageUrl" alt="{{titleWithSuffix}}" role="presentation"
                 aria-hidden="true">
             <span role="presentation" aria-hidden="true">{{title}}</span>
-            <span role="presentation" aria-hidden="true" fxHide.xs>{{titleSuffix}}</span>
         </a>
         <div class="flex-spacer" fxFlex="1 1 auto"></div>
         <a mat-button class="nav-img-btn" [href]="githubRepoUrl" aria-label="GitHub Repository">
@@ -63,26 +62,13 @@
         </div>
     </ng-template>
     <div fxLayout="column" class="about-description">
-        <p>Convert between Unicode code point numbers/sequences (UTF-32/UTF-16/UTF-8 code units in hex) to text (Unicode
-            characters) - Myanmar Tools by DagonMetric.</p>
+        <p>Unicode converter by DagonMetric Myanmar Tools to lookup between Unicode code point sequences
+            (UTF-32/UTF-16/UTF-8 code units in hex numbers/digits) and text.</p>
         <div class="app-version">Version: <a [href]="githubReleaseUrl">{{appVersion}}</a></div>
-        <div class="about-features">
-            <p>
-                Supported input coide point formats: C style (\U0000), Javascript/Java style (\u0000), ES6 style
-                (\u&#123;0000&#125;),
-                U+HEX style (U+0000), \x hex numbers style (\x0000)
-            </p>
-            <p>
-                Supported output coide point formats: Javascript/Java style (\u0000), ES6 style (\u&#123;0000&#125;),
-                U+HEX style (U+0000)
-            </p>
-
-        </div>
         <div class="about-category">
             Category: UtilitiesApplication, Utilities and Productivity, Progressive Web Application, Unicode Tools, Open
             Source, Online Tools,
-            Decode/Encode Unicode text,
-            JavaScript Unicode Escapes, Unicode Converter, Unicode Lookup
+            Decode/Encode Unicode text, Unicode Converter, Unicode Lookup
         </div>
     </div>
 </main>
@@ -92,21 +78,20 @@
             <section class="footer-section" fxLayout="column">
                 <ul fxLayout="row" fxLayout.xs="column" fxLayoutGap="24px">
                     <li>
-                        <a href="https://myanmartools.org">Myanmar Tools Home</a>
+                        <a href="https://myanmartools.org" target="_blank" rel="noopener">Myanmar Tools Home</a>
                     </li>
                     <li>
-                        <a href="https://github.com/myanmartools">GitHub</a>
+                        <a href="https://github.com/myanmartools" target="_blank" rel="noopener">GitHub</a>
                     </li>
                     <li>
-                        <a href="https://gitter.im/myanmartools/community">Gitter Chat</a>
+                        <a href="https://gitter.im/myanmartools/community" target="_blank" rel="noopener">Gitter Chat</a>
                     </li>
                     <li>
-                        <a href="https://github.com/myanmartools/unicode-code-points-lookup-angular-pwa/issues">Report
-                            Issues</a>
+                        <a href="https://github.com/myanmartools/unicode-code-points-lookup-angular-pwa/issues" target="_blank" rel="noopener">Report Issues</a>
                     </li>
                     <li>
                         <a
-                            href="https://github.com/myanmartools/unicode-code-points-lookup-angular-pwa/blob/master/CONTRIBUTING.md">Contribute</a>
+                            href="https://github.com/myanmartools/unicode-code-points-lookup-angular-pwa/blob/master/CONTRIBUTING.md" target="_blank" rel="noopener">Contribute</a>
                     </li>
                 </ul>
             </section>

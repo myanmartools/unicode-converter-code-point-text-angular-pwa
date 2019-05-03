@@ -29,7 +29,7 @@ export interface UnicodeFormatterResult extends ZgUniDetectResult {
     encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit, OnDestroy {
-    title = 'Unicode Code Points Lookup - Myanmar Tools';
+    title = 'Unicode Code Points Lookup';
     titleShort = 'Unicode Lookup';
 
     githubRepoUrl = 'https://github.com/myanmartools/unicode-code-points-lookup-angular-pwa';
