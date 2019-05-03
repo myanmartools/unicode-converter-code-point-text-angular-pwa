@@ -55,6 +55,6 @@ describe('AppComponent', () => {
         fixture.detectChanges();
         const compiled = fixture.debugElement.nativeElement as HTMLElement;
         const ele = compiled.querySelector('h1');
-        expect(ele && ele.textContent).toContain('Unicode Code Points Text Converter - Myanmar Tools');
+        expect(ele && ele.textContent).toContain('Unicode Code Points Lookup - Myanmar Tools');
     });
 });

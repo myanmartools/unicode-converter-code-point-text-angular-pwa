@@ -29,12 +29,12 @@ export interface UnicodeFormatterResult extends ZgUniDetectResult {
     encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit, OnDestroy {
-    title = 'Unicode Code Points Text Converter';
-    titleSuffix = ' - Myanmar Tools';
+    title = 'Unicode Code Points Lookup - Myanmar Tools';
+    titleShort = 'Unicode Lookup';
 
-    githubRepoUrl = 'https://github.com/myanmartools/unicode-code-points-text-converter-angular-pwa';
-    githubImageAlt = 'Unicode Code Points Text Converter GitHub Repo';
-    githubReleaseUrl = 'https://github.com/myanmartools/unicode-code-points-text-converter-angular-pwa/releases';
+    githubRepoUrl = 'https://github.com/myanmartools/unicode-code-points-lookup-angular-pwa';
+    githubImageAlt = 'Unicode Code Points Lookup GitHub Repo';
+    githubReleaseUrl = 'https://github.com/myanmartools/unicode-code-points-lookup-angular-pwa/releases';
 
     @ViewChild('sourceTextareaSyncSize')
     sourceTextareaSyncSize: CdkTextareaSyncSize;
@@ -46,12 +46,8 @@ export class AppComponent implements OnInit, OnDestroy {
         return VERSION.full;
     }
 
-    get titleWithSuffix(): string {
-        return `${this.title}${this.titleSuffix}`;
-    }
-
     get baseUrl(): string {
-        return environment.production ? 'https://unicode-code-points-text-converter.myanmartools.org/' : '/';
+        return environment.production ? 'https://unicode-code-points-lookup.myanmartools.org/' : '/';
     }
 
     get appImageUrl(): string {

@@ -1,16 +1,14 @@
 # Unicode Code Points Lookup (Myanmar Tools)
 
-[![Build Status](https://dev.azure.com/myanmartools/unicode-code-points-text-converter-angular-pwa/_apis/build/status/myanmartools.unicode-code-points-text-converter-angular-pwa?branchName=master)](https://dev.azure.com/myanmartools/unicode-code-points-text-converter-angular-pwa/_build/latest?definitionId=4&branchName=master)
-[![Build status](https://ci.appveyor.com/api/projects/status/ieefc2r743et56q4?svg=true)](https://ci.appveyor.com/project/admindagonmetriccom/unicode-code-points-text-converter-angular-pwa)
 [![Gitter](https://badges.gitter.im/myanmartools/community.svg)](https://gitter.im/myanmartools/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 Angular Progressive Web Application (PWA) for converting UTF-32/UTF-16/UTF-8 code point sequences to text and vice versa.
 
 ## Live Application - Unicode Code Points Lookup
 
-[![Unicode Code Points Lookup](https://unicode-code-points-text-converter.myanmartools.org/assets/images/appicons/v1/screenshot.jpg)](https://unicode-code-points-text-converter.myanmartools.org)
+[![Unicode Code Points Lookup](https://unicode-code-points-lookup.myanmartools.org/assets/images/appicons/v1/screenshot.jpg)](https://unicode-code-points-lookup.myanmartools.org)
 
-[https://unicode-code-points-text-converter.myanmartools.org](https://unicode-code-points-text-converter.myanmartools.org)
+[https://unicode-code-points-lookup.myanmartools.org](https://unicode-code-points-lookup.myanmartools.org)
 
 ## Features
 
@@ -46,8 +44,8 @@ A collection of useful open source projects for Myanmar specific applications, l
 
 ## Feedback and Contributing
 
-Check out the [Contributing](https://github.com/myanmartools/unicode-code-points-text-converter-angular-pwa/blob/master/CONTRIBUTING.md) page to see the best places to log issues and start discussions.
+Check out the [Contributing](https://github.com/myanmartools/unicode-code-points-lookup-angular-pwa/blob/master/CONTRIBUTING.md) page to see the best places to log issues and start discussions.
 
 ## License
 
-This repository is licensed with the [MIT](https://github.com/myanmartools/unicode-code-points-text-converter-angular-pwa/blob/master/LICENSE) license.
+This repository is licensed with the [MIT](https://github.com/myanmartools/unicode-code-points-lookup-angular-pwa/blob/master/LICENSE) license.

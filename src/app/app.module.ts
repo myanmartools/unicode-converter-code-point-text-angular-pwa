@@ -29,7 +29,7 @@ import { AppComponent } from './app.component';
         AppComponent
     ],
     imports: [
-        BrowserModule.withServerTransition({ appId: 'unicode-code-points-text-converter' }),
+        BrowserModule.withServerTransition({ appId: 'unicode-code-points-lookup' }),
         CommonModule,
         HttpClientModule,
         FormsModule,

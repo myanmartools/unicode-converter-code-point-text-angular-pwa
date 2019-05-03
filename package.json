@@ -1,17 +1,17 @@
 {
-  "name": "unicode-code-points-text-converter-angular-pwa",
+  "name": "unicodeunicode-code-points-lookup-angular-pwa",
   "version": "1.0.0-preview1",
   "private": true,
   "author": "DagonMetric",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/myanmartools/unicode-code-points-text-converter-angular-pwa.git"
+    "url": "https://github.com/myanmartools/unicode-code-points-lookup-angular-pwa.git"
   },
   "bugs": {
-    "url": "https://github.com/myanmartools/unicode-code-points-text-converter-angular-pwa/issues"
+    "url": "https://github.com/myanmartools/unicode-code-points-lookup-angular-pwa/issues"
   },
-  "homepage": "https://github.com/myanmartools/unicode-code-points-text-converter-angular-pwa",
+  "homepage": "https://github.com/myanmartools/unicode-code-points-lookup-angular-pwa",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
