@@ -22,4 +22,5 @@ steps:
     yarn install
     yarn run lint
     yarn run build
-  displayName: 'npm install, lint and build'
+    yarn run test:ci
+  displayName: 'yarn install, lint, build and test'
