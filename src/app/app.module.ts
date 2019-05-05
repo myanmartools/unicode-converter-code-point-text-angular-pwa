@@ -1,5 +1,3 @@
-// tslint:disable: no-unnecessary-class
-
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -12,7 +10,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { ZawgyiDetectorModule } from '@myanmartools/ng-zawgyi-detector';
@@ -44,6 +42,7 @@ import { AppComponent } from './app.component';
         MatToolbarModule,
 
         CdkTextareaSyncSizeModule,
+
         ZawgyiDetectorModule,
         HttpZgUniRuleLoaderModule.withOptions({
             endpoint: '/assets/zawgyi-detect-rules/v1/zg-uni-rule.json'
