@@ -19,7 +19,7 @@ Angular Progressive Web Application (PWA) for converting UTF-32/UTF-16/UTF-8 cod
 * On the fly converting Unicode hex numbers in UTF-32, UTF-16, and UTF-8 formats to their Unicode characters
 * Auto detect Zawgyi and Myanmar Unicode font encodings and display correctly
 * Custom fonts can be used for input/output text boxes;
-* Supported input code point formats: C style (\U000000), JavaScript/Java style (\u0000), ES6 style (\u{0000}), U+HEX style (U+0000), \x hex numbers style (\x0000)
+* Supported input code point formats: C style (\U000000), JavaScript/Java style (\u0000), ES6 style (\u{0000}), U+HEX style (U+0000), \x hex numbers style (\x00)
 * Supported output code point formats: JavaScript/Java style (\u0000), ES6 style (\u{0000}), U+HEX style (U+0000)
 
 ## Programming Languages & Frameworks
