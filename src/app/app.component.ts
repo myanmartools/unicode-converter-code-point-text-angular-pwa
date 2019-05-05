@@ -3,10 +3,10 @@
 
 import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 
-import { Observable, Subject } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 
-import { ZawgyiDetector, ZgUniDetectResult } from '@myanmartools/ng-zawgyi-detector';
+import { ZawgyiDetector } from '@myanmartools/ng-zawgyi-detector';
 
 import { CdkTextareaSyncSize } from '../cdk-extensions';
 
@@ -16,7 +16,8 @@ import { VERSION } from '../version';
 export type FontEncType = 'zg' | 'uni' | null | '';
 export type CpOutFormatType = 'js' | 'es6' | 'uPlus';
 
-export interface UnicodeFormatterResult extends ZgUniDetectResult {
+export interface UnicodeFormatterResult {
+    detectedEnc: 'zg' | 'uni' | null;
     input: string;
     formattedOutput: string;
     inputIsCodePoints: boolean;
@@ -66,6 +67,11 @@ export class AppComponent implements OnInit, OnDestroy {
     private _sourceFontEnc: FontEncType;
     private _targetFontEnc: FontEncType;
 
+    private _prevIsCP: boolean | null = null;
+    private _prevSourceText: string | null = null;
+    private _prevSourceFontEnc: FontEncType | null = null;
+    private _prevTargetFontEnc: FontEncType | null = null;
+
     private _cpOutOptionsVisible = false;
     private _cpOutFormat: CpOutFormatType = 'js';
     private _cpOutFormatEscapse = true;
@@ -78,6 +84,14 @@ export class AppComponent implements OnInit, OnDestroy {
         return this._sourceText;
     }
     set sourceText(value: string) {
+        if (value == null || value.length === 0 || value.trim().length === 0) {
+            this._prevSourceText = '';
+            this._prevSourceFontEnc = null;
+            this._prevTargetFontEnc = null;
+        } else {
+            this._prevSourceText = this._sourceText;
+        }
+
         this._sourceText = value;
         this.convertNext();
     }
@@ -86,6 +100,9 @@ export class AppComponent implements OnInit, OnDestroy {
         return this._sourceFontEnc;
     }
     set sourceFontEnc(value: FontEncType) {
+        this._prevSourceFontEnc = value;
+        this._prevTargetFontEnc = null;
+
         this._sourceFontEnc = value;
     }
 
@@ -93,6 +110,9 @@ export class AppComponent implements OnInit, OnDestroy {
         return this._targetFontEnc;
     }
     set targetFontEnc(value: FontEncType) {
+        this._prevTargetFontEnc = value;
+        this._prevSourceFontEnc = null;
+
         this._targetFontEnc = value;
     }
 
@@ -208,13 +228,6 @@ export class AppComponent implements OnInit, OnDestroy {
     private convert(input: string): Observable<UnicodeFormatterResult> {
         const result: UnicodeFormatterResult = {
             detectedEnc: null,
-            probability: 0,
-            containsUnicodeBlocks: false,
-            stdCodePointsMatchedCount: 0,
-            extCodePointsMatchedCount: 0,
-            zgMatches: [],
-            uniMatches: [],
-
             input: input,
             inputIsCodePoints: false,
             formattedOutput: ''
@@ -224,6 +237,23 @@ export class AppComponent implements OnInit, OnDestroy {
             const formattedOutput = this.convertToChars(input);
             result.formattedOutput = formattedOutput;
             result.inputIsCodePoints = true;
+
+            this._prevSourceFontEnc = null;
+
+            if (this._prevIsCP != null && !this._prevIsCP && this._prevTargetFontEnc) {
+                this._prevTargetFontEnc = null;
+                this._prevSourceText = '';
+            }
+            this._prevIsCP = true;
+
+            if (this._prevTargetFontEnc &&
+                this._prevSourceText &&
+                (input.includes(this._prevSourceText) || this._prevSourceText.includes(input))) {
+                return of({
+                    ...result,
+                    detectedEnc: this._prevTargetFontEnc
+                });
+            }
 
             return this._zawgyiDetector.detect(formattedOutput).pipe(
                 map(zgDetectorResult => {
@@ -236,6 +266,23 @@ export class AppComponent implements OnInit, OnDestroy {
         } else {
             const formattedOutput = this.convertToCodePoints(input);
             result.formattedOutput = formattedOutput;
+
+            this._prevTargetFontEnc = null;
+
+            if (this._prevIsCP != null && this._prevIsCP && this._prevSourceFontEnc) {
+                this._prevSourceFontEnc = null;
+                this._prevSourceText = '';
+            }
+            this._prevIsCP = false;
+
+            if (this._prevSourceFontEnc &&
+                this._prevSourceText &&
+                (input.includes(this._prevSourceText) || this._prevSourceText.includes(input))) {
+                return of({
+                    ...result,
+                    detectedEnc: this._prevSourceFontEnc
+                });
+            }
 
             return this._zawgyiDetector.detect(input).pipe(
                 map(zgDetectorResult => {
