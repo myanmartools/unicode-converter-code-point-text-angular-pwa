@@ -61,8 +61,6 @@ export class AppComponent implements OnInit, OnDestroy {
     private readonly _convertSubject = new Subject<string>();
     private readonly _destroyed = new Subject<void>();
 
-    // private readonly _printableASCIIRegExp = /[\x20-\x7E]/;
-
     private _sourceText = '';
     private _outText = '';
     private _sourceFontEnc: FontEncType;
