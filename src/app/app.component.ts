@@ -13,11 +13,11 @@ import { CdkTextareaSyncSize } from '../cdk-extensions';
 import { environment } from '../environments/environment';
 import { VERSION } from '../version';
 
-export type FontEncType = 'zg' | 'uni' | null | '';
+export type FontEncType = 'zg' | 'uni' | 'custom' | null | '';
 export type CpOutFormatType = 'js' | 'es6' | 'uPlus';
 
 export interface UnicodeFormatterResult {
-    detectedEnc: 'zg' | 'uni' | null;
+    detectedEnc: FontEncType;
     input: string;
     formattedOutput: string;
     inputIsCodePoints: boolean;
@@ -66,11 +66,13 @@ export class AppComponent implements OnInit, OnDestroy {
     private _outText = '';
     private _sourceFontEnc: FontEncType;
     private _targetFontEnc: FontEncType;
+    private _sourceFontCustom: string | null = null;
+    private _targetFontCustom: string | null = null;
 
     private _prevIsCP: boolean | null = null;
     private _prevSourceText: string | null = null;
-    private _prevSourceFontEnc: FontEncType | null = null;
-    private _prevTargetFontEnc: FontEncType | null = null;
+    private _prevSourceFontEnc: FontEncType = null;
+    private _prevTargetFontEnc: FontEncType = null;
 
     private _cpOutOptionsVisible = false;
     private _cpOutFormat: CpOutFormatType = 'js';
@@ -114,6 +116,28 @@ export class AppComponent implements OnInit, OnDestroy {
         this._prevSourceFontEnc = null;
 
         this._targetFontEnc = value;
+    }
+
+    get sourceFontCustom(): string | null {
+        return this._sourceFontCustom;
+    }
+    set sourceFontCustom(value: string | null) {
+        this._prevSourceFontEnc = null;
+        this._prevTargetFontEnc = null;
+        this._prevSourceText = '';
+
+        this._sourceFontCustom = value;
+    }
+
+    get targetFontCustom(): string | null {
+        return this._targetFontCustom;
+    }
+    set targetFontCustom(value: string | null) {
+        this._prevSourceFontEnc = null;
+        this._prevTargetFontEnc = null;
+        this._prevSourceText = '';
+
+        this._targetFontCustom = value;
     }
 
     get cpOutFormat(): CpOutFormatType {
@@ -184,9 +208,12 @@ export class AppComponent implements OnInit, OnDestroy {
                     this._targetFontEnc = 'zg';
                 } else if (result.detectedEnc === 'uni') {
                     this._targetFontEnc = 'uni';
+                } else if (result.detectedEnc === 'custom') {
+                    this._targetFontEnc = 'custom';
                 } else {
                     this._targetFontEnc = null;
                 }
+
             } else {
                 if (result.formattedOutput && result.formattedOutput.length > 0) {
                     this._cpOutOptionsVisible = true;
@@ -198,6 +225,8 @@ export class AppComponent implements OnInit, OnDestroy {
                     this._sourceFontEnc = 'zg';
                 } else if (result.detectedEnc === 'uni') {
                     this._sourceFontEnc = 'uni';
+                } else if (result.detectedEnc === 'custom') {
+                    this._sourceFontEnc = 'custom';
                 } else {
                     this._sourceFontEnc = null;
                 }
@@ -238,6 +267,17 @@ export class AppComponent implements OnInit, OnDestroy {
             result.formattedOutput = formattedOutput;
             result.inputIsCodePoints = true;
 
+            if (this._targetFontEnc === 'custom') {
+                this._prevSourceFontEnc = null;
+                this._prevTargetFontEnc = null;
+                this._prevSourceText = '';
+
+                return of({
+                    ...result,
+                    detectedEnc: 'custom'
+                });
+            }
+
             this._prevSourceFontEnc = null;
 
             if (this._prevIsCP != null && !this._prevIsCP && this._prevTargetFontEnc) {
@@ -266,6 +306,17 @@ export class AppComponent implements OnInit, OnDestroy {
         } else {
             const formattedOutput = this.convertToCodePoints(input);
             result.formattedOutput = formattedOutput;
+
+            if (this._sourceFontEnc === 'custom') {
+                this._prevSourceFontEnc = null;
+                this._prevTargetFontEnc = null;
+                this._prevSourceText = '';
+
+                return of({
+                    ...result,
+                    detectedEnc: 'custom'
+                });
+            }
 
             this._prevTargetFontEnc = null;
 

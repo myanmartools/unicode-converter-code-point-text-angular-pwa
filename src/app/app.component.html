@@ -17,15 +17,17 @@
         <div class="form-field-container" fxLayout="column" fxFlex="1 1 100%">
             <mat-form-field floatLabel="never">
                 <textarea spellcheck="false" matInput placeholder="Code points or text" [(ngModel)]="sourceText"
-                    [class.my-uni]="sourceFontEnc == 'uni'" [class.my-zg]="sourceFontEnc == 'zg'" cdkTextareaSyncSize
-                    cdkAutosizeMinRows="10" #sourceTextareaSyncSize="cdkTextareaSyncSize"></textarea>
+                    [class.my-uni]="sourceFontEnc == 'uni'" [class.my-zg]="sourceFontEnc == 'zg'"
+                    [style.font-family]="sourceFontEnc == 'custom' ? sourceFontCustom : null" cdkTextareaSyncSize cdkAutosizeMinRows="10"
+                    #sourceTextareaSyncSize="cdkTextareaSyncSize"></textarea>
             </mat-form-field>
         </div>
         <div class="form-field-container" fxLayout="column" fxFlex="1 1 100%" [fxHide.xs]="!outText">
             <mat-form-field floatLabel="never">
                 <textarea spellcheck="false" matInput placeholder="Formatted output" [ngModel]="outText"
-                    [class.my-uni]="targetFontEnc == 'uni'" [class.my-zg]="targetFontEnc == 'zg'" [readonly]="!outText"
-                    cdkTextareaSyncSize cdkAutosizeMinRows="10" #outTextareaSyncSize="cdkTextareaSyncSize"></textarea>
+                    [class.my-uni]="targetFontEnc == 'uni'" [class.my-zg]="targetFontEnc == 'zg'"
+                    [style.font-family]="targetFontEnc == 'custom' ? targetFontCustom : null" [readonly]="!outText" cdkTextareaSyncSize
+                    cdkAutosizeMinRows="10" #outTextareaSyncSize="cdkTextareaSyncSize"></textarea>
             </mat-form-field>
         </div>
     </div>
@@ -47,7 +49,11 @@
                 fxLayout.xs="column" fxLayoutGap="24px">
                 <mat-radio-button value="zg">Zawgyi</mat-radio-button>
                 <mat-radio-button value="uni">Myanmar Unicode</mat-radio-button>
+                <mat-radio-button value="custom">Custom</mat-radio-button>
             </mat-radio-group>
+            <mat-form-field *ngIf="sourceFontEnc == 'custom'">
+                <input matInput placeholder="Custom font family" [(ngModel)]="sourceFontCustom">
+            </mat-form-field>
 
         </div>
     </ng-template>
@@ -58,7 +64,11 @@
                 fxLayout.xs="column" fxLayoutGap="24px">
                 <mat-radio-button value="zg">Zawgyi</mat-radio-button>
                 <mat-radio-button value="uni">Myanmar Unicode</mat-radio-button>
+                <mat-radio-button value="custom">Custom</mat-radio-button>
             </mat-radio-group>
+            <mat-form-field *ngIf="targetFontEnc == 'custom'">
+                <input matInput placeholder="Custom font family" [(ngModel)]="targetFontCustom">
+            </mat-form-field>
         </div>
     </ng-template>
     <div fxLayout="column" class="about-description">
@@ -84,14 +94,16 @@
                         <a href="https://github.com/myanmartools" target="_blank" rel="noopener">GitHub</a>
                     </li>
                     <li>
-                        <a href="https://gitter.im/myanmartools/community" target="_blank" rel="noopener">Gitter Chat</a>
+                        <a href="https://gitter.im/myanmartools/community" target="_blank" rel="noopener">Gitter
+                            Chat</a>
                     </li>
                     <li>
-                        <a href="https://github.com/myanmartools/unicode-code-points-lookup-angular-pwa/issues" target="_blank" rel="noopener">Report Issues</a>
+                        <a href="https://github.com/myanmartools/unicode-code-points-lookup-angular-pwa/issues"
+                            target="_blank" rel="noopener">Report Issues</a>
                     </li>
                     <li>
-                        <a
-                            href="https://github.com/myanmartools/unicode-code-points-lookup-angular-pwa/blob/master/CONTRIBUTING.md" target="_blank" rel="noopener">Contribute</a>
+                        <a href="https://github.com/myanmartools/unicode-code-points-lookup-angular-pwa/blob/master/CONTRIBUTING.md"
+                            target="_blank" rel="noopener">Contribute</a>
                     </li>
                 </ul>
             </section>
