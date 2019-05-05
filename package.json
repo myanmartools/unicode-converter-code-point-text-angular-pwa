@@ -51,7 +51,7 @@
     "normalize.css": "^8.0.1",
     "rxjs": "^6.5.1",
     "tslib": "^1.9.3",
-    "zone.js": "^0.9.0"
+    "zone.js": "^0.9.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.800.0-rc.2",
@@ -60,7 +60,7 @@
     "@angular/language-service": "^8.0.0-rc.2",
     "@types/jasmine": "^3.3.12",
     "@types/jasminewd2": "^2.0.6",
-    "@types/node": "^11.13.9",
+    "@types/node": "^12.0.0",
     "codelyzer": "^5.0.1",
     "jasmine-core": "^3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
