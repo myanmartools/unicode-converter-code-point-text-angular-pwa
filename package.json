@@ -21,7 +21,7 @@
     "e2e": "ng e2e",
     "build:prod": "npm run build:universal:prod && npm run generate:prerender",
     "build:app:prod": "ng build --prod",
-    "build:server:prod": "ng run unicode-converter:server:production",
+    "build:server:prod": "ng run unicode-lookup:server:production",
     "build:universal:prod": "npm run build:app:prod && npm run build:server:prod",
     "update:ngsw-config": "node_modules/.bin/ngsw-config dist/app ngsw-config.json",
     "compile:prerender": "tsc -p tsconfig.prerender.json",
