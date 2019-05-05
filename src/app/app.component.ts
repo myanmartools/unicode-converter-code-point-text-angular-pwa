@@ -349,9 +349,11 @@ export class AppComponent implements OnInit, OnDestroy {
     private inputContainsCodePoints(input: string): boolean {
         if (/[Uu]\+10([A-Fa-f0-9]{4})/g.test(input) ||
             /[Uu]\+([A-Fa-f0-9]{1,5})/g.test(input) ||
-            /\\[ux]\{([A-Fa-f0-9 ]{1,})\}/g.test(input) ||
+            /0x([A-Fa-f0-9]{1,6})/g.test(input) ||
+            /\\[u]\{([A-Fa-f0-9 ]{1,})\}/g.test(input) ||
+            /\\[x]\{([A-Fa-f0-9]{1,})\}/g.test(input) ||
             /\\x([A-Fa-f0-9]{2})/g.test(input) ||
-            /\\U([A-Fa-f0-9]{6})/g.test(input) ||
+            /\\U([A-Fa-f0-9]{6,8})/g.test(input) ||
             /\\u([A-Fa-f0-9]{4})/g.test(input)
         ) {
             return true;
@@ -565,8 +567,8 @@ export class AppComponent implements OnInit, OnDestroy {
         // Convert  \x + 2 digits to a string of characters
         str = this.replaceHexToChar(/\\x([A-Fa-f0-9]{2})/g, str);
 
-        // Convert  \U + 6 digits to a string of characters
-        str = this.replaceHexToChar(/\\U([A-Fa-f0-9]{6})/g, str);
+        // Convert  \U + 6 to 8 digits to a string of characters
+        str = this.replaceHexToChar(/\\U([A-Fa-f0-9]{6,8})/g, str);
 
         // Convert  \u + 4 digits to a string of characters
         str = this.replaceHexToChar(/\\u([A-Fa-f0-9]{4})/g, str);
