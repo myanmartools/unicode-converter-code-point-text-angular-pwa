@@ -9,6 +9,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -19,8 +20,10 @@ import { HttpZgUniRuleLoaderModule } from '@myanmartools/ng-zawgyi-detector/http
 import { environment } from '../environments/environment';
 
 import { CdkTextareaSyncSizeModule } from '../cdk-extensions';
+import { CustomIconRegistry } from '../mat-extensions';
 
 import { AppComponent } from './app.component';
+import { appSvgIconProviders } from './app.svg-icons';
 
 @NgModule({
     declarations: [
@@ -37,6 +40,7 @@ import { AppComponent } from './app.component';
         FlexLayoutModule,
         MatButtonModule,
         MatCheckboxModule,
+        MatIconModule,
         MatInputModule,
         MatRadioModule,
         MatToolbarModule,
@@ -50,7 +54,13 @@ import { AppComponent } from './app.component';
 
         ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
     ],
-    providers: [],
+    providers: [
+        {
+            provide: MatIconRegistry,
+            useClass: CustomIconRegistry
+        },
+        appSvgIconProviders
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
