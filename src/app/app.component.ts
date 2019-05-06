@@ -23,6 +23,13 @@ export interface UnicodeFormatterResult {
     inputIsCodePoints: boolean;
 }
 
+export interface SocialLinkItem {
+    url: string;
+    label?: string;
+    svgUrl?: string;
+    svgIconName?: string;
+}
+
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -36,6 +43,23 @@ export class AppComponent implements OnInit, OnDestroy {
     githubRepoUrl = 'https://github.com/myanmartools/unicode-code-points-lookup-angular-pwa';
     githubImageAlt = 'Unicode Code Points Lookup GitHub Repo';
     githubReleaseUrl = 'https://github.com/myanmartools/unicode-code-points-lookup-angular-pwa/releases';
+
+    socialLinkItems: SocialLinkItem[] = [{
+        url: 'https://www.facebook.com/DagonMetric',
+        label: 'Follow Myanmar Tools on Facebook',
+        svgIconName: 'facebook'
+    },
+    {
+        url: 'https://twitter.com/myanmartools',
+        label: 'Follow Myanmar Tools on Twitter',
+        svgIconName: 'twitter'
+    },
+    {
+        url: 'https://medium.com/myanmartools',
+        label: 'Myanmar Tools Blog on Medium',
+        svgIconName: 'medium'
+    }
+    ];
 
     @ViewChild('sourceTextareaSyncSize')
     sourceTextareaSyncSize: CdkTextareaSyncSize;
