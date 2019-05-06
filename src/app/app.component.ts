@@ -70,7 +70,6 @@ export class AppComponent implements OnInit, OnDestroy {
     private _targetFontCustom: string | null = null;
 
     private _prevIsCP: boolean | null = null;
-    private _prevSourceText: string | null = null;
     private _prevSourceFontEnc: FontEncType = null;
     private _prevTargetFontEnc: FontEncType = null;
 
@@ -87,11 +86,8 @@ export class AppComponent implements OnInit, OnDestroy {
     }
     set sourceText(value: string) {
         if (value == null || value.length === 0 || value.trim().length === 0) {
-            this._prevSourceText = '';
             this._prevSourceFontEnc = null;
             this._prevTargetFontEnc = null;
-        } else {
-            this._prevSourceText = this._sourceText;
         }
 
         this._sourceText = value;
@@ -124,7 +120,6 @@ export class AppComponent implements OnInit, OnDestroy {
     set sourceFontCustom(value: string | null) {
         this._prevSourceFontEnc = null;
         this._prevTargetFontEnc = null;
-        this._prevSourceText = '';
 
         this._sourceFontCustom = value;
     }
@@ -135,7 +130,6 @@ export class AppComponent implements OnInit, OnDestroy {
     set targetFontCustom(value: string | null) {
         this._prevSourceFontEnc = null;
         this._prevTargetFontEnc = null;
-        this._prevSourceText = '';
 
         this._targetFontCustom = value;
     }
@@ -270,7 +264,6 @@ export class AppComponent implements OnInit, OnDestroy {
             if (this._targetFontEnc === 'custom') {
                 this._prevSourceFontEnc = null;
                 this._prevTargetFontEnc = null;
-                this._prevSourceText = '';
 
                 return of({
                     ...result,
@@ -282,13 +275,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
             if (this._prevIsCP != null && !this._prevIsCP && this._prevTargetFontEnc) {
                 this._prevTargetFontEnc = null;
-                this._prevSourceText = '';
             }
             this._prevIsCP = true;
 
-            if (this._prevTargetFontEnc &&
-                this._prevSourceText &&
-                (input.includes(this._prevSourceText) || this._prevSourceText.includes(input))) {
+            if (this._prevTargetFontEnc) {
                 return of({
                     ...result,
                     detectedEnc: this._prevTargetFontEnc
@@ -310,7 +300,6 @@ export class AppComponent implements OnInit, OnDestroy {
             if (this._sourceFontEnc === 'custom') {
                 this._prevSourceFontEnc = null;
                 this._prevTargetFontEnc = null;
-                this._prevSourceText = '';
 
                 return of({
                     ...result,
@@ -322,13 +311,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
             if (this._prevIsCP != null && this._prevIsCP && this._prevSourceFontEnc) {
                 this._prevSourceFontEnc = null;
-                this._prevSourceText = '';
             }
             this._prevIsCP = false;
 
-            if (this._prevSourceFontEnc &&
-                this._prevSourceText &&
-                (input.includes(this._prevSourceText) || this._prevSourceText.includes(input))) {
+            if (this._prevSourceFontEnc) {
                 return of({
                     ...result,
                     detectedEnc: this._prevSourceFontEnc
