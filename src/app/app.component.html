@@ -18,16 +18,16 @@
             <mat-form-field floatLabel="never">
                 <textarea spellcheck="false" matInput placeholder="Code points or text" [(ngModel)]="sourceText"
                     [class.my-uni]="sourceFontEnc == 'uni'" [class.my-zg]="sourceFontEnc == 'zg'"
-                    [style.font-family]="sourceFontEnc == 'custom' ? sourceFontCustom : null" cdkTextareaSyncSize cdkAutosizeMinRows="10"
-                    #sourceTextareaSyncSize="cdkTextareaSyncSize"></textarea>
+                    [style.font-family]="sourceFontEnc == 'custom' ? sourceFontCustom : null" cdkTextareaSyncSize
+                    cdkAutosizeMinRows="10" #sourceTextareaSyncSize="cdkTextareaSyncSize"></textarea>
             </mat-form-field>
         </div>
         <div class="form-field-container" fxLayout="column" fxFlex="1 1 100%" [fxHide.xs]="!outText">
             <mat-form-field floatLabel="never">
                 <textarea spellcheck="false" matInput placeholder="Formatted output" [ngModel]="outText"
                     [class.my-uni]="targetFontEnc == 'uni'" [class.my-zg]="targetFontEnc == 'zg'"
-                    [style.font-family]="targetFontEnc == 'custom' ? targetFontCustom : null" [readonly]="!outText" cdkTextareaSyncSize
-                    cdkAutosizeMinRows="10" #outTextareaSyncSize="cdkTextareaSyncSize"></textarea>
+                    [style.font-family]="targetFontEnc == 'custom' ? targetFontCustom : null" [readonly]="!outText"
+                    cdkTextareaSyncSize cdkAutosizeMinRows="10" #outTextareaSyncSize="cdkTextareaSyncSize"></textarea>
             </mat-form-field>
         </div>
     </div>
@@ -72,19 +72,25 @@
         </div>
     </ng-template>
     <div fxLayout="column" class="about-description">
-        <p>Unicode converter by DagonMetric Myanmar Tools to lookup between Unicode code point sequences
-            (UTF-32/UTF-16/UTF-8 code units in hex numbers/digits) and text.</p>
+        <p>Unicode code points converter by DagonMetric to encode or decode Unicode codepoint sequences (convert
+            UTF-32/UTF-16/UTF-8 hex numbers to text and vice visa).</p>
         <div class="app-version">Version: <a [href]="githubReleaseUrl">{{appVersion}}</a></div>
         <div class="about-category">
-            Category: UtilitiesApplication, Utilities and Productivity, Progressive Web Application, Unicode Tools, Open
-            Source, Online Tools,
-            Decode/Encode Unicode Text, Unicode Converter, Unicode Lookup
+            Category: UtilitiesApplication, Unicode Code Points Converter, Unicode Lookup, Unicode Converter, Unicode
+            Encode Decode, Unicode Codepoints, Unicode Tools, Decode/Encode Unicode Text, Unicode Escapse, Open Source,
+            Online Converter
         </div>
     </div>
 </main>
 <footer class="app-footer">
     <div class="container">
         <div fxLayout="column" class="footer-section-grid">
+            <div class="social-links">
+                <a class="social-link-item" target="_blank" rel="noopener" *ngFor="let socialLinkItem of socialLinkItems"
+                    [href]="socialLinkItem.url" [attr.title]="socialLinkItem.label">
+                    <mat-icon svgIcon="{{socialLinkItem.svgIconName}}"></mat-icon>
+                </a>
+            </div>
             <section class="footer-section" fxLayout="column">
                 <ul fxLayout="row" fxLayout.xs="column" fxLayoutGap="24px">
                     <li>
