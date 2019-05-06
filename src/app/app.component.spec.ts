@@ -1,5 +1,6 @@
 // tslint:disable: no-floating-promises
 
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 
@@ -10,6 +11,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -17,8 +19,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { NoopZgUniRuleLoaderModule, ZawgyiDetectorModule } from '@myanmartools/ng-zawgyi-detector';
 
 import { CdkTextareaSyncSizeModule } from '../cdk-extensions';
+import { CustomIconRegistry } from '../mat-extensions';
 
 import { AppComponent } from './app.component';
+import { appSvgIconProviders } from './app.svg-icons';
 
 describe('AppComponent', () => {
     beforeEach(async(() => {
@@ -29,11 +33,13 @@ describe('AppComponent', () => {
             imports: [
                 NoopAnimationsModule,
                 CommonModule,
+                HttpClientTestingModule,
                 FormsModule,
 
                 FlexLayoutModule,
                 MatButtonModule,
                 MatCheckboxModule,
+                MatIconModule,
                 MatInputModule,
                 MatRadioModule,
                 MatToolbarModule,
@@ -43,6 +49,13 @@ describe('AppComponent', () => {
                 ZawgyiDetectorModule,
                 NoopZgUniRuleLoaderModule
             ],
+            providers: [
+                {
+                    provide: MatIconRegistry,
+                    useClass: CustomIconRegistry
+                },
+                appSvgIconProviders
+            ]
         }).compileComponents();
     }));
 
