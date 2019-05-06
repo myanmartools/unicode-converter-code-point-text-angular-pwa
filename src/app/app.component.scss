@@ -106,6 +106,42 @@ footer.app-footer {
         text-align: center;
     }
 
+    .social-links {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        flex: 0 1 auto;
+        justify-content: center;
+        text-align: center;
+        margin-bottom: $default-gap-width;
+
+        & > *:not(:last-child) {
+            margin-right: $default-gap-width / 2;
+        }
+
+        .social-link-item {
+            box-sizing: border-box;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: inherit;
+            cursor: pointer;
+
+            .mat-icon {
+                display: inline-block;
+                // width: 20px;
+                // height: 20px;
+                // line-height: 20px;
+                // color: rgba(0, 0, 0, .67);
+                // fill: rgba(0, 0, 0, .67);
+            }
+        }
+    }
+
     ul {
         display: flex;
         list-style-type: disc;
