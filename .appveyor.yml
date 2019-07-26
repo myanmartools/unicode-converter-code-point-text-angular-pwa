@@ -1,10 +1,11 @@
-version: 1.0.0-preview4+{build}
+version: '{build}'
 branches:
   only:
     - master
     - '/v(?:0|[1-9]\d*)(\.(?:0|[1-9]\d*))?(\.(?:0|[1-9]\d*))?(?:-[\da-z-]+(?:\.[\da-z-]+)*)?(?:\+[\da-z-]+(?:\.[\da-z-]+)*)?/'
 clone_depth: 1
 skip_non_tags: true
+image: Visual Studio 2017
 environment:
   nodejs_version: "10"
 install:
