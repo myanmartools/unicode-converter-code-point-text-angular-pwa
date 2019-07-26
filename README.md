@@ -1,4 +1,4 @@
-# Unicode Code Points Lookup (Angular PWA)
+# Unicode Code Points Lookup Angular PWA
 
 [![Build Status](https://dev.azure.com/myanmartools/unicode-code-points-lookup-angular-pwa/_apis/build/status/myanmartools.unicode-code-points-lookup-angular-pwa?branchName=master)](https://dev.azure.com/myanmartools/unicode-code-points-lookup-angular-pwa/_build/latest?definitionId=5&branchName=master)
 [![Build status](https://ci.appveyor.com/api/projects/status/bied8m9cnv6wk7lo?svg=true)](https://ci.appveyor.com/project/admindagonmetriccom/unicode-code-points-lookup-angular-pwa)
