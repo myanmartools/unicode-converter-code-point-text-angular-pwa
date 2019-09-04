@@ -1,7 +1,7 @@
 # Unicode Code Points Lookup Angular PWA
 
 [![Build Status](https://dev.azure.com/myanmartools/unicode-code-points-lookup-angular-pwa/_apis/build/status/myanmartools.unicode-code-points-lookup-angular-pwa?branchName=master)](https://dev.azure.com/myanmartools/unicode-code-points-lookup-angular-pwa/_build/latest?definitionId=5&branchName=master)
-[![Build status](https://ci.appveyor.com/api/projects/status/bied8m9cnv6wk7lo?svg=true)](https://ci.appveyor.com/project/admindagonmetriccom/unicode-code-points-lookup-angular-pwa)
+[![CircleCI](https://circleci.com/gh/myanmartools/unicode-code-points-lookup-angular-pwa/tree/master.svg?style=svg)](https://circleci.com/gh/myanmartools/unicode-code-points-lookup-angular-pwa/tree/master)
 [![Gitter](https://badges.gitter.im/myanmartools/community.svg)](https://gitter.im/myanmartools/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 Angular Progressive Web Application (PWA) for converting UTF-32/UTF-16/UTF-8 code point sequences to text and vice versa.
