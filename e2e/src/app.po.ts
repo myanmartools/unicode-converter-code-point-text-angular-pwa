@@ -1,6 +1,9 @@
 // tslint:disable-next-line: no-implicit-dependencies
 import { browser, by, element } from 'protractor';
 
+/**
+ * Shared.
+ */
 export class AppPage {
     // tslint:disable-next-line: no-any
     async navigateTo(): Promise<any> {

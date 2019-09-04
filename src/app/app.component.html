@@ -18,7 +18,7 @@
             <mat-form-field floatLabel="never">
                 <textarea spellcheck="false" matInput placeholder="Code points or text" [(ngModel)]="sourceText"
                     [class.my-uni]="sourceFontEnc == 'uni'" [class.my-zg]="sourceFontEnc == 'zg'"
-                    [style.font-family]="sourceFontEnc == 'custom' ? sourceFontCustom : null" cdkTextareaSyncSize
+                    [style.font-family]="sourceFontEnc == 'mix' ? sourceFontCustom : null" cdkTextareaSyncSize
                     cdkAutosizeMinRows="10" #sourceTextareaSyncSize="cdkTextareaSyncSize"></textarea>
             </mat-form-field>
         </div>
@@ -26,7 +26,7 @@
             <mat-form-field floatLabel="never">
                 <textarea spellcheck="false" matInput placeholder="Formatted output" [ngModel]="outText"
                     [class.my-uni]="targetFontEnc == 'uni'" [class.my-zg]="targetFontEnc == 'zg'"
-                    [style.font-family]="targetFontEnc == 'custom' ? targetFontCustom : null" [readonly]="!outText"
+                    [style.font-family]="targetFontEnc == 'mix' ? targetFontCustom : null" [readonly]="!outText"
                     cdkTextareaSyncSize cdkAutosizeMinRows="10" #outTextareaSyncSize="cdkTextareaSyncSize"></textarea>
             </mat-form-field>
         </div>
@@ -49,9 +49,9 @@
                 fxLayout.xs="column" fxLayoutGap="24px">
                 <mat-radio-button value="zg">Zawgyi</mat-radio-button>
                 <mat-radio-button value="uni">Myanmar Unicode</mat-radio-button>
-                <mat-radio-button value="custom">Custom</mat-radio-button>
+                <mat-radio-button value="mix">Custom</mat-radio-button>
             </mat-radio-group>
-            <mat-form-field *ngIf="sourceFontEnc == 'custom'">
+            <mat-form-field *ngIf="sourceFontEnc == 'mix'">
                 <input matInput placeholder="Custom font family" [(ngModel)]="sourceFontCustom">
             </mat-form-field>
 
@@ -64,9 +64,9 @@
                 fxLayout.xs="column" fxLayoutGap="24px">
                 <mat-radio-button value="zg">Zawgyi</mat-radio-button>
                 <mat-radio-button value="uni">Myanmar Unicode</mat-radio-button>
-                <mat-radio-button value="custom">Custom</mat-radio-button>
+                <mat-radio-button value="mix">Custom</mat-radio-button>
             </mat-radio-group>
-            <mat-form-field *ngIf="targetFontEnc == 'custom'">
+            <mat-form-field *ngIf="targetFontEnc == 'mix'">
                 <input matInput placeholder="Custom font family" [(ngModel)]="targetFontCustom">
             </mat-form-field>
         </div>

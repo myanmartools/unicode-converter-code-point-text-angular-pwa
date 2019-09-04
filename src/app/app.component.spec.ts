@@ -10,13 +10,18 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { NoopZgUniRuleLoaderModule, ZawgyiDetectorModule } from '@myanmartools/ng-zawgyi-detector';
+import { ConfigModule } from '@dagonmetric/ng-config';
+import { StaticConfigLoaderModule } from '@dagonmetric/ng-config/static-loader';
+import { LogModule } from '@dagonmetric/ng-log';
+
+import { ZawgyiDetectorModule } from '@myanmartools/ng-zawgyi-detector';
 
 import { CdkTextareaSyncSizeModule } from '../cdk-extensions';
 import { CustomIconRegistry } from '../mat-extensions';
@@ -38,6 +43,7 @@ describe('AppComponent', () => {
 
                 FlexLayoutModule,
                 MatButtonModule,
+                MatButtonToggleModule,
                 MatCheckboxModule,
                 MatIconModule,
                 MatInputModule,
@@ -46,8 +52,41 @@ describe('AppComponent', () => {
 
                 CdkTextareaSyncSizeModule,
 
-                ZawgyiDetectorModule,
-                NoopZgUniRuleLoaderModule
+                ZawgyiDetectorModule.withOptions({ detectMixType: false }),
+
+                LogModule,
+
+                // ng-config modules
+                ConfigModule.init(),
+                StaticConfigLoaderModule.withSettings({
+                    appVersion: '1.0.0',
+                    title: 'Unicode Code Points Lookup',
+                    titleSuffix: ' - Myanmar Tools',
+                    githubRepoUrl: 'https://github.com/myanmartools/unicode-code-points-lookup-angular-pwa',
+                    githubImageAlt: 'Unicode Code Points Lookup GitHub Repo',
+                    baseUrl: 'https://unicode-code-points-lookup.myanmartools.org/',
+                    appImageUrl: 'assets/images/appicons/v1/logo.png',
+                    githubImageUrl: 'assets/images/appicons/v1/github.svg',
+                    githubReleaseUrl: 'https://github.com/myanmartools/unicode-code-points-lookup-angular-pwa/releases',
+                    socialLinks: [
+                        {
+                            url: 'https://www.facebook.com/DagonMetric',
+                            label: 'Follow Myanmar Tools on Facebook',
+                            svgIconName: 'facebook'
+                        },
+                        {
+                            url: 'https://twitter.com/myanmartools',
+                            label: 'Follow Myanmar Tools on Twitter',
+                            svgIconName: 'twitter'
+                        },
+                        {
+                            url: 'https://medium.com/myanmartools',
+                            label: 'Myanmar Tools Blog on Medium',
+                            svgIconName: 'medium'
+                        }
+                    ]
+                }),
+
             ],
             providers: [
                 {
@@ -67,7 +106,7 @@ describe('AppComponent', () => {
 
     it("should have as title 'Unicode Code Points Lookup'", () => {
         const fixture = TestBed.createComponent(AppComponent);
-        const app = fixture.debugElement.componentInstance  as AppComponent;
+        const app = fixture.debugElement.componentInstance as AppComponent;
         expect(app.title).toEqual('Unicode Code Points Lookup');
     });
 

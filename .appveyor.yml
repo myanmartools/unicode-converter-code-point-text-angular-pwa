@@ -1,30 +1,14 @@
 version: '{build}'
-branches:
-  only:
-    - master
-    - '/v(?:0|[1-9]\d*)(\.(?:0|[1-9]\d*))?(\.(?:0|[1-9]\d*))?(?:-[\da-z-]+(?:\.[\da-z-]+)*)?(?:\+[\da-z-]+(?:\.[\da-z-]+)*)?/'
-clone_depth: 1
-skip_non_tags: true
-image: Visual Studio 2017
+image: 'Visual Studio 2019'
 environment:
   nodejs_version: "10"
 install:
   - ps: Install-Product node $env:nodejs_version
-  - ps: |
-  - yarn global add firebase-tools
-  - yarn install --frozen-lockfile --network-timeout=500000
-  # - yarn install
+  - yarn install --frozen-lockfile
 build_script:
-  - yarn run lint
-  - yarn run build
-  - yarn run test:ci
-test: "off"
+  - yarn build
+test_script:
+  - yarn test -c=ci
 cache:
   - node_modules -> yarn.lock
   - "%LOCALAPPDATA%\\Yarn"
-deploy_script:
-  - ps: |
-      if ($env:firebase_token)
-      {
-        iex "firebase deploy --only hosting:unicode-converter --token $env:firebase_token"
-      }

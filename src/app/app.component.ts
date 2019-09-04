@@ -1,86 +1,97 @@
+/**
+ * @license
+ * Copyright DagonMetric. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found under the LICENSE file in the root directory of this source tree.
+ */
+
 // tslint:disable: binary-expression-operand-order
 // tslint:disable: no-bitwise
 
-import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 
-import { Observable, of, Subject } from 'rxjs';
-import { map, switchMap, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 
-import { ZawgyiDetector } from '@myanmartools/ng-zawgyi-detector';
+import { ConfigService } from '@dagonmetric/ng-config';
+import { LogService } from '@dagonmetric/ng-log';
+
+import { DetectedEnc, DetectorResult, ZawgyiDetector } from '@myanmartools/ng-zawgyi-detector';
 
 import { CdkTextareaSyncSize } from '../cdk-extensions';
 
 import { environment } from '../environments/environment';
-import { VERSION } from '../version';
 
-export type FontEncType = 'zg' | 'uni' | 'custom' | null | '';
+import { SocialLinkItem } from './social-link-item';
+
+// export type FontEncType = DetectedEnc | 'custom' | null | '';
 export type CpOutFormatType = 'js' | 'es6' | 'uPlus';
 
-export interface UnicodeFormatterResult {
-    detectedEnc: FontEncType;
+export interface UnicodeFormatterResult extends DetectorResult {
     input: string;
     formattedOutput: string;
     inputIsCodePoints: boolean;
 }
 
-export interface SocialLinkItem {
-    url: string;
-    label?: string;
-    svgUrl?: string;
-    svgIconName?: string;
-}
-
+/**
+ * The core app component.
+ */
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class AppComponent implements OnInit, OnDestroy {
-    title = 'Unicode Code Points Lookup';
-    titleShort = 'Unicode Lookup';
+export class AppComponent implements AfterViewInit, OnInit, OnDestroy {
+    @ViewChild('sourceTextareaSyncSize', { static: false })
+    sourceTextareaSyncSize?: CdkTextareaSyncSize;
 
-    githubRepoUrl = 'https://github.com/myanmartools/unicode-code-points-lookup-angular-pwa';
-    githubImageAlt = 'Unicode Code Points Lookup GitHub Repo';
-    githubReleaseUrl = 'https://github.com/myanmartools/unicode-code-points-lookup-angular-pwa/releases';
-
-    socialLinkItems: SocialLinkItem[] = [{
-        url: 'https://www.facebook.com/DagonMetric',
-        label: 'Follow Myanmar Tools on Facebook',
-        svgIconName: 'facebook'
-    },
-    {
-        url: 'https://twitter.com/myanmartools',
-        label: 'Follow Myanmar Tools on Twitter',
-        svgIconName: 'twitter'
-    },
-    {
-        url: 'https://medium.com/myanmartools',
-        label: 'Myanmar Tools Blog on Medium',
-        svgIconName: 'medium'
-    }
-    ];
-
-    @ViewChild('sourceTextareaSyncSize')
-    sourceTextareaSyncSize: CdkTextareaSyncSize;
-
-    @ViewChild('outTextareaSyncSize')
-    outTextareaSyncSize: CdkTextareaSyncSize;
+    @ViewChild('outTextareaSyncSize', { static: false })
+    outTextareaSyncSize?: CdkTextareaSyncSize;
 
     get appVersion(): string {
-        return VERSION.full;
+        return this._configService.getValue<string>('appVersion', 'dev');
+    }
+
+    get title(): string {
+        return this._configService.getValue<string>('title');
+    }
+
+    get titleSuffix(): string {
+        return this._configService.getValue<string>('titleSuffix');
+    }
+
+    get titleWithSuffix(): string {
+        return `${this.title}${this.titleSuffix}`;
     }
 
     get baseUrl(): string {
-        return environment.production ? 'https://unicode-code-points-lookup.myanmartools.org/' : '/';
+        return environment.production ? this._configService.getValue<string>('baseUrl') : '/';
+    }
+
+    get githubRepoUrl(): string {
+        return this._configService.getValue<string>('githubRepoUrl');
+    }
+
+    get githubImageAlt(): string {
+        return this._configService.getValue<string>('githubImageAlt');
+    }
+
+    get githubReleaseUrl(): string {
+        return this._configService.getValue<string>('githubReleaseUrl');
     }
 
     get appImageUrl(): string {
-        return `${this.baseUrl}assets/images/appicons/v1/logo.png`;
+        return `${this.baseUrl}${this._configService.getValue<string>('appImageUrl')}`;
     }
 
     get githubImageUrl(): string {
-        return `${this.baseUrl}assets/images/appicons/v1/github.svg`;
+        return `${this.baseUrl}${this._configService.getValue<string>('githubImageUrl')}`;
+    }
+
+    get socialLinkItems(): SocialLinkItem[] {
+        return this._configService.getValue<SocialLinkItem[]>('socialLinks', []);
     }
 
     private readonly _convertSubject = new Subject<string>();
@@ -88,14 +99,14 @@ export class AppComponent implements OnInit, OnDestroy {
 
     private _sourceText = '';
     private _outText = '';
-    private _sourceFontEnc: FontEncType;
-    private _targetFontEnc: FontEncType;
+    private _sourceFontEnc?: DetectedEnc;
+    private _targetFontEnc?: DetectedEnc;
     private _sourceFontCustom: string | null = null;
     private _targetFontCustom: string | null = null;
 
     private _prevIsCP: boolean | null = null;
-    private _prevSourceFontEnc: FontEncType = null;
-    private _prevTargetFontEnc: FontEncType = null;
+    private _prevSourceFontEnc?: DetectedEnc;
+    private _prevTargetFontEnc?: DetectedEnc;
 
     private _cpOutOptionsVisible = false;
     private _cpOutFormat: CpOutFormatType = 'js';
@@ -118,20 +129,20 @@ export class AppComponent implements OnInit, OnDestroy {
         this.convertNext();
     }
 
-    get sourceFontEnc(): FontEncType {
+    get sourceFontEnc(): DetectedEnc | undefined {
         return this._sourceFontEnc;
     }
-    set sourceFontEnc(value: FontEncType) {
+    set sourceFontEnc(value: DetectedEnc | undefined) {
         this._prevSourceFontEnc = value;
         this._prevTargetFontEnc = null;
 
         this._sourceFontEnc = value;
     }
 
-    get targetFontEnc(): FontEncType {
+    get targetFontEnc(): DetectedEnc | undefined {
         return this._targetFontEnc;
     }
-    set targetFontEnc(value: FontEncType) {
+    set targetFontEnc(value: DetectedEnc | undefined) {
         this._prevTargetFontEnc = value;
         this._prevSourceFontEnc = null;
 
@@ -206,15 +217,15 @@ export class AppComponent implements OnInit, OnDestroy {
         return this._cpOutOptionsVisible;
     }
 
-    constructor(private readonly _zawgyiDetector: ZawgyiDetector) { }
+    constructor(
+        private readonly _zawgyiDetector: ZawgyiDetector,
+        private readonly _configService: ConfigService,
+        private readonly _logService: LogService) { }
 
     ngOnInit(): void {
-        this.sourceTextareaSyncSize.secondCdkTextareaSyncSize = this.outTextareaSyncSize;
-        this.outTextareaSyncSize.secondCdkTextareaSyncSize = this.sourceTextareaSyncSize;
-
         this._convertSubject.pipe(
             takeUntil(this._destroyed),
-            switchMap(() => {
+            map(() => {
                 return this.convert(this.sourceText);
             })
         ).subscribe(result => {
@@ -226,8 +237,8 @@ export class AppComponent implements OnInit, OnDestroy {
                     this._targetFontEnc = 'zg';
                 } else if (result.detectedEnc === 'uni') {
                     this._targetFontEnc = 'uni';
-                } else if (result.detectedEnc === 'custom') {
-                    this._targetFontEnc = 'custom';
+                } else if (result.detectedEnc === 'mix') {
+                    this._targetFontEnc = 'mix';
                 } else {
                     this._targetFontEnc = null;
                 }
@@ -243,15 +254,31 @@ export class AppComponent implements OnInit, OnDestroy {
                     this._sourceFontEnc = 'zg';
                 } else if (result.detectedEnc === 'uni') {
                     this._sourceFontEnc = 'uni';
-                } else if (result.detectedEnc === 'custom') {
-                    this._sourceFontEnc = 'custom';
+                } else if (result.detectedEnc === 'mix') {
+                    this._sourceFontEnc = 'mix';
                 } else {
                     this._sourceFontEnc = null;
                 }
             }
 
             this._outText = result.formattedOutput;
+
+            const eventName = result.inputIsCodePoints ? 'cp2text' : 'text2cp';
+
+            this._logService.trackEvent({
+                name: eventName,
+                event_category: 'lookup'
+            });
         });
+    }
+
+    ngAfterViewInit(): void {
+        if (this.sourceTextareaSyncSize) {
+            this.sourceTextareaSyncSize.secondCdkTextareaSyncSize = this.outTextareaSyncSize;
+        }
+        if (this.outTextareaSyncSize) {
+            this.outTextareaSyncSize.secondCdkTextareaSyncSize = this.sourceTextareaSyncSize;
+        }
     }
 
     ngOnDestroy(): void {
@@ -272,12 +299,14 @@ export class AppComponent implements OnInit, OnDestroy {
         this._convertSubject.next(formattedInput);
     }
 
-    private convert(input: string): Observable<UnicodeFormatterResult> {
+    private convert(input: string): UnicodeFormatterResult {
         const result: UnicodeFormatterResult = {
             detectedEnc: null,
             input: input,
             inputIsCodePoints: false,
-            formattedOutput: ''
+            formattedOutput: '',
+            duration: 0,
+            matches: []
         };
 
         if (this.inputContainsCodePoints(input)) {
@@ -285,14 +314,14 @@ export class AppComponent implements OnInit, OnDestroy {
             result.formattedOutput = formattedOutput;
             result.inputIsCodePoints = true;
 
-            if (this._targetFontEnc === 'custom') {
+            if (this._targetFontEnc === 'mix') {
                 this._prevSourceFontEnc = null;
                 this._prevTargetFontEnc = null;
 
-                return of({
+                return {
                     ...result,
-                    detectedEnc: 'custom'
-                });
+                    detectedEnc: 'mix'
+                };
             }
 
             this._prevSourceFontEnc = null;
@@ -303,32 +332,30 @@ export class AppComponent implements OnInit, OnDestroy {
             this._prevIsCP = true;
 
             if (this._prevTargetFontEnc) {
-                return of({
+                return {
                     ...result,
                     detectedEnc: this._prevTargetFontEnc
-                });
+                };
             }
 
-            return this._zawgyiDetector.detect(formattedOutput).pipe(
-                map(zgDetectorResult => {
-                    return {
-                        ...result,
-                        ...zgDetectorResult
-                    };
-                })
-            );
+            const zgDetectorResult = this._zawgyiDetector.detect(formattedOutput);
+
+            return {
+                ...result,
+                ...zgDetectorResult
+            };
         } else {
             const formattedOutput = this.convertToCodePoints(input);
             result.formattedOutput = formattedOutput;
 
-            if (this._sourceFontEnc === 'custom') {
+            if (this._sourceFontEnc === 'mix') {
                 this._prevSourceFontEnc = null;
                 this._prevTargetFontEnc = null;
 
-                return of({
+                return {
                     ...result,
-                    detectedEnc: 'custom'
-                });
+                    detectedEnc: 'mix'
+                };
             }
 
             this._prevTargetFontEnc = null;
@@ -339,20 +366,18 @@ export class AppComponent implements OnInit, OnDestroy {
             this._prevIsCP = false;
 
             if (this._prevSourceFontEnc) {
-                return of({
+                return {
                     ...result,
                     detectedEnc: this._prevSourceFontEnc
-                });
+                };
             }
 
-            return this._zawgyiDetector.detect(input).pipe(
-                map(zgDetectorResult => {
-                    return {
-                        ...result,
-                        ...zgDetectorResult
-                    };
-                })
-            );
+            const zgDetectorResult = this._zawgyiDetector.detect(input);
+
+            return {
+                ...result,
+                ...zgDetectorResult
+            };
         }
     }
 

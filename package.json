@@ -1,17 +1,17 @@
 {
-  "name": "unicodeunicode-code-points-lookup-angular-pwa",
+  "name": "unicode-code-points-lookup-angular-pwa",
   "version": "1.0.0",
   "private": true,
   "author": "DagonMetric",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/myanmartools/unicodeunicode-code-points-lookup-angular-pwa.git"
+    "url": "https://github.com/myanmartools/unicode-code-points-lookup-angular-pwa.git"
   },
   "bugs": {
-    "url": "https://github.com/myanmartools/unicodeunicode-code-points-lookup-angular-pwa/issues"
+    "url": "https://github.com/myanmartools/unicode-code-points-lookup-angular-pwa/issues"
   },
-  "homepage": "https://github.com/myanmartools/unicodeunicode-code-points-lookup-angular-pwa",
+  "homepage": "https://github.com/myanmartools/unicode-code-points-lookup-angular-pwa",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -21,7 +21,7 @@
     "e2e": "ng e2e",
     "build:prod": "npm run build:universal:prod && npm run generate:prerender && npm run copy-files",
     "build:app:prod": "ng build --prod",
-    "build:server:prod": "ng run unicodeunicode-code-points-lookup-angular-pwa:server:production",
+    "build:server:prod": "ng run unicode-code-points-lookup-angular-pwa:server:production",
     "build:universal:prod": "npm run build:app:prod && npm run build:server:prod",
     "update:ngsw-config": "node_modules/.bin/ngsw-config dist/app ngsw-config.json",
     "compile:prerender": "tsc -p tsconfig.prerender.json",

@@ -1,6 +1,10 @@
-// tslint:disable: directive-class-suffix
-// tslint:disable: directive-selector
-// tslint:disable: no-host-metadata-property
+/**
+ * @license
+ * Copyright DagonMetric. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found under the LICENSE file in the root directory of this source tree.
+ */
 
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Platform } from '@angular/cdk/platform';
@@ -17,11 +21,14 @@ import {
 import { fromEvent, Subject } from 'rxjs';
 import { auditTime, takeUntil } from 'rxjs/operators';
 
+/**
+ * Directive for Syncing two text area.
+ */
 @Directive({
     selector: 'textarea[cdkTextareaSyncSize]',
     exportAs: 'cdkTextareaSyncSize',
     host: {
-        class: 'cdk-textarea-autosize cdk-textarea-syncsize',
+        class: 'cdk-textarea-syncsize',
         rows: '1',
         '(input)': '_noopInputHandler()'
     }
@@ -30,11 +37,11 @@ export class CdkTextareaSyncSize implements AfterViewInit, DoCheck, OnDestroy {
     _cachedHeight = -1;
 
     private _previousValue?: string;
-    private _initialHeight: string | null;
+    private _initialHeight?: string | null;
     private readonly _destroyed = new Subject<void>();
 
-    private _minRows: number;
-    private _maxRows: number;
+    private _minRows?: number;
+    private _maxRows?: number;
     private _enabled = true;
 
     private _previousMinRows = -1;
@@ -43,7 +50,7 @@ export class CdkTextareaSyncSize implements AfterViewInit, DoCheck, OnDestroy {
 
     // tslint:disable-next-line: no-unsafe-any
     @Input('cdkAutosizeMinRows')
-    get minRows(): number { return this._minRows; }
+    get minRows(): number { return this._minRows != null ? this._minRows : 0; }
     set minRows(value: number) {
         this._minRows = value;
         this.setMinHeight();
@@ -51,7 +58,7 @@ export class CdkTextareaSyncSize implements AfterViewInit, DoCheck, OnDestroy {
 
     // tslint:disable-next-line: no-unsafe-any
     @Input('cdkAutosizeMaxRows')
-    get maxRows(): number { return this._maxRows; }
+    get maxRows(): number { return this._maxRows != null ? this._maxRows : 0; }
     set maxRows(value: number) {
         this._maxRows = value;
         this.setMaxHeight();
@@ -89,8 +96,8 @@ export class CdkTextareaSyncSize implements AfterViewInit, DoCheck, OnDestroy {
         this._secondCdkTextareaSyncSize = value;
     }
 
-    private _cachedLineHeight: number;
-    private _secondCdkTextareaSyncSize: CdkTextareaSyncSize | undefined;
+    private _cachedLineHeight?: number;
+    private _secondCdkTextareaSyncSize?: CdkTextareaSyncSize;
 
     constructor(
         private readonly _elementRef: ElementRef<HTMLElement>,
@@ -192,7 +199,7 @@ export class CdkTextareaSyncSize implements AfterViewInit, DoCheck, OnDestroy {
         }
 
         this._previousValue = value;
-        this._previousMinRows = this._minRows;
+        this._previousMinRows = this.minRows;
     }
 
     reset(): void {
@@ -214,7 +221,7 @@ export class CdkTextareaSyncSize implements AfterViewInit, DoCheck, OnDestroy {
         }
     }
 
-    // TODO: fix not working when setting height values in css class
+    // To fix not working when setting height values in css class
     private cacheTextareaLineHeight(): void {
         if (this._cachedLineHeight) {
             return;
@@ -254,7 +261,7 @@ export class CdkTextareaSyncSize implements AfterViewInit, DoCheck, OnDestroy {
             return;
         }
 
-        // TODO: use input property
+        // To use input property
         this._cachedLineHeight = 22;
 
         this.setMinHeight();

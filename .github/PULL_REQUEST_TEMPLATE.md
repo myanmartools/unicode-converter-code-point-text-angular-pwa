@@ -4,5 +4,3 @@ Thanks for submitting a pull request! Please provide enough information so that 
 Refer to CONTRIBUTING.MD for more details.
 https://github.com/myanmartools/unicode-code-points-lookup-angular-pwa/blob/master/CONTRIBUTING.md
 -->
-
-Fixes #

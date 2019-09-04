@@ -6,12 +6,9 @@
  * found under the LICENSE file in the root directory of this source tree.
  */
 
-import { enableProdMode } from '@angular/core';
-
-import { environment } from './environments/environment';
-
-if (environment.production) {
-    enableProdMode();
+export interface SocialLinkItem {
+    url: string;
+    label?: string;
+    svgUrl?: string;
+    svgIconName?: string;
 }
-
-export { AppServerModule } from './app/app.server.module';

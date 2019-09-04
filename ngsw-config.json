@@ -40,17 +40,6 @@
           "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
         ]
       }
-    },
-    {
-      "name": "assets-rules-eager",
-      "installMode": "prefetch",
-      "updateMode": "prefetch",
-      "resources": {
-        "files": [
-          "/assets/zawgyi-detect-rules/**",
-          "/assets/translit-rules/**"
-        ]
-      }
     }
   ]
 }

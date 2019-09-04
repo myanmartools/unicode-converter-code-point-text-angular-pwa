@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "modules",
   "projects": {
-    "unicode-lookup": {
+    "unicode-code-points-lookup-angular-pwa": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -23,15 +23,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              {
-                "input": "node_modules/@myanmartools/ng-zawgyi-detector/rules/",
-                "glob": "**/*.json",
-                "output": "./assets/zawgyi-detect-rules/v1"
-              },
               "src/favicon.ico",
               "src/manifest.json",
-              "src/robots.txt",
-              "src/sitemap.xml",
               "src/assets"
             ],
             "styles": [
@@ -54,6 +47,13 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+              "assets": [
+                "src/favicon.ico",
+                "src/manifest.json",
+                "src/robots.txt",
+                "src/sitemap.xml",
+                "src/assets"
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -69,6 +69,11 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
                 }
               ]
             }
@@ -77,18 +82,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "unicode-lookup:build"
+            "browserTarget": "unicode-code-points-lookup-angular-pwa:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "unicode-lookup:build:production"
+              "browserTarget": "unicode-code-points-lookup-angular-pwa:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "unicode-lookup:build"
+            "browserTarget": "unicode-code-points-lookup-angular-pwa:build"
           }
         },
         "test": {
@@ -98,6 +103,10 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
+            "codeCoverageExclude": [
+              "**/test.ts",
+              "**/index.ts"
+            ],
             "styles": [
               "src/styles.scss"
             ],
@@ -110,8 +119,17 @@
             "scripts": [],
             "assets": [
               "src/favicon.ico",
+              "src/manifest.json",
               "src/assets"
             ]
+          },
+          "configurations": {
+            "ci": {
+              "browsers": "ChromeHeadless",
+              "reporters": ["progress", "junit"],
+              "watch": false,
+              "progress": false
+            }
           }
         },
         "lint": {
@@ -131,11 +149,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "unicode-lookup:serve"
+            "devServerTarget": "unicode-code-points-lookup-angular-pwa:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "unicode-lookup:serve:production"
+              "devServerTarget": "unicode-code-points-lookup-angular-pwa:serve:production"
             }
           }
         },
@@ -147,7 +165,8 @@
             "tsConfig": "tsconfig.server.json",
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src/styles"
+                "src/styles",
+                "node_modules/normalize.css"
               ]
             }
           },
@@ -167,5 +186,5 @@
       }
     }
   },
-  "defaultProject": "unicode-lookup"
+  "defaultProject": "unicode-code-points-lookup-angular-pwa"
 }
