@@ -1,7 +1,7 @@
 {
   "hosting": [{
     "target": "unicode-converter",
-    "public": "dist/app",
+    "public": "app",
     "cleanUrls": true,
     "ignore": [
       "firebase.json",
