@@ -932,10 +932,10 @@
   dependencies:
     tslib "^1.10.0"
 
-"@myanmartools/ng-zawgyi-detector@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@myanmartools/ng-zawgyi-detector/-/ng-zawgyi-detector-1.1.1.tgz#7375f9888a25ed89b9f50cc974a42b0bf2d411b6"
-  integrity sha512-0YPYFduv5WT9XBfr624psenke1MRZUgXzFZwI0JEeiEVYZGQHVxbh2BV9iU8hgFHBB1EFQZQ39RFnh2/eZAcMw==
+"@myanmartools/ng-zawgyi-detector@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@myanmartools/ng-zawgyi-detector/-/ng-zawgyi-detector-1.1.3.tgz#cc9fe06a3fa7127503e9cf270dcd7a32bb14390f"
+  integrity sha512-n4oYJgSfnWkSAxRl0hK5izRxrZ4uLEftwLVSi9Acj2IiupI4nHlY1/vAm/frd4Jz+Qz2K7ucccL5ZpAUetc3Uw==
   dependencies:
     tslib "^1.10.0"
 
