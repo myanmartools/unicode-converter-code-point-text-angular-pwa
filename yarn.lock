@@ -911,24 +911,24 @@
   resolved "https://registry.yarnpkg.com/@dagonmetric/app-styles-base/-/app-styles-base-0.1.1.tgz#a9da329de48403584df04810fa4586715709f33e"
   integrity sha512-vh4iWCYum2Anw7pYgvd8csoTLZnC4qz8kYn17JbLephdmxIVAduN5ygFqfvCumfPUO1D2yn/DSol4q75i8ibLQ==
 
-"@dagonmetric/ng-config@^2.2.0":
+"@dagonmetric/ng-config@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@dagonmetric/ng-config/-/ng-config-2.2.1.tgz#d731bb48af08c726a0097cb192c213f2f488c35b"
+  integrity sha512-D5EHYwyAx28pTl4JnPvUmYZmk3gMap0aRXnxQYP7PB9NJABn7cCS9gLlZigT6cHzuzWr+04Y/bkKhg5yh+ePgQ==
+  dependencies:
+    tslib "^1.10.0"
+
+"@dagonmetric/ng-log-gtag@^2.2.0":
   version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@dagonmetric/ng-config/-/ng-config-2.2.0.tgz#1815ecfd87a8e93dd14bc3a8dceaf8186e067349"
-  integrity sha512-gZXlbZd66BnJOagkKDnzYh5VdAFd0UekrKEuN1FIxI2IptfAZ1tlIH69BK8YPO97EGjAilCt+8tqW6u7C9gUOw==
+  resolved "https://registry.yarnpkg.com/@dagonmetric/ng-log-gtag/-/ng-log-gtag-2.2.0.tgz#e32cab1df9ab987de21e4d76a949cb194baed364"
+  integrity sha512-Z3Lfeejf5N5WiSgPXrIUbcbgH722GYnwYF5G4bXr+u6jDRxgslm4Uaa2IDp/d3MOLGEWFpqkr+p8RU5tme6LmA==
   dependencies:
     tslib "^1.10.0"
 
-"@dagonmetric/ng-log-gtag@^2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@dagonmetric/ng-log-gtag/-/ng-log-gtag-2.1.1.tgz#35328097526ca0027f8424b5a298d7a5dae460bf"
-  integrity sha512-HsmWMDoe4Ib0KL/XDvq0MazXdi6bq9gSIsU3HHOSsueV6jRM0bEnWAtVu2/CyJmSvB/kA+poDeaRHFXPkpOzzg==
-  dependencies:
-    tslib "^1.10.0"
-
-"@dagonmetric/ng-log@^2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@dagonmetric/ng-log/-/ng-log-2.1.1.tgz#cf4ea668a4dd0ff5cf0377877afcfe409c08fc63"
-  integrity sha512-hQdlBNjQiES5CTZAzuo8Mgk7nDrlFS0etWN/tMHtF0ywkf1hZgMzpBlK2Lc4B9JjBjsn62+yV58Jn6plBxGVkQ==
+"@dagonmetric/ng-log@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@dagonmetric/ng-log/-/ng-log-2.2.1.tgz#64bc763a2cd58975c9818f8a09145ea7054ac0b1"
+  integrity sha512-pfaxU0QY9QA1v61b+YDPOe4Vzr3BsVVvMHbUWMkSXgfBU1IAqtJ2L9v2HOnEztZuiJ5IhX9tU206SbrCjvlNKQ==
   dependencies:
     tslib "^1.10.0"
 
