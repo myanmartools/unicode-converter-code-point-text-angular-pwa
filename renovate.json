@@ -4,8 +4,8 @@
   ],
   "timezone": "Asia/Yangon",
   "schedule": [
-    "after 11pm and before 6am every weekday",
-    "after 11pm and before 6am every weekend"
+    "after 2am and before 6am every weekday",
+    "after 2am and before 6am every weekend"
   ],
   "packageFiles": ["package.json"],
   "automerge": true,
