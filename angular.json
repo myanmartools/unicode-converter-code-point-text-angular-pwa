@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "modules",
   "projects": {
-    "unicode-code-points-lookup-angular-pwa": {
+    "unicode-code-points-lookup-web": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -82,18 +82,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "unicode-code-points-lookup-angular-pwa:build"
+            "browserTarget": "unicode-code-points-lookup-web:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "unicode-code-points-lookup-angular-pwa:build:production"
+              "browserTarget": "unicode-code-points-lookup-web:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "unicode-code-points-lookup-angular-pwa:build"
+            "browserTarget": "unicode-code-points-lookup-web:build"
           }
         },
         "test": {
@@ -149,11 +149,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "unicode-code-points-lookup-angular-pwa:serve"
+            "devServerTarget": "unicode-code-points-lookup-web:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "unicode-code-points-lookup-angular-pwa:serve:production"
+              "devServerTarget": "unicode-code-points-lookup-web:serve:production"
             }
           }
         },
@@ -186,5 +186,5 @@
       }
     }
   },
-  "defaultProject": "unicode-code-points-lookup-angular-pwa"
+  "defaultProject": "unicode-code-points-lookup-web"
 }

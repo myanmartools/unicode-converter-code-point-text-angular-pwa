@@ -45,7 +45,7 @@ import { appSvgIconProviders } from './app.svg-icons';
         AppComponent
     ],
     imports: [
-        BrowserModule.withServerTransition({ appId: 'unicode-code-points-lookup-angular-pwa' }),
+        BrowserModule.withServerTransition({ appId: 'unicode-code-points-lookup-web' }),
         CommonModule,
         HttpClientModule,
         FormsModule,
@@ -78,12 +78,12 @@ import { appSvgIconProviders } from './app.svg-icons';
             appVersion: '1.0.0',
             title: 'Unicode Code Points Lookup',
             titleSuffix: ' - Myanmar Tools',
-            githubRepoUrl: 'https://github.com/myanmartools/unicode-code-points-lookup-angular-pwa',
+            githubRepoUrl: 'https://github.com/myanmartools/unicode-code-points-lookup-web',
             githubImageAlt: 'Unicode Code Points Lookup GitHub Repo',
             baseUrl: 'https://unicode-code-points-lookup.myanmartools.org/',
             appImageUrl: 'assets/images/appicons/v1/logo.png',
             githubImageUrl: 'assets/images/appicons/v1/github.svg',
-            githubReleaseUrl: 'https://github.com/myanmartools/unicode-code-points-lookup-angular-pwa/releases',
+            githubReleaseUrl: 'https://github.com/myanmartools/unicode-code-points-lookup-web/releases',
             socialLinks: [
                 {
                     url: 'https://www.facebook.com/DagonMetric',
