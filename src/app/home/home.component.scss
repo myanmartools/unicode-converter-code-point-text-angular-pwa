@@ -1,0 +1,12 @@
+.form-container {
+    flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+}
+
+.form-field-container {
+    flex-direction: column;
+    box-sizing: border-box;
+    display: flex;
+    flex: 1 1 100%;
+}

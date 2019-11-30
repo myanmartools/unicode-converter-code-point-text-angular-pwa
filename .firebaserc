@@ -1,14 +1,1 @@
-{
-  "projects": {
-    "default": "myanmartools"
-  },
-  "targets": {
-    "myanmartools": {
-      "hosting": {
-        "unicode-converter": [
-          "unicode-converter"
-        ]
-      }
-    }
-  }
-}
+{ }

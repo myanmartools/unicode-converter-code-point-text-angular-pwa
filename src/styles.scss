@@ -1,12 +1,11 @@
-@import 'normalize.css';
+// @import 'normalize.css';
 @import '~@angular/material/theming';
 @import "~@dagonmetric/app-styles-base/core";
 
-@import "shared/constants";
-
+@import "app/shared/style-variables";
 @import "app/app-theme";
 
-@import "cdk-extensions/cdk-textarea-syncsize";
+@import "modules/cdk-extensions/cdk-textarea-syncsize";
 
 $app-styles-config: app-styles-config(
     $font-family-base: $font-family-base,
@@ -30,8 +29,36 @@ $body-1: mat-typography-level($font-size-base, $line-height-base, $font-weight-b
 
 // Define the light theme.
 $primary: mat-palette($mat-brown);
-// $accent: mat-palette($mat-pink, A200, A100, A400);
+$accent: mat-palette($mat-brown, A200, A100, A400);
 
 $theme: mat-light-theme($primary, $primary);
+
 @include angular-material-theme($theme);
 @include app-theme($theme);
+
+// Font assets
+// ------------------------------------------------------------
+
+@font-face {
+    font-family: 'Zawgyi-One';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('Zawgyi-One'), url(assets/fonts/zawgyione/Zawgyi-One.eot);
+    src: url(assets/fonts/zawgyione/Zawgyi-One.eot?#iefix) format('embedded-opentype'),
+        url(assets/fonts/zawgyione/Zawgyi-One.woff2) format('woff2'),
+        url(assets/fonts/zawgyione/Zawgyi-One.woff) format('woff'),
+        url(assets/fonts/zawgyione/Zawgyi-One.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Noto Sans Myanmar UI';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('Noto Sans Myanmar UI'), local('NotoSansMyanmarUI'), url(assets/fonts/notosansmyanmarui/NotoSansMyanmarUI-Regular.eot);
+    src: url(assets/fonts/notosansmyanmarui/NotoSansMyanmarUI-Regular.eot?#iefix) format('embedded-opentype'),
+        url(assets/fonts/notosansmyanmarui/NotoSansMyanmarUI-Regular.woff2) format('woff2'),
+        url(assets/fonts/notosansmyanmarui/NotoSansMyanmarUI-Regular.woff) format('woff'),
+        url(assets/fonts/notosansmyanmarui/NotoSansMyanmarUI-Regular.ttf) format('truetype');
+}

@@ -1,0 +1,58 @@
+<div class="form-container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="24px" fxLayoutGap.xs="6px">
+    <div class="form-field-container" fxLayout="column" fxFlex="1 1 100%">
+        <mat-form-field floatLabel="never">
+            <textarea spellcheck="false" matInput placeholder="Code points or text" [(ngModel)]="sourceText"
+                [class.my-uni]="sourceFontEnc == 'uni'" [class.my-zg]="sourceFontEnc == 'zg'"
+                [style.font-family]="sourceFontEnc == 'mix' ? sourceFontCustom : null" cdkTextareaSyncSize
+                #sourceTextareaSyncSize="cdkTextareaSyncSize"></textarea>
+        </mat-form-field>
+    </div>
+    <div class="form-field-container" fxLayout="column" fxFlex="1 1 100%" [fxHide.xs]="!outText">
+        <mat-form-field floatLabel="never">
+            <textarea spellcheck="false" matInput placeholder="Formatted output" [ngModel]="outText"
+                [class.my-uni]="targetFontEnc == 'uni'" [class.my-zg]="targetFontEnc == 'zg'"
+                [style.font-family]="targetFontEnc == 'mix' ? targetFontCustom : null" [readonly]="!outText"
+                cdkTextareaSyncSize #outTextareaSyncSize="cdkTextareaSyncSize"></textarea>
+        </mat-form-field>
+    </div>
+</div>
+<ng-template [ngIf]="cpOutOptionsVisible" [ngIfElse]="cpInOptions">
+    <div *ngIf="sourceText" class="form-container" fxLayout="column" fxLayoutGap="24px">
+        <mat-radio-group aria-label="Select output format" [(ngModel)]="cpOutFormat" fxLayout="row" fxLayout.xs="column"
+            fxLayoutGap="24px">
+            <mat-radio-button value="js">JavaScript/Java style - \uXXXX</mat-radio-button>
+            <mat-radio-button value="es6">ES6 style - \u&#123;XXXX&#125;</mat-radio-button>
+            <mat-radio-button value="uPlus">U+HEX style - U+XXXX</mat-radio-button>
+        </mat-radio-group>
+        <mat-checkbox [(ngModel)]="cpOutPreserveASCII">Preserve ASCII chars</mat-checkbox>
+        <mat-checkbox *ngIf="cpOutFormat == 'js' || cpOutFormat == 'es6'" [(ngModel)]="cpOutFormatEscapse">New line,
+            tab
+            to \n, \t, etc.</mat-checkbox>
+        <mat-checkbox *ngIf="cpOutFormat == 'uPlus'" [(ngModel)]="cpOutConvertNewLineTabToCP">New line, tab to code
+            points</mat-checkbox>
+        <mat-radio-group aria-label="Select Font" *ngIf="sourceFontEnc" [(ngModel)]="sourceFontEnc" fxLayout="row"
+            fxLayout.xs="column" fxLayoutGap="24px">
+            <mat-radio-button value="zg">Zawgyi</mat-radio-button>
+            <mat-radio-button value="uni">Myanmar Unicode</mat-radio-button>
+            <mat-radio-button value="mix">Custom</mat-radio-button>
+        </mat-radio-group>
+        <mat-form-field *ngIf="sourceFontEnc == 'mix'">
+            <input matInput placeholder="Custom font family" [(ngModel)]="sourceFontCustom">
+        </mat-form-field>
+
+    </div>
+</ng-template>
+<ng-template #cpInOptions>
+    <div *ngIf="sourceText" class="form-container" fxLayout="column" fxLayoutGap="24px">
+        <mat-checkbox [(ngModel)]="cpInConvertEscapsesToChars">Convert \n, \t to New line, tab, etc.</mat-checkbox>
+        <mat-radio-group aria-label="Select Font" *ngIf="targetFontEnc" [(ngModel)]="targetFontEnc" fxLayout="row"
+            fxLayout.xs="column" fxLayoutGap="24px">
+            <mat-radio-button value="zg">Zawgyi</mat-radio-button>
+            <mat-radio-button value="uni">Myanmar Unicode</mat-radio-button>
+            <mat-radio-button value="mix">Custom</mat-radio-button>
+        </mat-radio-group>
+        <mat-form-field *ngIf="targetFontEnc == 'mix'">
+            <input matInput placeholder="Custom font family" [(ngModel)]="targetFontCustom">
+        </mat-form-field>
+    </div>
+</ng-template>

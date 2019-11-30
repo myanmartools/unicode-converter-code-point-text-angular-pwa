@@ -6,5 +6,8 @@
  * found under the LICENSE file in the root directory of this source tree.
  */
 
-// tslint:disable-next-line: no-import-side-effect
+// tslint:disable: no-import-side-effect
+
 import 'zone.js/dist/zone';
+
+// import 'hammerjs';

@@ -1,118 +1,48 @@
-<header class="app-header" role="banner">
-    <mat-toolbar color="primary">
-        <a mat-button class="nav-img-btn nav-brand" [href]="baseUrl" [attr.aria-label]="title">
-            <img class="nav-img site-logo-img" [src]="appImageUrl" alt="{{title}}" role="presentation"
-                aria-hidden="true">
-            <span role="presentation" aria-hidden="true">{{title}}</span>
+<header class="app-header">
+    <mat-toolbar color="primary" role="banner">
+        <a mat-icon-button class="app-header-logo" routerLink="/" [attr.aria-label]="appTitleFull">
+            <img [src]="appLogoUrl" alt="appTitleFull" role="presentation" aria-hidden="true">
         </a>
-        <div class="flex-spacer" fxFlex="1 1 auto"></div>
-        <a mat-button class="nav-img-btn" [href]="githubRepoUrl" aria-label="GitHub Repository">
-            <img class="nav-img" [src]="githubImageUrl" alt="{{githubImageAlt}}" role="presentation" aria-hidden="true">
-            <span role="presentation" aria-hidden="true" fxHide.xs>GitHub</span>
-        </a>
+        <h1 role="presentation" aria-hidden="true">{{appTitle}}</h1>
     </mat-toolbar>
 </header>
-<main class="container page">
-    <div class="form-container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="24px">
-        <div class="form-field-container" fxLayout="column" fxFlex="1 1 100%">
-            <mat-form-field floatLabel="never">
-                <textarea spellcheck="false" matInput placeholder="Code points or text" [(ngModel)]="sourceText"
-                    [class.my-uni]="sourceFontEnc == 'uni'" [class.my-zg]="sourceFontEnc == 'zg'"
-                    [style.font-family]="sourceFontEnc == 'mix' ? sourceFontCustom : null" cdkTextareaSyncSize
-                    cdkAutosizeMinRows="10" #sourceTextareaSyncSize="cdkTextareaSyncSize"></textarea>
-            </mat-form-field>
-        </div>
-        <div class="form-field-container" fxLayout="column" fxFlex="1 1 100%" [fxHide.xs]="!outText">
-            <mat-form-field floatLabel="never">
-                <textarea spellcheck="false" matInput placeholder="Formatted output" [ngModel]="outText"
-                    [class.my-uni]="targetFontEnc == 'uni'" [class.my-zg]="targetFontEnc == 'zg'"
-                    [style.font-family]="targetFontEnc == 'mix' ? targetFontCustom : null" [readonly]="!outText"
-                    cdkTextareaSyncSize cdkAutosizeMinRows="10" #outTextareaSyncSize="cdkTextareaSyncSize"></textarea>
-            </mat-form-field>
-        </div>
-    </div>
-    <ng-template [ngIf]="cpOutOptionsVisible" [ngIfElse]="cpInOptions">
-        <div *ngIf="sourceText" class="form-container" fxLayout="column" fxLayoutGap="24px">
-            <mat-radio-group aria-label="Select output format" [(ngModel)]="cpOutFormat" fxLayout="row"
-                fxLayout.xs="column" fxLayoutGap="24px">
-                <mat-radio-button value="js">JavaScript/Java style - \uXXXX</mat-radio-button>
-                <mat-radio-button value="es6">ES6 style - \u&#123;XXXX&#125;</mat-radio-button>
-                <mat-radio-button value="uPlus">U+HEX style - U+XXXX</mat-radio-button>
-            </mat-radio-group>
-            <mat-checkbox [(ngModel)]="cpOutPreserveASCII">Preserve ASCII chars</mat-checkbox>
-            <mat-checkbox *ngIf="cpOutFormat == 'js' || cpOutFormat == 'es6'" [(ngModel)]="cpOutFormatEscapse">New line,
-                tab
-                to \n, \t, etc.</mat-checkbox>
-            <mat-checkbox *ngIf="cpOutFormat == 'uPlus'" [(ngModel)]="cpOutConvertNewLineTabToCP">New line, tab to code
-                points</mat-checkbox>
-            <mat-radio-group aria-label="Select Font" *ngIf="sourceFontEnc" [(ngModel)]="sourceFontEnc" fxLayout="row"
-                fxLayout.xs="column" fxLayoutGap="24px">
-                <mat-radio-button value="zg">Zawgyi</mat-radio-button>
-                <mat-radio-button value="uni">Myanmar Unicode</mat-radio-button>
-                <mat-radio-button value="mix">Custom</mat-radio-button>
-            </mat-radio-group>
-            <mat-form-field *ngIf="sourceFontEnc == 'mix'">
-                <input matInput placeholder="Custom font family" [(ngModel)]="sourceFontCustom">
-            </mat-form-field>
-
-        </div>
-    </ng-template>
-    <ng-template #cpInOptions>
-        <div *ngIf="sourceText" class="form-container" fxLayout="column" fxLayoutGap="24px">
-            <mat-checkbox [(ngModel)]="cpInConvertEscapsesToChars">Convert \n, \t to New line, tab, etc.</mat-checkbox>
-            <mat-radio-group aria-label="Select Font" *ngIf="targetFontEnc" [(ngModel)]="targetFontEnc" fxLayout="row"
-                fxLayout.xs="column" fxLayoutGap="24px">
-                <mat-radio-button value="zg">Zawgyi</mat-radio-button>
-                <mat-radio-button value="uni">Myanmar Unicode</mat-radio-button>
-                <mat-radio-button value="mix">Custom</mat-radio-button>
-            </mat-radio-group>
-            <mat-form-field *ngIf="targetFontEnc == 'mix'">
-                <input matInput placeholder="Custom font family" [(ngModel)]="targetFontCustom">
-            </mat-form-field>
-        </div>
-    </ng-template>
-    <div fxLayout="column" class="about-description">
-        <p>Unicode code points converter by DagonMetric to encode or decode Unicode codepoint sequences (convert
-            UTF-32/UTF-16/UTF-8 hex numbers to text and vice visa).</p>
-        <div class="app-version">Version: <a [href]="githubReleaseUrl">{{appVersion}}</a></div>
-        <div class="about-category">
-            Category: UtilitiesApplication, Unicode Code Points Converter, Unicode Lookup, Unicode Converter, Unicode
-            Encode Decode, Unicode Codepoints, Unicode Tools, Decode/Encode Unicode Text, Unicode Escapse, Open Source,
-            Online Converter
+<main class="container content">
+    <router-outlet></router-outlet>
+    <div class="container about-section">
+        <div fxLayout="column" class="about-content">
+            <h2>{{appTitleFull}}</h2>
+            <p>{{appDescription}}</p>
+            <div>Version: {{appVersion}}</div>
+            <div class="features" *ngIf="aboutFeaturesVisible">
+                <h3>Features</h3>
+                <ul>
+                    <li>Ability to use offline (Progressive Web Application - PWA)</li>
+                    <li>On the fly converting Unicode hex numbers in UTF-32, UTF-16, and UTF-8 formats to their Unicode
+                        characters</li>
+                    <li>Auto detect Zawgyi and Myanmar Unicode font encodings and display correctly</li>
+                    <li>Custom fonts can be used for input/output text boxes</li>
+                    <li>Supported input code point formats: C style (\U000000), JavaScript/Java style (\u0000), ES6
+                        style
+                        (\u&#123;0000}), U+HEX style (U+0000), \x hex numbers style (\x00)</li>
+                    <li>Supported output code point formats: JavaScript/Java style (\u0000), ES6 style (\u&#123;0000}),
+                        U+HEX
+                        style
+                        (U+0000)</li>
+                </ul>
+            </div>
         </div>
     </div>
 </main>
 <footer class="app-footer">
     <div class="container">
         <div fxLayout="column" class="footer-section-grid">
-            <div class="social-links">
-                <a class="social-link-item" target="_blank" rel="noopener" *ngFor="let socialLinkItem of socialLinkItems"
-                    [href]="socialLinkItem.url" [attr.title]="socialLinkItem.label">
-                    <mat-icon svgIcon="{{socialLinkItem.svgIconName}}"></mat-icon>
+            <h3>Community and Links</h3>
+            <div class="nav-links">
+                <a class="nav-link-item" target="_blank" rel="noopener" *ngFor="let navLink of navLinks"
+                    [href]="navLink.url" [attr.title]="navLink.title">
+                    <mat-icon svgIcon="{{navLink.iconName}}"></mat-icon>
                 </a>
             </div>
-            <section class="footer-section" fxLayout="column">
-                <ul fxLayout="row" fxLayout.xs="column" fxLayoutGap="24px">
-                    <li>
-                        <a href="https://myanmartools.org" target="_blank" rel="noopener">Myanmar Tools Home</a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/myanmartools" target="_blank" rel="noopener">GitHub</a>
-                    </li>
-                    <li>
-                        <a href="https://gitter.im/myanmartools/community" target="_blank" rel="noopener">Gitter
-                            Chat</a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/myanmartools/unicode-code-points-lookup-web/issues"
-                            target="_blank" rel="noopener">Report Issues</a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/myanmartools/unicode-code-points-lookup-web/blob/master/CONTRIBUTING.md"
-                            target="_blank" rel="noopener">Contribute</a>
-                    </li>
-                </ul>
-            </section>
         </div>
     </div>
 </footer>

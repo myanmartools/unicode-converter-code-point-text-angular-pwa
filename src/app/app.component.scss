@@ -6,61 +6,11 @@
  * found under the LICENSE file in the root directory of this source tree.
  */
 
-@import "shared/constants";
+@import "shared/style-variables";
 
-$header-nav-img-height: 26px;
+$app-header-logo-width: 32px;
 
-.page {
-    padding-top: $default-gap-width;
-}
-
-.my-zg,
-textarea.mat-input-element.my-zg {
-    font-size: 1em;
-    line-height: 1.6;
-    font-weight: 400;
-
-    font-family: Zawgyi-One;
-}
-
-.my-uni,
-textarea.mat-input-element.my-uni {
-    font-size: 1em;
-    line-height: 1.6;
-    font-weight: 400;
-
-    font-family: "Noto Sans Myanmar UI", "Myanmar Text", Pyidaungsu, Padauk, Myanmar3, sans-serif;
-}
-
-.flex-spacer {
-    flex: 1 1 auto;
-    box-sizing: border-box;
-}
-
-.form-container {
-    flex-direction: row;
-    box-sizing: border-box;
-    display: flex;
-}
-
-.form-field-container {
-    flex-direction: column;
-    box-sizing: border-box;
-    display: flex;
-    flex: 1 1 100%;
-}
-
-.about-description {
-    justify-content: center;
-    text-align: center;
-    margin-top: $default-gap-width;
-
-    .about-category {
-        margin-top: $default-gap-width;
-    }
-}
-
-// header
+// Header
 // ------------------------------------------------------------
 header.app-header {
     box-sizing: border-box;
@@ -69,35 +19,50 @@ header.app-header {
     flex-direction: column;
     width: 100%;
 
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    .mat-toolbar {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
 
-    .nav-img-btn {
-        &.mat-button {
-            padding-left: 0;
-            padding-right: 0;
-            min-width: 0;
-        }
+        .app-header-logo {
+            display: block;
+            margin-right: $default-gap-width / 4;
 
-        img+span {
-            margin-left: $default-gap-width / 2;
-        }
-    }
+            img {
+                box-sizing: border-box;
+                display: inline-block;
 
-    .nav-img {
-        height: $header-nav-img-height;
-        vertical-align: middle;
-
-        &.site-logo-img {
-            width: 38px;
-            height: 38px;
-            line-height: 38px;
-
-            animation: brand-logo-animation 2.8s ease-in .2s forwards;
+                width: $app-header-logo-width;
+                height: $app-header-logo-width;
+                line-height: $app-header-logo-width;
+            }
         }
     }
+}
+
+// Content
+// ------------------------------------------------------------
+.content {
+    padding-top: $default-gap-width;
+}
+
+.about-section {
+    .about-content {
+        justify-content: center;
+        text-align: center;
+        // margin-bottom: $default-gap-width / 2;
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+    }
+}
+
+.editing .about-section {
+    display: none;
 }
 
 // Footer
@@ -105,7 +70,7 @@ header.app-header {
 footer.app-footer {
     position: relative;
     width: 100%;
-    padding-top: $default-gap-width;
+    padding-top: $default-gap-width / 2;
     padding-bottom: $default-gap-width * 2;
 
 
@@ -114,7 +79,7 @@ footer.app-footer {
         text-align: center;
     }
 
-    .social-links {
+    .nav-links {
         box-sizing: border-box;
         display: flex;
         flex-direction: row;
@@ -127,7 +92,7 @@ footer.app-footer {
             margin-right: $default-gap-width / 2;
         }
 
-        .social-link-item {
+        .nav-link-item {
             box-sizing: border-box;
             position: relative;
             display: flex;
@@ -137,36 +102,10 @@ footer.app-footer {
             align-items: center;
             overflow: hidden;
             color: inherit;
-            cursor: pointer;
-
-            .mat-icon {
-                display: inline-block;
-                // width: 20px;
-                // height: 20px;
-                // line-height: 20px;
-                // color: rgba(0, 0, 0, .67);
-                // fill: rgba(0, 0, 0, .67);
-            }
         }
     }
+}
 
-    ul {
-        display: flex;
-        list-style-type: disc;
-
-        // important
-        list-style-position: inside;
-        padding: 0;
-        margin: 0;
-
-        justify-content: center;
-        text-align: center;
-
-        li {
-            display: block;
-            list-style-type: none;
-            padding: 0;
-            // padding: $default-gap-width / 6 0;
-        }
-    }
+.editing footer.app-footer {
+    display: none;
 }

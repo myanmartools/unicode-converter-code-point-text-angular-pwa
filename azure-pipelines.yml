@@ -5,8 +5,8 @@ jobs:
     steps:
       - task: UseNode@1
         inputs:
-          version: '10.x'
-        displayName: 'Use Node 10.x'
+          version: '12.x'
+        displayName: 'Use Node 12.x'
       - script: |
           yarn install --frozen-lockfile
         displayName: 'Install dependencies'
@@ -26,7 +26,7 @@ jobs:
         displayName: 'Publish build artifacts'
       - task: PublishTestResults@2
         inputs:
-          testRunTitle: unicode-code-points-lookup
+          testRunTitle: zawgyi-unicode-converter
           searchFolder: $(System.DefaultWorkingDirectory)/dist/junit
           testResultsFormat: JUnit
           testResultsFiles: "**/TESTS*.xml"

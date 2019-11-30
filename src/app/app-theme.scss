@@ -1,0 +1,129 @@
+/**
+ * @license
+ * Copyright DagonMetric. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found under the LICENSE file in the root directory of this source tree.
+ */
+
+ // @import '~@angular/material/theming';
+
+@mixin app-theme($theme) {
+    $primary: map-get($theme, primary);
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    // Document
+    // ------------------------------------------------------------
+    body {
+        color: mat-color($foreground, text);
+        background: mat-color($background, background);
+    }
+
+    // Header
+    // ------------------------------------------------------------
+    header.app-header {
+        .mat-toolbar {
+            font-size: 18px;
+
+            &.mat-primary {
+                animation: header-background-ani 2.8s ease-in 0s forwards;
+            }
+
+            .app-header-logo {
+                img {
+                    animation: header-logo-img-ani 2.8s ease-in .2s forwards;
+                }
+            }
+
+            h1 {
+                font-size: inherit;
+                font-weight: 400;
+            }
+        }
+    }
+
+    @keyframes header-background-ani {
+        0% {
+            background: mat-color($primary, 800);
+        }
+
+        100% {
+            background: mat-color($primary, 500);
+        }
+    }
+
+    @keyframes header-logo-img-ani {
+        0% {
+            filter: saturate(100%) brightness(100%) invert(0);
+        }
+
+        50% {
+            filter: saturate(50%) brightness(150%) invert(0);
+        }
+
+        99.99% {
+            filter: saturate(0) brightness(300%) invert(0);
+        }
+
+        100% {
+            filter: saturate(0) brightness(0) invert(1);
+        }
+    }
+
+    // Content
+    // ------------------------------------------------------------
+    textarea.mat-input-element {
+        font-size: 14px;
+        line-height: 23px;
+        font-weight: 400;
+    }
+
+    .my-zg, textarea.mat-input-element.my-zg {
+        font-family: Zawgyi-One, sans-serif;
+    }
+
+    .my-uni, textarea.mat-input-element.my-uni {
+        font-family: "Noto Sans Myanmar UI", "Myanmar Text", Pyidaungsu, Padauk, Myanmar3, sans-serif;
+    }
+
+    .about-section {
+        color: mat-color($foreground, secondary-text);
+
+        h2 {
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        h3 {
+            font-weight: 600;
+            font-size: 14px;
+        }
+    }
+
+    // Footer
+    // ------------------------------------------------------------
+    footer.app-footer {
+        color: mat-color($foreground, secondary-text);
+
+        h3 {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            outline: 0;
+            -webkit-tap-highlight-color: transparent;
+            background: transparent;
+            position: relative;
+
+            &:hover,
+            &:focus,
+            &:active {
+                color: mat-color($primary);
+            }
+        }
+    }
+}

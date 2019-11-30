@@ -6,11 +6,10 @@
  * found under the LICENSE file in the root directory of this source tree.
  */
 
-import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { APP_BASE_HREF, CommonModule, DOCUMENT } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -20,37 +19,69 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
+import { CacheModule, MemoryCacheModule } from '@dagonmetric/ng-cache';
 import { ConfigModule } from '@dagonmetric/ng-config';
 import { StaticConfigLoaderModule } from '@dagonmetric/ng-config/static-loader';
 import { LogModule } from '@dagonmetric/ng-log';
-import { GTagLoggerModule } from '@dagonmetric/ng-log-gtag';
+import { ConsoleLoggerModule } from '@dagonmetric/ng-log/console';
 
 import { ZawgyiDetectorModule } from '@myanmartools/ng-zawgyi-detector';
 
 import { environment } from '../environments/environment';
 
-import { CdkTextareaSyncSizeModule } from '../cdk-extensions';
-import { CustomIconRegistry } from '../mat-extensions';
+import { CdkTextareaSyncSizeModule } from '../modules/cdk-extensions';
+import { CustomIconRegistry } from '../modules/mat-extensions';
+import { LinkService } from '../modules/seo';
+
+import { UrlHelper } from './shared/url-helper';
+
+import { HomeComponent } from './home';
 
 import { AppComponent } from './app.component';
+import { appSettings } from './app.settings';
 import { appSvgIconProviders } from './app.svg-icons';
 
+export const appId = 'unicode-code-points-lookup-web';
+
+export function baseHrefFactory(doc: Document): string | null | undefined {
+    // return document.getElementsByTagName('base')[0].href;
+
+    if (doc && doc.head) {
+        const baseEle = doc.head.querySelector('base') as HTMLBaseElement;
+
+        if (baseEle) {
+            return baseEle.getAttribute('href');
+        }
+    }
+
+    return undefined;
+}
+
+export const appRoutes: Routes = [
+    {
+        path: '',
+        component: HomeComponent,
+        // pathMatch: 'full'
+    },
+    { path: '**', redirectTo: '' }
+];
+
 /**
- * App module for both node and web platforms.
+ * App shared module for server, browser and test platforms.
  */
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        HomeComponent
     ],
     imports: [
-        BrowserModule.withServerTransition({ appId: 'unicode-code-points-lookup-web' }),
         CommonModule,
-        HttpClientModule,
         FormsModule,
 
-        BrowserTransferStateModule,
+        RouterModule.forRoot(appRoutes),
 
         FlexLayoutModule,
         MatButtonModule,
@@ -59,53 +90,40 @@ import { appSvgIconProviders } from './app.svg-icons';
         MatIconModule,
         MatInputModule,
         MatRadioModule,
+        MatSnackBarModule,
         MatToolbarModule,
 
         CdkTextareaSyncSizeModule,
 
-        // ng-zawgyi-detector module
-        ZawgyiDetectorModule.withOptions({ detectMixType: false }),
-
-        // ng-log modules
-        LogModule,
-        GTagLoggerModule.withOptions({
-            measurementId: 'UA-138062361-1'
-        }),
-
         // ng-config modules
         ConfigModule.init(),
-        StaticConfigLoaderModule.withSettings({
-            appVersion: '1.0.0',
-            title: 'Unicode Code Points Lookup',
-            titleSuffix: ' - Myanmar Tools',
-            githubRepoUrl: 'https://github.com/myanmartools/unicode-code-points-lookup-web',
-            githubImageAlt: 'Unicode Code Points Lookup GitHub Repo',
-            baseUrl: 'https://unicode-code-points-lookup.myanmartools.org/',
-            appImageUrl: 'assets/images/appicons/v1/logo.png',
-            githubImageUrl: 'assets/images/appicons/v1/github.svg',
-            githubReleaseUrl: 'https://github.com/myanmartools/unicode-code-points-lookup-web/releases',
-            socialLinks: [
-                {
-                    url: 'https://www.facebook.com/DagonMetric',
-                    label: 'Follow Myanmar Tools on Facebook',
-                    svgIconName: 'facebook'
-                },
-                {
-                    url: 'https://twitter.com/myanmartools',
-                    label: 'Follow Myanmar Tools on Twitter',
-                    svgIconName: 'twitter'
-                },
-                {
-                    url: 'https://medium.com/myanmartools',
-                    label: 'Myanmar Tools Blog on Medium',
-                    svgIconName: 'medium'
-                }
-            ]
+        StaticConfigLoaderModule.withSettings(appSettings),
+
+        // ng-log modules
+        LogModule.withConfig({
+            minLevel: environment.production ? 'warn' : 'trace'
         }),
+        ConsoleLoggerModule.withOptions({
+            enableDebug: !environment.production
+        }),
+
+        // ng-cache modules
+        CacheModule,
+        MemoryCacheModule,
+
+        // ng-zawgyi-detector module
+        ZawgyiDetectorModule,
 
         ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
     ],
     providers: [
+        {
+            provide: APP_BASE_HREF,
+            useFactory: baseHrefFactory,
+            deps: [DOCUMENT]
+        },
+        LinkService,
+        UrlHelper,
         {
             provide: MatIconRegistry,
             useClass: CustomIconRegistry

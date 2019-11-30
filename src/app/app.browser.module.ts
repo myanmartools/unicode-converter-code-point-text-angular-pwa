@@ -6,20 +6,42 @@
  * found under the LICENSE file in the root directory of this source tree.
  */
 
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { environment } from '../environments/environment';
+
+import { CacheLocalStorageModule } from '@dagonmetric/ng-cache';
+// import { FacebookAnalyticsLoggerModule } from '@dagonmetric/ng-log-facebook-analytics';
+
+// import { FirebaseAnalyticsLoggerModule } from '@dagonmetric/ng-log-firebase-analytics';
+import { FirebaseAnalyticsLoggerModule } from '../modules/ng-log-firebase-analytics';
+
 import { AppComponent } from './app.component';
-import { AppModule } from './app.module';
+import { appId, AppModule } from './app.module';
 
 /**
- * App module for web platform.
+ * App module for browser platform.
  */
 @NgModule({
     bootstrap: [AppComponent],
     imports: [
+        BrowserModule.withServerTransition({ appId: appId }),
+        BrowserTransferStateModule,
+        HttpClientModule,
+
         AppModule,
-        BrowserAnimationsModule
+
+        BrowserAnimationsModule,
+
+        CacheLocalStorageModule,
+
+        // FacebookAnalyticsLoggerModule,
+        FirebaseAnalyticsLoggerModule.config({
+            firebase: environment.firebase
+        })
     ]
 })
 export class AppBrowserModule { }

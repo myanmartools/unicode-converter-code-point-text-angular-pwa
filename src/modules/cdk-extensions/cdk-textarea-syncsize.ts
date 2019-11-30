@@ -50,7 +50,9 @@ export class CdkTextareaSyncSize implements AfterViewInit, DoCheck, OnDestroy {
 
     // tslint:disable-next-line: no-unsafe-any
     @Input('cdkAutosizeMinRows')
-    get minRows(): number { return this._minRows != null ? this._minRows : 0; }
+    get minRows(): number {
+        return this._minRows != null ? this._minRows : this.getMinRowsAutoHeight();
+    }
     set minRows(value: number) {
         this._minRows = value;
         this.setMinHeight();
@@ -150,7 +152,7 @@ export class CdkTextareaSyncSize implements AfterViewInit, DoCheck, OnDestroy {
         const textarea = this._elementRef.nativeElement as HTMLTextAreaElement;
         const value = textarea.value;
 
-        if (!force && this._minRows === this._previousMinRows && value === this._previousValue) {
+        if (!force && this.minRows === this._previousMinRows && value === this._previousValue) {
             return;
         }
 
@@ -213,6 +215,14 @@ export class CdkTextareaSyncSize implements AfterViewInit, DoCheck, OnDestroy {
         // Do nothing
     }
 
+    private getMinRowsAutoHeight(): number {
+        if (this._platform.isBrowser) {
+            return window.innerHeight > 960 ? 10 : window.innerHeight > 600 ? 8 : window.innerHeight > 400 ? 6 : 4;
+        } else {
+            return 8;
+        }
+    }
+
     private scrollToCaretPosition(textarea: HTMLTextAreaElement): void {
         const { selectionStart, selectionEnd } = textarea;
 
@@ -262,7 +272,8 @@ export class CdkTextareaSyncSize implements AfterViewInit, DoCheck, OnDestroy {
         }
 
         // To use input property
-        this._cachedLineHeight = 22;
+        // this._cachedLineHeight = 22;
+        this._cachedLineHeight = 23;
 
         this.setMinHeight();
         this.setMaxHeight();

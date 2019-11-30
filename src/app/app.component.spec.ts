@@ -2,99 +2,23 @@
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
-
-import { CommonModule } from '@angular/common';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-
-import { FlexLayoutModule } from '@angular/flex-layout';
-
-import { MatButtonModule } from '@angular/material/button';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatToolbarModule } from '@angular/material/toolbar';
-
-import { ConfigModule } from '@dagonmetric/ng-config';
-import { StaticConfigLoaderModule } from '@dagonmetric/ng-config/static-loader';
-import { LogModule } from '@dagonmetric/ng-log';
-
-import { ZawgyiDetectorModule } from '@myanmartools/ng-zawgyi-detector';
-
-import { CdkTextareaSyncSizeModule } from '../cdk-extensions';
-import { CustomIconRegistry } from '../mat-extensions';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { AppComponent } from './app.component';
-import { appSvgIconProviders } from './app.svg-icons';
+import { AppModule } from './app.module';
 
 describe('AppComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                AppComponent
-            ],
             imports: [
                 NoopAnimationsModule,
-                CommonModule,
                 HttpClientTestingModule,
-                FormsModule,
 
-                FlexLayoutModule,
-                MatButtonModule,
-                MatButtonToggleModule,
-                MatCheckboxModule,
-                MatIconModule,
-                MatInputModule,
-                MatRadioModule,
-                MatToolbarModule,
+                AppModule,
 
-                CdkTextareaSyncSizeModule,
-
-                ZawgyiDetectorModule.withOptions({ detectMixType: false }),
-
-                LogModule,
-
-                // ng-config modules
-                ConfigModule.init(),
-                StaticConfigLoaderModule.withSettings({
-                    appVersion: '1.0.0',
-                    title: 'Unicode Code Points Lookup',
-                    titleSuffix: ' - Myanmar Tools',
-                    githubRepoUrl: 'https://github.com/myanmartools/unicode-code-points-lookup-web',
-                    githubImageAlt: 'Unicode Code Points Lookup GitHub Repo',
-                    baseUrl: 'https://unicode-code-points-lookup.myanmartools.org/',
-                    appImageUrl: 'assets/images/appicons/v1/logo.png',
-                    githubImageUrl: 'assets/images/appicons/v1/github.svg',
-                    githubReleaseUrl: 'https://github.com/myanmartools/unicode-code-points-lookup-web/releases',
-                    socialLinks: [
-                        {
-                            url: 'https://www.facebook.com/DagonMetric',
-                            label: 'Follow Myanmar Tools on Facebook',
-                            svgIconName: 'facebook'
-                        },
-                        {
-                            url: 'https://twitter.com/myanmartools',
-                            label: 'Follow Myanmar Tools on Twitter',
-                            svgIconName: 'twitter'
-                        },
-                        {
-                            url: 'https://medium.com/myanmartools',
-                            label: 'Myanmar Tools Blog on Medium',
-                            svgIconName: 'medium'
-                        }
-                    ]
-                }),
-
+                ServiceWorkerModule.register('ngsw-worker.js', { enabled: false })
             ],
-            providers: [
-                {
-                    provide: MatIconRegistry,
-                    useClass: CustomIconRegistry
-                },
-                appSvgIconProviders
-            ]
         }).compileComponents();
     }));
 
@@ -104,121 +28,9 @@ describe('AppComponent', () => {
         expect(app).toBeTruthy();
     });
 
-    it("should have as title 'Unicode Code Points Lookup'", () => {
+    it("should have 'appTitle'", () => {
         const fixture = TestBed.createComponent(AppComponent);
         const app = fixture.debugElement.componentInstance as AppComponent;
-        expect(app.title).toEqual('Unicode Code Points Lookup');
-    });
-
-    it("should have as title 'Unicode Code Points Lookup' in app-header tag", () => {
-        const fixture = TestBed.createComponent(AppComponent);
-        fixture.detectChanges();
-        const compiled = fixture.debugElement.nativeElement as HTMLElement;
-        const ele = compiled.querySelector('.app-header a.nav-brand span');
-        expect(ele && ele.textContent).toContain('Unicode Code Points Lookup');
-    });
-
-    it("'sourceText' : 'ကခ' should be converted to 'outText' : '\\u1000\\u1001'", () => {
-        const fixture = TestBed.createComponent(AppComponent);
-        const app = fixture.debugElement.componentInstance as AppComponent;
-        app.ngOnInit();
-        app.sourceText = 'ကခ';
-        expect(app.outText).toEqual('\\u1000\\u1001');
-    });
-
-    it("'sourceText' : '❤️‍' should be converted to 'outText' : '\\u2764\\uFE0F\\u200D'", () => {
-        const fixture = TestBed.createComponent(AppComponent);
-        const app = fixture.debugElement.componentInstance as AppComponent;
-        app.ngOnInit();
-        app.sourceText = '❤️‍';
-        expect(app.outText).toEqual('\\u2764\\uFE0F\\u200D');
-    });
-
-    it("'sourceText' : '\\u1000\\u1001' should be converted to 'outText' : 'ကခ'", () => {
-        const fixture = TestBed.createComponent(AppComponent);
-        const app = fixture.debugElement.componentInstance as AppComponent;
-        app.ngOnInit();
-        app.sourceText = '\\u1000\\u1001';
-        expect(app.outText).toEqual('ကခ');
-    });
-
-    it("'sourceText' : 'e\\u0301' should be converted to 'outText' : 'é'", () => {
-        const fixture = TestBed.createComponent(AppComponent);
-        const app = fixture.debugElement.componentInstance as AppComponent;
-        app.ngOnInit();
-        app.sourceText = 'e\\u0301';
-        expect(app.outText).toEqual('é');
-    });
-
-    it("'sourceText' : '\\u{D83D}\\u{DC36}' should be converted to 'outText' : '🐶'", () => {
-        const fixture = TestBed.createComponent(AppComponent);
-        const app = fixture.debugElement.componentInstance as AppComponent;
-        app.ngOnInit();
-        app.sourceText = '\\u{D83D}\\u{DC36}';
-        expect(app.outText).toEqual('🐶');
-    });
-
-    it("'sourceText' : '\\u{1F436}' should be converted to 'outText' : '🐶'", () => {
-        const fixture = TestBed.createComponent(AppComponent);
-        const app = fixture.debugElement.componentInstance as AppComponent;
-        app.ngOnInit();
-        app.sourceText = '\\u{1F436}';
-        expect(app.outText).toEqual('🐶');
-    });
-
-    it("'sourceText' : '\\u{1000 1001}' should be converted to 'outText' : 'ကခ'", () => {
-        const fixture = TestBed.createComponent(AppComponent);
-        const app = fixture.debugElement.componentInstance as AppComponent;
-        app.ngOnInit();
-        app.sourceText = '\\u{1000 1001}';
-        expect(app.outText).toEqual('ကခ');
-    });
-
-    it("'sourceText' : 'U+1F1F2U+1F1F2' should be converted to 'outText' : '🇲🇲'", () => {
-        const fixture = TestBed.createComponent(AppComponent);
-        const app = fixture.debugElement.componentInstance as AppComponent;
-        app.ngOnInit();
-        app.sourceText = 'U+1F1F2U+1F1F2';
-        expect(app.outText).toEqual('🇲🇲');
-    });
-
-    it("'sourceText' : 'U+1F436' should be converted to 'outText' : '🐶'", () => {
-        const fixture = TestBed.createComponent(AppComponent);
-        const app = fixture.debugElement.componentInstance as AppComponent;
-        app.ngOnInit();
-        app.sourceText = 'U+1F436';
-        expect(app.outText).toEqual('🐶');
-    });
-
-    it("'sourceText' : '\\U01F436' should be converted to 'outText' : '🐶'", () => {
-        const fixture = TestBed.createComponent(AppComponent);
-        const app = fixture.debugElement.componentInstance as AppComponent;
-        app.ngOnInit();
-        app.sourceText = '\\U01F436';
-        expect(app.outText).toEqual('🐶');
-    });
-
-    it("'sourceText' : '0x75' should be converted to 'outText' : 'u'", () => {
-        const fixture = TestBed.createComponent(AppComponent);
-        const app = fixture.debugElement.componentInstance as AppComponent;
-        app.ngOnInit();
-        app.sourceText = '0x75';
-        expect(app.outText).toEqual('u');
-    });
-
-    it("'sourceText' : '\\x75' should be converted to 'outText' : 'u'", () => {
-        const fixture = TestBed.createComponent(AppComponent);
-        const app = fixture.debugElement.componentInstance as AppComponent;
-        app.ngOnInit();
-        app.sourceText = '\\x75';
-        expect(app.outText).toEqual('u');
-    });
-
-    it("'sourceText' : '\\x{1000}' should be converted to 'outText' : 'က'", () => {
-        const fixture = TestBed.createComponent(AppComponent);
-        const app = fixture.debugElement.componentInstance as AppComponent;
-        app.ngOnInit();
-        app.sourceText = '\\x{1000}';
-        expect(app.outText).toEqual('က');
+        expect(app.appTitle).toEqual('Unicode Code Points Lookup - Unicode Encode / Decode');
     });
 });

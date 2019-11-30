@@ -6,9 +6,5 @@
  * found under the LICENSE file in the root directory of this source tree.
  */
 
-export interface SocialLinkItem {
-    url: string;
-    label?: string;
-    svgUrl?: string;
-    svgIconName?: string;
-}
+export * from './cdk-textarea-syncsize';
+export * from './cdk-textarea-syncsize.module';
