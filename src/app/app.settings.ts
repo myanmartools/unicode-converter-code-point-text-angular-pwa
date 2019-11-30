@@ -5,7 +5,7 @@ export const appSettings: { app: AppConfig } = {
         appVersion: '2.0.0',
         appName: 'Unicode Code Points Lookup',
         appDescription: 'Unicode Code Points Lookup is a Unicode encode decode online tool to convert UTF-32/UTF-16/UTF-8/hex numbers codepoint sequences to text and vice versa created by DagonMetric Myanmar Tools team.',
-        baseUrl: 'https://unicode-code-points-lookup.myanmartools.org/',
+        baseUrl: 'https://unicode-code-point-lookup.myanmartools.org/',
         navLinks: [
             {
                 url: 'https://myanmartools.org',
@@ -39,7 +39,7 @@ export const appSettings: { app: AppConfig } = {
                 iconName: 'logo-medium'
             },
             {
-                url: 'https://github.com/myanmartools/unicode-code-points-lookup-web',
+                url: 'https://github.com/myanmartools/unicode-code-point-lookup-pwa',
                 label: 'GitHub',
                 title: 'Get source code on GitHub',
                 iconName: 'logo-github',

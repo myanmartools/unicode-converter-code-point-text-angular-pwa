@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "unicode-code-points-lookup",
+    "site": "unicode-code-point-lookup",
     "public": "app",
     "cleanUrls": true,
     "ignore": [

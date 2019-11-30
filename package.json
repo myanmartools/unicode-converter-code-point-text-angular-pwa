@@ -1,17 +1,17 @@
 {
-  "name": "unicode-code-points-lookup-web",
+  "name": "unicode-code-point-lookup-pwa",
   "version": "2.0.0",
   "private": true,
   "author": "DagonMetric",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/myanmartools/unicode-code-points-lookup-web.git"
+    "url": "https://github.com/myanmartools/unicode-code-point-lookup-pwa.git"
   },
   "bugs": {
-    "url": "https://github.com/myanmartools/unicode-code-points-lookup-web/issues"
+    "url": "https://github.com/myanmartools/unicode-code-point-lookup-pwa/issues"
   },
-  "homepage": "https://github.com/myanmartools/unicode-code-points-lookup-web",
+  "homepage": "https://github.com/myanmartools/unicode-code-point-lookup-pwa",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

@@ -2,4 +2,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://unicode-code-points-lookup.myanmartools.org/sitemap.xml
+Sitemap: https://unicode-code-point-lookup.myanmartools.org/sitemap.xml

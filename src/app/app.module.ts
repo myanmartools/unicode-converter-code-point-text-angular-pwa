@@ -44,7 +44,7 @@ import { AppComponent } from './app.component';
 import { appSettings } from './app.settings';
 import { appSvgIconProviders } from './app.svg-icons';
 
-export const appId = 'unicode-code-points-lookup-web';
+export const appId = 'unicode-code-point-lookup-pwa';
 
 export function baseHrefFactory(doc: Document): string | null | undefined {
     // return document.getElementsByTagName('base')[0].href;
