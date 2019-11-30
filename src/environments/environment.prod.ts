@@ -8,7 +8,7 @@
 
 export const environment = {
     production: true,
-    firebase: {
+    gtag: {
         measurementId: 'UA-136936085-2'
     }
 };
