@@ -11,7 +11,6 @@ import { NavLinkItem } from './nav-link-item';
 export interface AppConfig {
     appName: string;
     appVersion: string;
-    releaseDateUtc: string;
     appDescription: string;
     baseUrl: string;
     navLinks: NavLinkItem[];

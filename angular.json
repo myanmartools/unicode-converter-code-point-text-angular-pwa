@@ -43,13 +43,6 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "assets": [
-                "src/favicon.ico",
-                "src/manifest.json",
-                "src/robots.txt",
-                "src/sitemap.xml",
-                "src/assets"
-              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,

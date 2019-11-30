@@ -1,12 +1,13 @@
 # Unicode Code Points Lookup (Angular PWA)
 
+[![Build Status](https://github.com/myanmartools/unicode-code-points-lookup-web/workflows/Build/badge.svg)](https://github.com/myanmartools/unicode-code-points-lookup-web/actions)
 [![Gitter](https://badges.gitter.im/myanmartools/community.svg)](https://gitter.im/myanmartools/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 Unicode code points lookup is a Unicode encode / decode converter for converting UTF-32/UTF-16/UTF-8 code point sequences to text and vice versa written in Angular and Typescript powered by DagonMetric Myanmar Tools.
 
 ## Live Application - Unicode Code Points Lookup
 
-[![Unicode Code Points Lookup](https://unicode-code-points-lookup.myanmartools.org/assets/images/uploads/screenshot.jpg)](https://unicode-code-points-lookup.myanmartools.org)
+[![Unicode Code Points Lookup](https://unicode-code-points-lookup.myanmartools.org/assets/images/screenshot.jpg)](https://unicode-code-points-lookup.myanmartools.org)
 
 [https://unicode-code-points-lookup.myanmartools.org](https://unicode-code-points-lookup.myanmartools.org)
 

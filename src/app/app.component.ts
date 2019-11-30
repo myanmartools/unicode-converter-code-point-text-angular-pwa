@@ -43,7 +43,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     get appTitleFull(): string {
-        return `${this.appTitle} - Unicode Encode / Decode`;
+        return `${this.appTitle} | Myanmar Tools`;
     }
 
     get appVersion(): string {
