@@ -3,8 +3,8 @@ import { AppConfig } from './shared/app-config';
 export const appSettings: { app: AppConfig } = {
     app: {
         appVersion: '2.0.0',
-        appName: 'unicode-code-point-lookup',
-        appDescription: 'unicode-code-point-lookup is a Unicode encode decode online tool to convert UTF-32/UTF-16/UTF-8/hex numbers codepoint sequences to text and vice versa created by DagonMetric Myanmar Tools team.',
+        appName: 'Unicode Code Point Lookup',
+        appDescription: 'Unicode Code Point Lookup is a Unicode encode decode online tool to convert Unicode codepoint numbers to text and vice versa by DagonMetric Myanmar Tools.',
         baseUrl: 'https://unicode-code-point-lookup.myanmartools.org/',
         navLinks: [
             {
