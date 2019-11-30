@@ -9,13 +9,6 @@
 export const environment = {
     production: true,
     firebase: {
-        apiKey: 'AIzaSyArt-RNC1_mrcg8FHsAP8AsZkXXiFcYAQQ',
-        authDomain: 'myanmartools.firebaseapp.com',
-        databaseURL: 'https://myanmartools.firebaseio.com',
-        projectId: 'myanmartools',
-        storageBucket: 'myanmartools.appspot.com',
-        messagingSenderId: '660201840730',
-        appId: '1:660201840730:web:e1892253d48e9d932ef863',
-        measurementId: 'G-98MFYGTWYV'
+        measurementId: 'UA-136936085-2'
     }
 };
