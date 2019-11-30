@@ -1,9 +1,10 @@
 # Unicode Code Points Lookup (Angular PWA)
 
 [![Build Status](https://github.com/myanmartools/unicode-code-points-lookup-web/workflows/Build/badge.svg)](https://github.com/myanmartools/unicode-code-points-lookup-web/actions)
+[![Build Status](https://dev.azure.com/myanmartools/unicode-code-points-lookup-web/_apis/build/status/myanmartools.unicode-code-points-lookup-web?branchName=master)](https://dev.azure.com/myanmartools/unicode-code-points-lookup-web/_build/latest?definitionId=10&branchName=master)
 [![Gitter](https://badges.gitter.im/myanmartools/community.svg)](https://gitter.im/myanmartools/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-Unicode code points lookup is a Unicode encode / decode converter for converting UTF-32/UTF-16/UTF-8 code point sequences to text and vice versa written in Angular and Typescript powered by DagonMetric Myanmar Tools.
+Unicode code points lookup is a Unicode encode / decode converter for converting UTF-32/UTF-16/UTF-8 code point sequences to text and vice versa written in Angular and Typescript powered by DagonMetric Myanmar Tools team.
 
 ## Live Application - Unicode Code Points Lookup
 
