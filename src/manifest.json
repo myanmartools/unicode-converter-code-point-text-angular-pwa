@@ -1,7 +1,7 @@
 {
-  "name": "unicode-code-point-lookup",
-  "short_name": "unicode-code-point-lookup",
-  "description": "unicode-code-point-lookup is a Unicode encode / decode tool to convert UTF-32/UTF-16/UTF-8 code point sequences to text and vice versa.",
+  "name": "Unicode Code Point Lookup",
+  "short_name": "Unicode Code Point Lookup",
+  "description": "Unicode Code Point Lookup is a Unicode encode / decode tool to convert UTF-32/UTF-16/UTF-8 code point sequences to text and vice versa.",
   "theme_color": "#795548",
   "background_color": "#ffffff",
   "display": "standalone",
