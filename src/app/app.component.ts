@@ -6,8 +6,7 @@
  * found under the LICENSE file in the root directory of this source tree.
  */
 
-// tslint:disable: binary-expression-operand-order
-// tslint:disable: no-bitwise
+// tslint:disable: binary-expression-operand-order no-bitwise
 
 import { isPlatformBrowser } from '@angular/common';
 import { ApplicationRef, Component, Inject, OnDestroy, OnInit, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
@@ -67,7 +66,11 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     get aboutFeaturesVisible(): boolean {
-        return !this._isAppUsedBefore ? true : false;
+        return !this._isAppUsedBefore;
+    }
+
+    get aboutContentVisible(): boolean {
+        return this._curVerAppUsedCount < 3;
     }
 
     private readonly _appLogoUrl = 'assets/images/appicons/v1/logo.png';
@@ -149,7 +152,7 @@ export class AppComponent implements OnInit, OnDestroy {
             return 0;
         }
 
-        const appUsedCountStr = this._cacheService.getItem<string>(`appUsedCount-v${this._appConfig.appVersion}`);
+        const appUsedCountStr = this._cacheService.getItem<string>(`appUsed-v${this._appConfig.appVersion}`);
         if (appUsedCountStr) {
             return parseInt(appUsedCountStr, 10);
         }
