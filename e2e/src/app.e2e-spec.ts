@@ -15,7 +15,7 @@ describe('workspace-project App', () => {
         page.navigateTo();
 
         // tslint:disable-next-line: no-floating-promises
-        expect(page.getTitleText()).toEqual('Unicode Code Points Lookup');
+        expect(page.getTitleText()).toEqual('unicode-code-point-lookup');
     });
 
     afterEach(async () => {
