@@ -31,6 +31,6 @@ describe('AppComponent', () => {
     it("should have 'appTitle'", () => {
         const fixture = TestBed.createComponent(AppComponent);
         const app = fixture.debugElement.componentInstance as AppComponent;
-        expect(app.appTitle).toEqual('Unicode Code Points Lookup - Unicode Encode / Decode');
+        expect(app.appTitle).toEqual('Unicode Code Points Lookup');
     });
 });
