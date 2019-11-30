@@ -8,12 +8,7 @@
 
 export const environment = {
     production: false,
-    firebase: {
-        apiKey: '',
-        projectId: '',
-        storageBucket: '',
-        messagingSenderId: '',
-        appId: '',
+    gtag: {
         measurementId: ''
     }
 };
