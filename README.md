@@ -1,7 +1,7 @@
 # Unicode Code Point Lookup (Angular PWA)
 
-[![Build Status](https://github.com/myanmartools/unicode-code-point-lookup-pwa/workflows/Build/badge.svg)](https://github.com/myanmartools/unicode-code-point-lookup-pwa/actions)
-[![Build Status](https://dev.azure.com/myanmartools/unicode-code-point-lookup-pwa/_apis/build/status/myanmartools.unicode-code-point-lookup-pwa?branchName=master)](https://dev.azure.com/myanmartools/unicode-code-point-lookup-pwa/_build/latest?definitionId=11&branchName=master)
+[![GitHub Actions Statuss](https://github.com/myanmartools/unicode-code-point-lookup-pwa/workflows/Main%20Workflow/badge.svg)](https://github.com/myanmartools/unicode-code-point-lookup-pwa/actions)
+[![Azure Pipelines Status](https://dev.azure.com/myanmartools/unicode-code-point-lookup-pwa/_apis/build/status/myanmartools.unicode-code-point-lookup-pwa?branchName=master)](https://dev.azure.com/myanmartools/unicode-code-point-lookup-pwa/_build/latest?definitionId=11&branchName=master)
 [![Gitter](https://badges.gitter.im/myanmartools/community.svg)](https://gitter.im/myanmartools/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 Unicode Code Point Lookup is a Unicode encode / decode converter for converting UTF-32/UTF-16/UTF-8 code point sequences to text and vice versa written in Angular and Typescript.
