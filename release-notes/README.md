@@ -2,6 +2,7 @@
 
 | Date (UTC) | Version |  |  |
 | :-- | :-- | :--: | :-- |
+| 2020-01-01 | 2.2.0 | [release notes](v2.2.0/README.md) | - |
 | 2019-12-01 | 2.1.1 | [release notes](v2.1.1/README.md) | - |
 | 2019-11-30 | 2.1.0 | [release notes](v2.1.0/README.md) | - |
 | 2019-11-30 | 2.0.0 | [release notes](v2.0.0/README.md) | - |
