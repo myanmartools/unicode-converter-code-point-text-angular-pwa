@@ -8,16 +8,16 @@ jobs:
           version: '12.x'
         displayName: 'Use Node 12.x'
       - script: |
-          yarn install --frozen-lockfile
+          npm ci
         displayName: 'Install dependencies'
       - script: |
-          yarn build
+          npm run build --if-present
         displayName: "Run build"
       - script: |
-          yarn test -c=ci
+          npm test -- -c=ci
         displayName: 'Run test'
       - script: |
-          yarn lint
+          npm run lint --if-present
         displayName: 'Run linting'
       - task: PublishPipelineArtifact@0
         inputs:
