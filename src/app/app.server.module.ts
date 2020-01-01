@@ -23,7 +23,7 @@ import { appId, AppModule } from './app.module';
  */
 @NgModule({
     imports: [
-        BrowserModule.withServerTransition({ appId: appId }),
+        BrowserModule.withServerTransition({ appId }),
         BrowserTransferStateModule,
         HttpClientModule,
 

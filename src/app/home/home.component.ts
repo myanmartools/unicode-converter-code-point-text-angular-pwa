@@ -171,6 +171,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
     private _cpInConvertEscapsesToChars = true;
 
     constructor(
+        // tslint:disable-next-line: ban-types
         @Inject(PLATFORM_ID) platformId: Object,
         private readonly _configService: ConfigService,
         private readonly _logService: LogService,
@@ -271,7 +272,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
     private convert(input: string): UnicodeFormatterResult {
         const result: UnicodeFormatterResult = {
             detectedEnc: null,
-            input: input,
+            input,
             inputIsCodePoints: false,
             formattedOutput: '',
             duration: 0,

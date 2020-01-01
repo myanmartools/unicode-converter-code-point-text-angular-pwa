@@ -28,8 +28,8 @@ import { auditTime, takeUntil } from 'rxjs/operators';
     selector: 'textarea[cdkTextareaSyncSize]',
     exportAs: 'cdkTextareaSyncSize',
     host: {
-        class: 'cdk-textarea-syncsize',
-        rows: '1',
+        'class': 'cdk-textarea-syncsize',
+        'rows': '1',
         '(input)': '_noopInputHandler()'
     }
 })
@@ -205,10 +205,10 @@ export class CdkTextareaSyncSize implements AfterViewInit, DoCheck, OnDestroy {
     }
 
     reset(): void {
-        if (this._initialHeight === undefined) {
+        if (this._initialHeight == null) {
             return;
         }
-        this._textareaElement.style.height = this._initialHeight;
+        this._textareaElement.style.height = this._initialHeight as string;
     }
 
     _noopInputHandler(): void {
@@ -272,8 +272,7 @@ export class CdkTextareaSyncSize implements AfterViewInit, DoCheck, OnDestroy {
         }
 
         // To use input property
-        // this._cachedLineHeight = 22;
-        this._cachedLineHeight = 23;
+        this._cachedLineHeight = 22;
 
         this.setMinHeight();
         this.setMaxHeight();

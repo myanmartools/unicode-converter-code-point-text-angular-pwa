@@ -82,6 +82,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private readonly _checkInterval = 1000 * 60 * 60 * 6;
 
     constructor(
+        // tslint:disable-next-line: ban-types
         @Inject(PLATFORM_ID) platformId: Object,
         private readonly _appRef: ApplicationRef,
         private readonly _swUpdate: SwUpdate,
@@ -123,7 +124,7 @@ export class AppComponent implements OnInit, OnDestroy {
             .pipe(
                 takeUntil(this._destroyed),
             )
-            .subscribe((evt) => {
+            .subscribe(evt => {
                 const snackBarRef = this._snackBar.open('Update available.', 'RELOAD');
                 snackBarRef
                     .onAction()
