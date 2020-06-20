@@ -49,7 +49,7 @@
     "@dagonmetric/ng-config": "^2.2.2",
     "@dagonmetric/ng-log": "^2.2.5",
     "@dagonmetric/ng-log-gtag": "^2.2.4",
-    "@myanmartools/ng-zawgyi-detector": "^1.2.1",
+    "@myanmartools/ng-zawgyi-detector": "^1.2.2",
     "@nguniversal/common": "^9.1.1",
     "@nguniversal/module-map-ngfactory-loader": "^8.2.6",
     "hammerjs": "^2.0.8",
