@@ -47,7 +47,7 @@
     "@dagonmetric/app-styles-base": "^0.1.1",
     "@dagonmetric/ng-cache": "^2.0.6",
     "@dagonmetric/ng-config": "^2.2.2",
-    "@dagonmetric/ng-log": "^2.2.6",
+    "@dagonmetric/ng-log": "^2.3.0",
     "@dagonmetric/ng-log-gtag": "^2.2.5",
     "@myanmartools/ng-zawgyi-detector": "^1.2.3",
     "@nguniversal/common": "^10.1.0",
