@@ -46,7 +46,7 @@
     "@angular/service-worker": "^8.2.14",
     "@dagonmetric/app-styles-base": "^0.1.1",
     "@dagonmetric/ng-cache": "^2.1.0",
-    "@dagonmetric/ng-config": "^2.2.2",
+    "@dagonmetric/ng-config": "^4.3.0",
     "@dagonmetric/ng-log": "^2.3.0",
     "@dagonmetric/ng-log-gtag": "^2.3.0",
     "@myanmartools/ng-zawgyi-detector": "^1.2.4",
