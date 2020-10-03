@@ -10,7 +10,7 @@ import { mkdirSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
 async function _renderUniversal() {
-    const routes = ['/', '/about', '/support', '/privacy'];
+    const routes = ['/'];
 
     const serverBundlePath = './app/server/main';
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
