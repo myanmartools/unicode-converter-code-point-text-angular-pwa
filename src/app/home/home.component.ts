@@ -6,22 +6,19 @@
  * found under the LICENSE file in the root directory of this source tree.
  */
 
-// tslint:disable: binary-expression-operand-order no-bitwise
-
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { AfterViewInit, Component, Inject, OnDestroy, OnInit, Optional, PLATFORM_ID, ViewChild } from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 
-import { ConfigService } from '@dagonmetric/ng-config';
 import { LogService } from '@dagonmetric/ng-log';
 
 import { DetectedEnc, DetectorResult, ZawgyiDetector } from '@myanmartools/ng-zawgyi-detector';
 
 import { CdkTextareaSyncSize } from '../../modules/cdk-extensions';
 
-import { AppConfig } from '../shared/app-config';
+import { appSettings } from '../shared/app-settings';
 
 export type CpOutFormatType = 'js' | 'es6' | 'uPlus';
 
@@ -150,7 +147,6 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
     private readonly _convertSubject = new Subject<string>();
     private readonly _destroyed = new Subject<void>();
     private readonly _isBrowser: boolean;
-    private readonly _appConfig: AppConfig;
 
     private _sourceText = '';
     private _outText = '';
@@ -171,75 +167,75 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
     private _cpInConvertEscapsesToChars = true;
 
     constructor(
-        // tslint:disable-next-line: ban-types
+        // eslint-disable-next-line @typescript-eslint/ban-types
         @Inject(PLATFORM_ID) platformId: Object,
-        private readonly _configService: ConfigService,
         private readonly _logService: LogService,
         private readonly _zawgyiDetector: ZawgyiDetector,
-        @Optional() @Inject(DOCUMENT) private readonly _document?: Document) {
+        @Optional() @Inject(DOCUMENT) private readonly _document?: Document
+    ) {
         this._isBrowser = isPlatformBrowser(platformId);
-        this._appConfig = this._configService.getValue<AppConfig>('app');
     }
 
     ngOnInit(): void {
-        this._convertSubject.pipe(
-            takeUntil(this._destroyed),
-            map(() => {
-                return this.convert(this.sourceText);
-            })
-        ).subscribe(result => {
-            if (result.inputIsCodePoints) {
-                this._cpOutOptionsVisible = false;
-                this._sourceFontEnc = null;
-
-                if (result.detectedEnc === 'zg') {
-                    this._targetFontEnc = 'zg';
-                } else if (result.detectedEnc === 'uni') {
-                    this._targetFontEnc = 'uni';
-                } else if (result.detectedEnc === 'mix') {
-                    this._targetFontEnc = 'mix';
-                } else {
-                    this._targetFontEnc = null;
-                }
-
-            } else {
-                if (result.formattedOutput && result.formattedOutput.length > 0) {
-                    this._cpOutOptionsVisible = true;
-                }
-
-                this._targetFontEnc = null;
-
-                if (result.detectedEnc === 'zg') {
-                    this._sourceFontEnc = 'zg';
-                } else if (result.detectedEnc === 'uni') {
-                    this._sourceFontEnc = 'uni';
-                } else if (result.detectedEnc === 'mix') {
-                    this._sourceFontEnc = 'mix';
-                } else {
+        this._convertSubject
+            .pipe(
+                takeUntil(this._destroyed),
+                map(() => {
+                    return this.convert(this.sourceText);
+                })
+            )
+            .subscribe((result) => {
+                if (result.inputIsCodePoints) {
+                    this._cpOutOptionsVisible = false;
                     this._sourceFontEnc = null;
-                }
-            }
 
-            this._outText = result.formattedOutput;
-
-            const eventName = result.inputIsCodePoints ? 'cp2text' : 'text2cp';
-
-            if (this._isBrowser && this._document) {
-                (this._document as HTMLDocument).body.classList.toggle('editing', this._sourceText.length > 0);
-            }
-
-            if (this._isBrowser && this._sourceText.length) {
-                this._logService.trackEvent({
-                    name: `convert_${eventName}`,
-                    properties: {
-                        input_length: this._sourceText.length,
-                        duration_msec: result.duration,
-                        app_version: this._appConfig.appVersion,
-                        app_platform: 'web'
+                    if (result.detectedEnc === 'zg') {
+                        this._targetFontEnc = 'zg';
+                    } else if (result.detectedEnc === 'uni') {
+                        this._targetFontEnc = 'uni';
+                    } else if (result.detectedEnc === 'mix') {
+                        this._targetFontEnc = 'mix';
+                    } else {
+                        this._targetFontEnc = null;
                     }
-                });
-            }
-        });
+                } else {
+                    if (result.formattedOutput && result.formattedOutput.length > 0) {
+                        this._cpOutOptionsVisible = true;
+                    }
+
+                    this._targetFontEnc = null;
+
+                    if (result.detectedEnc === 'zg') {
+                        this._sourceFontEnc = 'zg';
+                    } else if (result.detectedEnc === 'uni') {
+                        this._sourceFontEnc = 'uni';
+                    } else if (result.detectedEnc === 'mix') {
+                        this._sourceFontEnc = 'mix';
+                    } else {
+                        this._sourceFontEnc = null;
+                    }
+                }
+
+                this._outText = result.formattedOutput;
+
+                const eventName = result.inputIsCodePoints ? 'cp2text' : 'text2cp';
+
+                if (this._isBrowser && this._document) {
+                    (this._document as HTMLDocument).body.classList.toggle('editing', this._sourceText.length > 0);
+                }
+
+                if (this._isBrowser && this._sourceText.length) {
+                    this._logService.trackEvent({
+                        name: `convert_${eventName}`,
+                        properties: {
+                            input_length: this._sourceText.length,
+                            duration_msec: result.duration,
+                            app_version: appSettings.appVersion,
+                            app_platform: 'web'
+                        }
+                    });
+                }
+            });
     }
 
     ngAfterViewInit(): void {
@@ -352,7 +348,8 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
     }
 
     private inputContainsCodePoints(input: string): boolean {
-        if (/[Uu]\+10([A-Fa-f0-9]{4})/g.test(input) ||
+        if (
+            /[Uu]\+10([A-Fa-f0-9]{4})/g.test(input) ||
             /[Uu]\+([A-Fa-f0-9]{1,5})/g.test(input) ||
             /0x([A-Fa-f0-9]{1,6})/g.test(input) ||
             /\\[u]\{([A-Fa-f0-9 ]{1,})\}/g.test(input) ||
@@ -370,7 +367,6 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
     private convertToCodePoints(input: string): string {
         if (this.cpOutFormat === 'uPlus') {
             return this.convertToUPlusCodePoints(input);
-
         } else {
             return this.convertToJSES6CodePoints(input);
         }
@@ -412,14 +408,13 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
         return cpArray.join('');
     }
 
-    // tslint:disable-next-line: max-func-body-length
     private convertToJSES6CodePoints(input: string): string {
         const cpArray: string[] = [];
         let highSurrogate = 0;
 
         for (const c of input) {
             const cp = c.codePointAt(0);
-            if (!cp || cp < 0 || cp > 0xFFFF) {
+            if (!cp || cp < 0 || cp > 0xffff) {
                 cpArray.push(c);
 
                 continue;
@@ -427,16 +422,19 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
 
             if (highSurrogate !== 0) {
                 // this is a surrogate upper char, and code point contains the lower surrogate
-                if (cp >= 0xDC00 && cp <= 0xDFFF) {
-                    let upperSurrogateCp = 0x10000 + ((highSurrogate - 0xD800) << 10) + (cp - 0xDC00);
+                if (cp >= 0xdc00 && cp <= 0xdfff) {
+                    // eslint-disable-next-line no-bitwise
+                    let upperSurrogateCp = 0x10000 + ((highSurrogate - 0xd800) << 10) + (cp - 0xdc00);
 
                     if (this.cpOutFormat === 'es6') {
                         const pad = upperSurrogateCp.toString(16).toUpperCase();
                         cpArray.push(`\\u{${pad}}`);
                     } else {
                         upperSurrogateCp -= 0x10000;
-                        const pair1 = this.dec2hex4(0xD800 | (upperSurrogateCp >> 10));
-                        const pair2 = this.dec2hex4(0xDC00 | (upperSurrogateCp & 0x3FF));
+                        // eslint-disable-next-line no-bitwise
+                        const pair1 = this.dec2hex4(0xd800 | (upperSurrogateCp >> 10));
+                        // eslint-disable-next-line no-bitwise
+                        const pair2 = this.dec2hex4(0xdc00 | (upperSurrogateCp & 0x3ff));
                         cpArray.push(`\\u${pair1}\\u${pair2}`);
                     }
 
@@ -449,7 +447,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
                 continue;
             }
 
-            if (cp >= 0xD800 && cp <= 0xDBFF) {
+            if (cp >= 0xd800 && cp <= 0xdbff) {
                 // Start of supplementary character
                 highSurrogate = cp;
 
@@ -507,7 +505,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
                     if (!this.cpOutFormatEscapse) {
                         cpArray.push('"');
                     } else {
-                        cpArray.push('\\\"');
+                        cpArray.push('\\"');
                     }
                     break;
                 }
@@ -515,7 +513,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
                     if (!this.cpOutFormatEscapse) {
                         cpArray.push("'");
                     } else {
-                        cpArray.push("\\\'");
+                        cpArray.push("\\'");
                     }
                     break;
                 }
@@ -525,7 +523,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
                 }
                 default: {
                     // If ASCII
-                    if (cp > 0x1F && cp < 0x7F && this.cpOutPreserveASCII) {
+                    if (cp > 0x1f && cp < 0x7f && this.cpOutPreserveASCII) {
                         cpArray.push(String.fromCharCode(cp));
                     } else if (this.cpOutFormat === 'es6') {
                         const hex = cp.toString(16).toUpperCase();
@@ -585,8 +583,9 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
         return str;
     }
 
-    private replaceHexToChar(regex: RegExp, str: string, checkSpace: boolean = false): string {
+    private replaceHexToChar(regex: RegExp, str: string, checkSpace = false): string {
         return str.replace(regex, (matchstr, p1: string) => {
+            // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
             if (checkSpace && p1.match(' ')) {
                 let out = '';
                 const chars = p1.split(' ');
@@ -594,7 +593,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
                 for (const c of chars) {
                     const cp = parseInt(c, 16);
 
-                    if (cp > 0x10FFFF) {
+                    if (cp > 0x10ffff) {
                         return matchstr;
                     }
 
@@ -605,7 +604,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
             } else {
                 const cp = parseInt(p1, 16);
 
-                if (cp <= 0x10FFFF) {
+                if (cp <= 0x10ffff) {
                     return String.fromCodePoint(cp);
                 }
 
@@ -623,8 +622,8 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
         str = str.replace(/\\v/g, '\v');
         str = str.replace(/\\f/g, '\f');
         str = str.replace(/\\r/g, '\r');
-        str = str.replace(/\\\'/g, '\'');
-        str = str.replace(/\\\"/g, '\"');
+        str = str.replace(/\\'/g, "'");
+        str = str.replace(/\\"/g, '"');
         str = str.replace(/\\\\/g, '\\');
 
         return str;
@@ -633,6 +632,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
     private dec2hex4(d: number): string {
         const hexequiv = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
 
-        return hexequiv[(d >> 12) & 0xF] + hexequiv[(d >> 8) & 0xF] + hexequiv[(d >> 4) & 0xF] + hexequiv[d & 0xF];
+        // eslint-disable-next-line no-bitwise
+        return hexequiv[(d >> 12) & 0xf] + hexequiv[(d >> 8) & 0xf] + hexequiv[(d >> 4) & 0xf] + hexequiv[d & 0xf];
     }
 }
