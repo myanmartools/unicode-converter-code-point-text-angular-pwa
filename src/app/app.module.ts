@@ -23,8 +23,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { CacheModule, MemoryCacheModule } from '@dagonmetric/ng-cache';
-import { ConfigModule } from '@dagonmetric/ng-config';
-import { StaticConfigLoaderModule } from '@dagonmetric/ng-config/static-loader';
 import { LogModule } from '@dagonmetric/ng-log';
 import { ConsoleLoggerModule } from '@dagonmetric/ng-log/console';
 
@@ -41,7 +39,6 @@ import { UrlHelper } from './shared/url-helper';
 import { HomeComponent } from './home';
 
 import { AppComponent } from './app.component';
-import { appSettings } from './app.settings';
 import { appSvgIconProviders } from './app.svg-icons';
 
 export const appId = 'unicode-code-point-lookup-pwa';
@@ -50,7 +47,7 @@ export function baseHrefFactory(doc: Document): string | null | undefined {
     // return document.getElementsByTagName('base')[0].href;
 
     if (doc && doc.head) {
-        const baseEle = doc.head.querySelector('base') as HTMLBaseElement;
+        const baseEle = doc.head.querySelector('base');
 
         if (baseEle) {
             return baseEle.getAttribute('href');
@@ -63,7 +60,7 @@ export function baseHrefFactory(doc: Document): string | null | undefined {
 export const appRoutes: Routes = [
     {
         path: '',
-        component: HomeComponent,
+        component: HomeComponent
         // pathMatch: 'full'
     },
     { path: '**', redirectTo: '' }
@@ -73,10 +70,7 @@ export const appRoutes: Routes = [
  * App shared module for server, browser and test platforms.
  */
 @NgModule({
-    declarations: [
-        AppComponent,
-        HomeComponent
-    ],
+    declarations: [AppComponent, HomeComponent],
     imports: [
         CommonModule,
         FormsModule,
@@ -94,10 +88,6 @@ export const appRoutes: Routes = [
         MatToolbarModule,
 
         CdkTextareaSyncSizeModule,
-
-        // ng-config modules
-        ConfigModule.init(),
-        StaticConfigLoaderModule.withSettings(appSettings),
 
         // ng-log modules
         LogModule.withConfig({
@@ -132,4 +122,4 @@ export const appRoutes: Routes = [
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
