@@ -8,37 +8,28 @@
 
 import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
+import { ErrorHandler, Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
-import { MatIconRegistry } from '@angular/material';
+import { MatIconRegistry } from '@angular/material/icon';
 
 import { Observable, of } from 'rxjs';
-
-/**
- * Use SVG_ICONS (and SvgIconInfo) as "multi" providers to provide the SVG source
- * code for the icons that you wish to have preloaded in the `CustomIconRegistry`
- * For compatibility with the MdIconComponent, please ensure that the SVG source has
- * the following attributes:
- *
- * * `xmlns="http://www.w3.org/2000/svg"`
- * * `focusable="false"` (disable IE11 default behavior to make SVGs focusable)
- * * `height="100%"` (the default)
- * * `width="100%"` (the default)
- * * `preserveAspectRatio="xMidYMid meet"` (the default)
- *
- */
 
 export interface SvgIconInfo {
     name: string;
     svgSource: string;
+    namespace?: string;
 }
 
 export const SVG_ICON = new InjectionToken<SvgIconInfo[]>('SVG_ICON');
 
 interface SvgIconMap {
-    [iconName: string]: SVGElement;
+    [namespace: string]: {
+        [iconName: string]: SVGElement;
+    };
 }
+
+const DEFAULT_NS = '$$default';
 
 /**
  * A custom replacement for Angular Material's `MdIconRegistry`, which allows
@@ -48,43 +39,53 @@ interface SvgIconMap {
     providedIn: 'root'
 })
 export class CustomIconRegistry extends MatIconRegistry {
-    private readonly _preloadedSvgElements: SvgIconMap = {};
+    private cachedSvgElements: SvgIconMap = { [DEFAULT_NS]: {} };
 
     constructor(
         httpClient: HttpClient,
         sanitizer: DomSanitizer,
-        @Inject(SVG_ICON) svgIcons: SvgIconInfo[],
-        // tslint:disable-next-line:no-any
-        @Optional() @Inject(DOCUMENT) document?: any) {
-        super(httpClient, sanitizer, document);
-
-        if (document) {
-            this.loadSvgElements(svgIcons, document as HTMLDocument);
-        }
+        errorHandler: ErrorHandler,
+        @Inject(SVG_ICON) private readonly svgIcons: SvgIconInfo[],
+        @Optional() @Inject(DOCUMENT) readonly document?: Document
+    ) {
+        super(httpClient, sanitizer, document, errorHandler);
     }
 
     getNamedSvgIcon(iconName: string, namespace?: string): Observable<SVGElement> {
-        if (this._preloadedSvgElements[iconName]) {
-            return of(this._preloadedSvgElements[iconName].cloneNode(true) as SVGElement);
+        const nsIconMap = this.cachedSvgElements[namespace || DEFAULT_NS];
+        let preloadedElement: SVGElement | undefined = nsIconMap && nsIconMap[iconName];
+        if (!preloadedElement) {
+            preloadedElement = this.loadSvgElement(iconName, namespace);
         }
 
-        return super.getNamedSvgIcon(iconName, namespace);
+        return preloadedElement
+            ? of(preloadedElement.cloneNode(true) as SVGElement)
+            : super.getNamedSvgIcon(iconName, namespace);
     }
 
-    // tslint:disable-next-line:no-any
-    private loadSvgElements(svgIcons: SvgIconInfo[], doc?: HTMLDocument): void {
-        if (doc || typeof document === 'object') {
-            svgIcons.forEach(icon => {
-                const div = (doc || document).createElement('DIV');
+    private loadSvgElement(iconName: string, namespace?: string): SVGElement | undefined {
+        const svgIcon = this.svgIcons.find((icon) => {
+            return namespace ? icon.name === iconName && icon.namespace === namespace : icon.name === iconName;
+        });
 
-                // SECURITY: the source for the SVG icons is provided in code by trusted developers
-                // tslint:disable-next-line:no-inner-html
-                div.innerHTML = icon.svgSource;
-                const svgElement = div.querySelector('svg');
-                if (svgElement) {
-                    this._preloadedSvgElements[icon.name] = svgElement;
-                }
-            });
+        if (!svgIcon) {
+            return undefined;
+        }
+
+        if (this.document || typeof document === 'object') {
+            const ns = svgIcon.namespace || DEFAULT_NS;
+            const nsIconMap = this.cachedSvgElements[ns] || (this.cachedSvgElements[ns] = {});
+
+            // Creating a new `<div>` per icon is necessary for the SVGs to work correctly in IE11.
+            const div = (this.document || document).createElement('DIV');
+
+            // SECURITY: the source for the SVG icons is provided in code by trusted developers
+            div.innerHTML = svgIcon.svgSource;
+
+            const svgElement = div.querySelector('svg');
+            nsIconMap[svgIcon.name] = svgElement;
+
+            return svgElement;
         } else {
             throw new Error('CustomIconRegistry could not resolve document.');
         }
