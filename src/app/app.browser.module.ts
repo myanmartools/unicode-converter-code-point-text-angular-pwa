@@ -17,7 +17,7 @@ import { CacheLocalStorageModule } from '@dagonmetric/ng-cache';
 import { GTagLoggerModule } from '@dagonmetric/ng-log-gtag';
 
 import { AppComponent } from './app.component';
-import { appId, AppModule } from './app.module';
+import { AppModule, appId } from './app.module';
 
 /**
  * App module for browser platform.
@@ -39,4 +39,4 @@ import { appId, AppModule } from './app.module';
         GTagLoggerModule.withOptions(environment.gtag)
     ]
 })
-export class AppBrowserModule { }
+export class AppBrowserModule {}
