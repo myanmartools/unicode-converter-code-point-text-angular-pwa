@@ -8,17 +8,9 @@
 
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Platform } from '@angular/cdk/platform';
-import {
-    AfterViewInit,
-    Directive,
-    DoCheck,
-    ElementRef,
-    Input,
-    NgZone,
-    OnDestroy
-} from '@angular/core';
+import { AfterViewInit, Directive, DoCheck, ElementRef, Input, NgZone, OnDestroy } from '@angular/core';
 
-import { fromEvent, Subject } from 'rxjs';
+import { Subject, fromEvent } from 'rxjs';
 import { auditTime, takeUntil } from 'rxjs/operators';
 
 /**
@@ -28,8 +20,8 @@ import { auditTime, takeUntil } from 'rxjs/operators';
     selector: 'textarea[cdkTextareaSyncSize]',
     exportAs: 'cdkTextareaSyncSize',
     host: {
-        'class': 'cdk-textarea-syncsize',
-        'rows': '1',
+        class: 'cdk-textarea-syncsize',
+        rows: '1',
         '(input)': '_noopInputHandler()'
     }
 })
@@ -60,7 +52,9 @@ export class CdkTextareaSyncSize implements AfterViewInit, DoCheck, OnDestroy {
 
     // tslint:disable-next-line: no-unsafe-any
     @Input('cdkAutosizeMaxRows')
-    get maxRows(): number { return this._maxRows != null ? this._maxRows : 0; }
+    get maxRows(): number {
+        return this._maxRows != null ? this._maxRows : 0;
+    }
     set maxRows(value: number) {
         this._maxRows = value;
         this.setMaxHeight();
@@ -82,7 +76,6 @@ export class CdkTextareaSyncSize implements AfterViewInit, DoCheck, OnDestroy {
                 } else {
                     this.cacheTextareaLineHeightNonBrowser();
                 }
-
             } else {
                 this.reset();
             }
@@ -104,7 +97,8 @@ export class CdkTextareaSyncSize implements AfterViewInit, DoCheck, OnDestroy {
     constructor(
         private readonly _elementRef: ElementRef<HTMLElement>,
         private readonly _platform: Platform,
-        private readonly _ngZone: NgZone) {
+        private readonly _ngZone: NgZone
+    ) {
         this._textareaElement = this._elementRef.nativeElement as HTMLTextAreaElement;
     }
 
@@ -138,7 +132,7 @@ export class CdkTextareaSyncSize implements AfterViewInit, DoCheck, OnDestroy {
         }
     }
 
-    resizeToFitContent(force: boolean = false, suggestedMinHeight: number = -1): void {
+    resizeToFitContent(force = false, suggestedMinHeight = -1): void {
         if (!this._enabled) {
             return;
         }
@@ -178,8 +172,10 @@ export class CdkTextareaSyncSize implements AfterViewInit, DoCheck, OnDestroy {
         if (heightChanged && this.secondCdkTextareaSyncSize && suggestedMinHeight <= 0) {
             this.secondCdkTextareaSyncSize.resizeToFitContent(true, height);
 
-            if (this.secondCdkTextareaSyncSize._cachedHeight > 0 &&
-                this.secondCdkTextareaSyncSize._cachedHeight > height) {
+            if (
+                this.secondCdkTextareaSyncSize._cachedHeight > 0 &&
+                this.secondCdkTextareaSyncSize._cachedHeight > height
+            ) {
                 const newHeight = this.secondCdkTextareaSyncSize._cachedHeight;
                 textarea.style.height = `${newHeight}px`;
                 this._cachedHeight = newHeight;
@@ -208,7 +204,7 @@ export class CdkTextareaSyncSize implements AfterViewInit, DoCheck, OnDestroy {
         if (this._initialHeight == null) {
             return;
         }
-        this._textareaElement.style.height = this._initialHeight as string;
+        this._textareaElement.style.height = this._initialHeight;
     }
 
     _noopInputHandler(): void {
@@ -279,8 +275,7 @@ export class CdkTextareaSyncSize implements AfterViewInit, DoCheck, OnDestroy {
     }
 
     private setMinHeight(): void {
-        const minHeight = this.minRows && this._cachedLineHeight ?
-            `${this.minRows * this._cachedLineHeight}px` : null;
+        const minHeight = this.minRows && this._cachedLineHeight ? `${this.minRows * this._cachedLineHeight}px` : null;
 
         if (minHeight) {
             this._textareaElement.style.minHeight = minHeight;
@@ -288,8 +283,7 @@ export class CdkTextareaSyncSize implements AfterViewInit, DoCheck, OnDestroy {
     }
 
     private setMaxHeight(): void {
-        const maxHeight = this.maxRows && this._cachedLineHeight ?
-            `${this.maxRows * this._cachedLineHeight}px` : null;
+        const maxHeight = this.maxRows && this._cachedLineHeight ? `${this.maxRows * this._cachedLineHeight}px` : null;
 
         if (maxHeight) {
             this._textareaElement.style.maxHeight = maxHeight;

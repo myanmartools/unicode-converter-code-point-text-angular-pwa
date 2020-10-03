@@ -15,10 +15,8 @@ import { CdkTextareaSyncSize } from './cdk-textarea-syncsize';
  * The `NGMODULE` for `CdkTextareaSyncSize`.
  */
 @NgModule({
-    declarations: [
-        CdkTextareaSyncSize
-    ],
+    declarations: [CdkTextareaSyncSize],
     imports: [PlatformModule],
-    exports: [CdkTextareaSyncSize],
+    exports: [CdkTextareaSyncSize]
 })
-export class CdkTextareaSyncSizeModule { }
+export class CdkTextareaSyncSizeModule {}
