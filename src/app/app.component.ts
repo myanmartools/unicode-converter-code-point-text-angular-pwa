@@ -20,7 +20,7 @@ import { LogService } from '@dagonmetric/ng-log';
 
 import { environment } from '../environments/environment';
 
-import { AppConfig } from './shared/app-config';
+import { appSettings } from './shared/app-settings';
 import { NavLinkItem } from './shared/nav-link-item';
 import { UrlHelper } from './shared/url-helper';
 
@@ -35,7 +35,7 @@ import { UrlHelper } from './shared/url-helper';
 })
 export class AppComponent implements OnInit, OnDestroy {
     get appTitle(): string {
-        return this._appConfig.appName;
+        return appSettings.appName;
     }
 
     get appTitleFull(): string {
@@ -43,11 +43,11 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     get appVersion(): string {
-        return this._appConfig.appVersion;
+        return appSettings.appVersion;
     }
 
     get appDescription(): string {
-        return this._appConfig.appDescription;
+        return appSettings.appDescription;
     }
 
     get appLogoUrl(): string {
@@ -56,9 +56,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
     get navLinks(): NavLinkItem[] {
         if (this._isAppUsedBefore) {
-            return this._appConfig.navLinks;
+            return appSettings.navLinks;
         } else {
-            return this._appConfig.navLinks.filter((navLink) => navLink.expanded === true);
+            return appSettings.navLinks.filter((navLink) => navLink.expanded === true);
         }
     }
 
@@ -73,7 +73,6 @@ export class AppComponent implements OnInit, OnDestroy {
     private readonly _appLogoUrl = 'assets/images/appicons/v1/logo.png';
     private readonly _destroyed = new Subject<void>();
     private readonly _isBrowser: boolean;
-    private readonly _appConfig: AppConfig;
     private readonly _curVerAppUsedCount: number = 0;
     private readonly _isAppUsedBefore: boolean = false;
     private readonly _checkInterval = 1000 * 60 * 60 * 6;
@@ -122,7 +121,7 @@ export class AppComponent implements OnInit, OnDestroy {
                 this._logService.trackEvent({
                     name: 'reload_update',
                     properties: {
-                        app_version: this._appConfig.appVersion,
+                        app_version: appSettings.appVersion,
                         app_platform: 'web',
                         current_hash: evt.current.hash,
                         available_hash: evt.available.hash
@@ -141,7 +140,7 @@ export class AppComponent implements OnInit, OnDestroy {
             return 0;
         }
 
-        const appUsedCountStr = this._cacheService.getItem<string>(`appUsed-v${this._appConfig.appVersion}`);
+        const appUsedCountStr = this._cacheService.getItem<string>(`appUsed-v${appSettings.appVersion}`);
         if (appUsedCountStr) {
             return parseInt(appUsedCountStr, 10);
         }
@@ -172,7 +171,7 @@ export class AppComponent implements OnInit, OnDestroy {
             return;
         }
 
-        this._cacheService.setItem(`appUsed-v${this._appConfig.appVersion}`, `${this._curVerAppUsedCount + 1}`);
+        this._cacheService.setItem(`appUsed-v${appSettings.appVersion}`, `${this._curVerAppUsedCount + 1}`);
 
         if (!this._isAppUsedBefore) {
             this._cacheService.setItem('appUsed', 'true');
