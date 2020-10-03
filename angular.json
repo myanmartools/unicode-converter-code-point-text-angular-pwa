@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/app",
+            "outputPath": "dist/app/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -47,8 +47,7 @@
               "outputHashing": "all",
               "sourceMap": false,
               "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
+              "namedChunks": false,              
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -108,7 +107,7 @@
           },
           "configurations": {
             "ci": {
-              "browsers": "ChromeHeadless",
+              "browsers": "ChromeHeadlessCI",
               "reporters": ["progress", "junit"],
               "watch": false,
               "progress": false
@@ -130,12 +129,13 @@
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "outputPath": "dist/server",
+            "outputPath": "dist/app/server",
             "main": "src/main.server.ts",
             "tsConfig": "tsconfig.server.json"
           },
           "configurations": {
             "production": {
+              "outputHashing": "media",
               "optimization": true,
               "sourceMap": false,
               "fileReplacements": [
