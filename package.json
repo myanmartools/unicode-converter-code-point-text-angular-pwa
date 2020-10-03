@@ -15,10 +15,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "npm run build:prod",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e",
+    "build": "npm run build:prod",    
     "build:prod": "npm run build:universal:prod && npm run generate:prerender && npm run copy-files",
     "build:app:prod": "ng build --prod",
     "build:server:prod": "ng run app:server:production",
@@ -26,7 +23,10 @@
     "update:ngsw-config": "node_modules/.bin/ngsw-config dist/app ngsw-config.json",
     "compile:prerender": "tsc -p tsconfig.prerender.json",
     "generate:prerender": "npm run compile:prerender && node dist/prerender && npm run update:ngsw-config",
-    "copy-files": "node copy-files.js"
+    "copy-files": "node copy-files.js",
+    "test": "ng test -c=ci",
+    "lint": "eslint -c .eslintrc.json --ext .js,.ts .",
+    "e2e": "ng e2e"
   },
   "dependencies": {
     "@angular/animations": "^10.1.4",
