@@ -6,56 +6,62 @@
  * found under the LICENSE file in the root directory of this source tree.
  */
 
-// tslint:disable:no-import-side-effect
-// tslint:disable:no-var-requires
-// tslint:disable:no-require-imports
-
-import 'zone.js/dist/zone-node';
-
-// tslint:disable-next-line: no-implicit-dependencies
-import 'reflect-metadata';
-
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
-// Import module map for lazy loading
-import { renderModuleFactory } from '@angular/platform-server';
-import { provideModuleMap } from '@nguniversal/module-map-ngfactory-loader';
+async function _renderUniversal() {
+    const routes = ['/', '/about', '/support', '/privacy'];
 
-export const ROUTES = [
-    '/'
-];
+    const serverBundlePath = './app/server/main';
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const { AppServerModule, AppServerModuleNgFactory, renderModule, renderModuleFactory } = await import(
+        serverBundlePath
+    );
 
-const PUBLIC_FOLDER = join(__dirname, 'app');
+    let renderModuleFn: (module: unknown, options: unknown) => Promise<string>;
+    let AppServerModuleDef: unknown;
 
-// * NOTE :: leave this as require() since this file is built Dynamically from webpack
-// tslint:disable-next-line: no-unsafe-any
-const { AppServerModuleNgFactory, LAZY_MODULE_MAP } = require('./server/main');
-
-// Load the index.html file containing referances to your application bundle.
-const index = readFileSync(join(PUBLIC_FOLDER, 'index.html'), 'utf8');
-
-let previousRender = Promise.resolve();
-
-// Iterate each route path
-ROUTES.forEach(route => {
-    const fullPath = join(PUBLIC_FOLDER, route);
-
-    // Make sure the directory structure is there
-    if (!existsSync(fullPath)) {
-        mkdirSync(fullPath);
+    if (renderModuleFactory && AppServerModuleNgFactory) {
+        // Happens when in ViewEngine mode.
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        renderModuleFn = renderModuleFactory;
+        AppServerModuleDef = AppServerModuleNgFactory;
+    } else if (renderModule && AppServerModule) {
+        // Happens when in Ivy mode.
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        renderModuleFn = renderModule;
+        AppServerModuleDef = AppServerModule;
+    } else {
+        throw new Error(`renderModule method and/or AppServerModule were not exported from: './server/main'.`);
     }
 
-    // Writes rendered HTML to index.html, replacing the file if it already exists.
-    // tslint:disable-next-line: no-unsafe-any
-    previousRender = previousRender.then(_ => renderModuleFactory(AppServerModuleNgFactory, {
-        document: index,
-        url: route,
-        extraProviders: [
-            // tslint:disable-next-line: no-unsafe-any
-            provideModuleMap(LAZY_MODULE_MAP)
-        ]
-    })).then(html => {
-        writeFileSync(join(fullPath, 'index.html'), html);
-    });
-});
+    const browserOutputPath = join(__dirname, 'app/browser');
+    const browserIndexOutputPath = join(browserOutputPath, 'index.html');
+
+    const indexHtml = readFileSync(browserIndexOutputPath, 'utf8');
+
+    for (const route of routes) {
+        const renderOpts = {
+            document: indexHtml,
+            url: route
+        };
+
+        const html = await renderModuleFn(AppServerModuleDef, renderOpts);
+
+        const outputFolderPath = join(browserOutputPath, route);
+        const outputIndexPath = join(outputFolderPath, 'index.html');
+
+        // This case happens when we are prerendering "/".
+        if (browserIndexOutputPath === outputIndexPath) {
+            const browserIndexOutputPathOriginal = join(browserOutputPath, 'index.original.html');
+            writeFileSync(browserIndexOutputPathOriginal, indexHtml);
+        }
+
+        // Make sure the directory structure is there
+        mkdirSync(outputFolderPath, { recursive: true });
+
+        writeFileSync(outputIndexPath, html);
+    }
+}
+
+void _renderUniversal();
