@@ -14,11 +14,10 @@ import { SwUpdate } from '@angular/service-worker';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { concat, interval, Subject } from 'rxjs';
+import { Subject, concat, interval } from 'rxjs';
 import { first, takeUntil } from 'rxjs/operators';
 
 import { CacheService } from '@dagonmetric/ng-cache';
-import { ConfigService } from '@dagonmetric/ng-config';
 import { LogService } from '@dagonmetric/ng-log';
 
 import { environment } from '../environments/environment';
@@ -61,7 +60,7 @@ export class AppComponent implements OnInit, OnDestroy {
         if (this._isAppUsedBefore) {
             return this._appConfig.navLinks;
         } else {
-            return this._appConfig.navLinks.filter(navLink => navLink.expanded === true);
+            return this._appConfig.navLinks.filter((navLink) => navLink.expanded === true);
         }
     }
 
@@ -82,17 +81,16 @@ export class AppComponent implements OnInit, OnDestroy {
     private readonly _checkInterval = 1000 * 60 * 60 * 6;
 
     constructor(
-        // tslint:disable-next-line: ban-types
+        // eslint-disable-next-line @typescript-eslint/ban-types
         @Inject(PLATFORM_ID) platformId: Object,
         private readonly _appRef: ApplicationRef,
         private readonly _swUpdate: SwUpdate,
         private readonly _cacheService: CacheService,
-        private readonly _configService: ConfigService,
         private readonly _logService: LogService,
         private readonly _urlHelper: UrlHelper,
-        private readonly _snackBar: MatSnackBar) {
+        private readonly _snackBar: MatSnackBar
+    ) {
         this._isBrowser = isPlatformBrowser(platformId);
-        this._appConfig = this._configService.getValue<AppConfig>('app');
 
         this._curVerAppUsedCount = this.getCurVerAppUsedCount();
         this._isAppUsedBefore = this.checkAppUsedBefore();
@@ -113,39 +111,31 @@ export class AppComponent implements OnInit, OnDestroy {
             return;
         }
 
-        const appIsStable = this._appRef.isStable.pipe(first(isStable => isStable === true));
+        const appIsStable = this._appRef.isStable.pipe(first((isStable) => isStable === true));
         concat(appIsStable, interval(this._checkInterval))
-            .pipe(
-                takeUntil(this._destroyed),
-            )
-            .subscribe(() => this._swUpdate.checkForUpdate());
-
-        this._swUpdate.available
-            .pipe(
-                takeUntil(this._destroyed),
-            )
-            .subscribe(evt => {
-                const snackBarRef = this._snackBar.open('Update available.', 'RELOAD');
-                snackBarRef
-                    .onAction()
-                    .subscribe(() => {
-                        this._logService.trackEvent({
-                            name: 'reload_update',
-                            properties: {
-                                app_version: this._appConfig.appVersion,
-                                app_platform: 'web',
-                                current_hash: evt.current.hash,
-                                available_hash: evt.available.hash
-                            }
-                        });
-
-                        // tslint:disable-next-line: no-floating-promises
-                        this._swUpdate.activateUpdate()
-                            .then(() => {
-                                document.location.reload();
-                            });
-                    });
+            .pipe(takeUntil(this._destroyed))
+            .subscribe(() => {
+                void this._swUpdate.checkForUpdate();
             });
+
+        this._swUpdate.available.pipe(takeUntil(this._destroyed)).subscribe((evt) => {
+            const snackBarRef = this._snackBar.open('Update available.', 'RELOAD');
+            snackBarRef.onAction().subscribe(() => {
+                this._logService.trackEvent({
+                    name: 'reload_update',
+                    properties: {
+                        app_version: this._appConfig.appVersion,
+                        app_platform: 'web',
+                        current_hash: evt.current.hash,
+                        available_hash: evt.available.hash
+                    }
+                });
+
+                void this._swUpdate.activateUpdate().then(() => {
+                    document.location.reload();
+                });
+            });
+        });
     }
 
     private getCurVerAppUsedCount(): number {
