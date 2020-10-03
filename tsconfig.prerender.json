@@ -8,5 +8,7 @@
       "node"
     ]
   },
-  "include": ["prerender.ts"]
+  "include": [
+    "prerender.ts"
+  ]
 }

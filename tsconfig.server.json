@@ -3,17 +3,13 @@
   "compilerOptions": {
     "outDir": "./dist/out-tsc/server",
     "module": "commonjs",
-    "target": "es2015",
     "types": [
       "node"
     ]
   },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "src/test.ts",
-    "src/**/*.spec.ts"
+  "files": [
+    "src/main.server.ts",
+    "server.ts"
   ],
   "angularCompilerOptions": {
     "entryModule": "./src/app/app.server.module#AppServerModule"
