@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 const config = require('./protractor.conf').config;
 
 config.capabilities = {
