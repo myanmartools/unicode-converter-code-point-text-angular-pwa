@@ -6,8 +6,6 @@
  * found under the LICENSE file in the root directory of this source tree.
  */
 
-// tslint:disable:max-line-length
-
 import { Provider } from '@angular/core';
 
 import { SVG_ICON } from '../modules/mat-extensions';
