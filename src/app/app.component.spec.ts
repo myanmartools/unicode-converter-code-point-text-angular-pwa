@@ -1,5 +1,3 @@
-// tslint:disable: no-floating-promises
-
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed, async } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
