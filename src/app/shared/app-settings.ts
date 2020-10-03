@@ -1,7 +1,7 @@
 import { AppConfig } from './app-config';
 
 export const appSettings: AppConfig = {
-    appVersion: '2.2.0',
+    appVersion: '2.2.1',
     appName: 'Unicode Code Point Lookup',
     appDescription:
         'Unicode Code Point Lookup is a Unicode encode decode online tool to convert Unicode codepoint numbers to text and vice versa by DagonMetric Myanmar Tools.',
