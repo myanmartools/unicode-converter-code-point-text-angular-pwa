@@ -1,7 +1,7 @@
 {
   "hosting": {
     "site": "unicode-code-point-lookup",
-    "public": "app",
+    "public": "browser",
     "cleanUrls": true,
     "ignore": [
       "firebase.json",
