@@ -6,8 +6,6 @@
  * found under the LICENSE file in the root directory of this source tree.
  */
 
-// tslint:disable: binary-expression-operand-order no-bitwise
-
 import { isPlatformBrowser } from '@angular/common';
 import { ApplicationRef, Component, Inject, OnDestroy, OnInit, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
