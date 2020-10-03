@@ -130,23 +130,23 @@
           "builder": "@angular-devkit/build-angular:server",
           "options": {
             "outputPath": "dist/app/server",
-            "main": "src/main.server.ts",
+            "main": "server.ts",
             "tsConfig": "tsconfig.server.json"
           },
           "configurations": {
             "production": {
               "outputHashing": "media",
-              "optimization": true,
-              "sourceMap": false,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
                 }
-              ]
+              ],
+              "sourceMap": false,
+              "optimization": true
             }
           }
-        }
+        }        
       }
     }
   },
