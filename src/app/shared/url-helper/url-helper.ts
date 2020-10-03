@@ -9,9 +9,7 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { Inject, Injectable, Optional } from '@angular/core';
 
-import { ConfigService } from '@dagonmetric/ng-config';
-
-import { AppConfig } from '../app-config';
+import { appSettings } from '../app-settings';
 
 /**
  * App url helper service.
@@ -20,13 +18,7 @@ import { AppConfig } from '../app-config';
     providedIn: 'root'
 })
 export class UrlHelper {
-    private readonly _appConfig: AppConfig;
-
-    constructor(
-        configService: ConfigService,
-        @Optional() @Inject(APP_BASE_HREF) private readonly _baseHref?: string) {
-        this._appConfig = configService.getValue<AppConfig>('app');
-    }
+    constructor(@Optional() @Inject(APP_BASE_HREF) private readonly _baseHref?: string) {}
 
     toAbsoluteUrl(url: string): string {
         let formattedUrl = (url || '').trim();
@@ -35,7 +27,7 @@ export class UrlHelper {
             return formattedUrl;
         }
 
-        let originalUrl = this._appConfig.baseUrl;
+        let originalUrl = appSettings.baseUrl;
 
         if (originalUrl.endsWith('/')) {
             originalUrl = originalUrl.substr(0, originalUrl.length - 1);
@@ -51,6 +43,6 @@ export class UrlHelper {
     }
 
     private isAbsoluteUrl(url: string): boolean {
-        return /^https?\:\/\//i.test(url);
+        return /^https?:\/\//i.test(url);
     }
 }
