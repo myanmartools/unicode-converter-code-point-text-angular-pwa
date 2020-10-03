@@ -1,40 +1,24 @@
-// @import 'normalize.css';
-@import '~@angular/material/theming';
-@import "~@dagonmetric/app-styles-base/core";
+/**
+ * @license
+ * Copyright DagonMetric. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found under the LICENSE file in the root directory of this source tree.
+ */
 
-@import "app/shared/style-variables";
-@import "app/app-theme";
+ @import './styles/app-theme';
 
-@import "modules/cdk-extensions/cdk-textarea-syncsize";
-
-$app-styles-config: app-styles-config(
-    $font-family-base: $font-family-base,
-    $font-size-base: $font-size-base,
-    $line-height-base: $line-height-base,
-    $font-weight-base: $font-weight-base,
-    $default-gap-width: $default-gap-width,
-    $container-max-widths: $container-max-widths);
-
-@include app-styles-core($app-styles-config);
-
-@include cdk-textarea-syncsize();
-
-// define a custom typography config that overrides the font-family as well as the
-// `headlines` and `body-1` levels.
-$typography-config: mat-typography-config($font-family: $font-family-base,
-$body-1: mat-typography-level($font-size-base, $line-height-base, $font-weight-base));
-
-// include material core styles.
-@include mat-core($typography-config);
-
-// Define the light theme.
-$primary: mat-palette($mat-brown);
-$accent: mat-palette($mat-brown, A200, A100, A400);
-
-$theme: mat-light-theme($primary, $primary);
-
-@include angular-material-theme($theme);
-@include app-theme($theme);
+// app-root
+// ------------------------------------------------------------
+// app-root {
+//     display: flex;
+//     flex-direction: column;
+//     position: absolute;
+//     top: 0;
+//     bottom: 0;
+//     left: 0;
+//     right: 0;
+// }
 
 // Font assets
 // ------------------------------------------------------------

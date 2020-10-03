@@ -7,8 +7,22 @@
  */
 
  // @import '~@angular/material/theming';
+ @import '../../node_modules/@angular/material/theming';
 
-@mixin app-theme($theme) {
+@import "variables";
+@import "core";
+
+@import "../modules/cdk-extensions/cdk-textarea-syncsize";
+
+$about-description-ani-delay: 4s;
+$about-description-ani-duration: 1s;
+
+$total-feature-items: 12;
+$feature-item-ani-duration: 5s;
+
+$footer-section-ani-duration: 2s;
+
+ @mixin app-theme($theme) {
     $primary: map-get($theme, primary);
     $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
@@ -126,4 +140,34 @@
             }
         }
     }
+}
+
+$typography-config: mat-typography-config($font-family: $font-family-base, $body-1: mat-typography-level($font-size-base, $line-height-base, $font-weight-base));
+
+// Default app light theme
+$primary: mat-palette($mat-brown);
+$accent: mat-palette($mat-brown, A200, A100, A400);
+
+$dark-theme: mat-dark-theme($primary, $accent);
+$light-theme: mat-light-theme($primary, $accent);
+
+$styles-config: styles-config(
+   $font-family-base: $font-family-base,
+   $font-size-base: $font-size-base,
+   $line-height-base: $line-height-base,
+   $font-weight-base: $font-weight-base,
+   $default-gap-width: $default-gap-width,
+   $mat-typography-config: $typography-config,
+   $mat-light-theme: $light-theme,
+   $container-max-widths: $container-max-widths);
+
+@include mat-core($typography-config);
+@include styles-core($styles-config);
+@include angular-material-theme($light-theme);
+
+@include app-theme($light-theme);
+
+.dark {
+    @include angular-material-theme($dark-theme);
+    @include app-theme($dark-theme);
 }

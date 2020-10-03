@@ -1,0 +1,45 @@
+/**
+ * @license
+ * Copyright DagonMetric. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found under the LICENSE file in the root directory of this source tree.
+ */
+
+// Ref: (bootstrap)
+
+@import "breakpoints";
+
+@mixin _make-container($default-gap-width) {
+    width: 100%;
+    // padding-right: ($default-gap-width / 2); // 15px
+    // padding-left: ($default-gap-width / 2); // 15px
+    padding-right: $default-gap-width;
+    padding-left: $default-gap-width;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@mixin _make-container-max-widths($max-widths, $breakpoints) {
+    @each $breakpoint, $container-max-width in $max-widths {
+        @include media-breakpoint-up($breakpoint, $breakpoints) {
+            max-width: $container-max-width;
+        }
+    }
+}
+
+@mixin container-styles($config) {
+    $enable-container-style-classes: map-get($config, 'enable-container-style-classes');
+    $default-gap-width: map-get($config, 'default-gap-width');
+    $container-max-widths: map-get($config, 'container-max-widths');
+    $screen-breakpoints: map-get($config, 'screen-breakpoints');
+    $default-gap-width: map-get($config, 'default-gap-width');
+
+    @if $enable-container-style-classes {
+        .container {
+            box-sizing: border-box;
+            @include _make-container($default-gap-width);
+            @include _make-container-max-widths($container-max-widths, $screen-breakpoints);
+        }
+    }
+}

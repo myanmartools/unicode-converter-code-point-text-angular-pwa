@@ -1,0 +1,88 @@
+/**
+ * @license
+ * Copyright DagonMetric. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found under the LICENSE file in the root directory of this source tree.
+ */
+
+@import 'reset';
+@import 'container';
+@import 'util';
+@import 'print';
+
+@function styles-config(
+    $reboot: true,
+    $box-sizing-to-border-box: false,
+    $enable-container-style-classes: true,
+    $screen-breakpoints: (
+        xs: 0,
+        xs-1: 260px,
+        xs-2: 320px,
+        sm: 600px, // 576 (bs)
+        sm-1: 720px,
+        sm-2: 840px,
+        md: 960px, //768 (bs)
+        md-1: 1066px,
+        md-2: 1173px,
+        lg: 1280px, //992 (bs)
+        lg-1: 1490px,
+        lg-2: 1700px,
+        xl: 1920px //1200 (bs)
+        ),
+    $container-max-widths: (
+        sm: 540px, // 576px
+        md: 720px, // 768px
+        lg: 960px, // 992px
+        xl: 1140px // 1200px
+        ),
+
+    $font-family-base: '-apple-system, BlinkMacSystemFont, "Segoe UI",Roboto, RobotoDraft, "San Francisco", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+    $font-size-base: 14px,
+    $line-height-base: 20px,
+    $font-weight-base: 400,
+
+    $default-gap-width: 24px,
+
+    $enable-clearfix-util-classes: false,
+    $enable-sr-reader-util-classes: false,
+
+    $enable-print-style-classes: false,
+    $print-page-size: a3,
+    $mat-typography-config: null,
+    $mat-light-theme: null,
+    $mat-dark-theme: null) {
+        $config: (
+            reboot: $reboot,
+            box-sizing-to-border-box: $box-sizing-to-border-box,
+            enable-container-style-classes: $enable-container-style-classes,
+            screen-breakpoints: $screen-breakpoints,
+            container-max-widths: $container-max-widths,
+            font-family-base: $font-family-base,
+            font-size-base: $font-size-base,
+            line-height-base: $line-height-base,
+            font-weight-base: $font-weight-base,
+            default-gap-width: $default-gap-width,
+            enable-clearfix-util-classes: $enable-clearfix-util-classes,
+            enable-sr-reader-util-classes: $enable-sr-reader-util-classes,
+            enable-print-style-classes: $enable-print-style-classes,
+            print-page-size: $print-page-size,
+            mat-typography-config: $mat-typography-config,
+            mat-light-theme: $mat-light-theme,
+            mat-dark-theme: $mat-dark-theme
+        );
+
+    @return  $config;
+}
+
+@mixin styles-core($config: null) {
+    @if $config==null {
+        $config: styles-config();
+    }
+
+    @include styles-reset($config);
+    @include container-styles($config);
+
+    @include util-styles($config);
+    @include print-styles($config);
+}

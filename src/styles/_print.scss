@@ -1,0 +1,74 @@
+/**
+ * @license
+ * Copyright DagonMetric. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found under the LICENSE file in the root directory of this source tree.
+ */
+
+@mixin print-styles($config) {
+    $enable-print-style-classes: map-get($config, 'enable-print-style-classes');
+    $print-page-size: map-get($config, 'print-page-size');
+    $screen-breakpoints: map-get($config, 'screen-breakpoints');
+    $print-body-min-width: map-get($screen-breakpoints, "lg");
+
+    @if $enable-print-style-classes {
+        // Ref: bootstrap
+
+        @media print {
+          *,
+          *::before,
+          *::after {
+            // Bootstrap specific; comment out `color` and `background`
+            text-shadow: none !important;
+            //background: transparent !important;
+            box-shadow: none !important;
+          }
+
+          // TODO: to review
+          // pre {
+          //   white-space: pre-wrap !important;
+          // }
+
+          // TODO: to review
+          thead {
+            display: table-header-group;
+          }
+
+          // TODO: to review
+          p,
+          h2,
+          h3 {
+            orphans: 3;
+            widows: 3;
+          }
+
+          // Material
+          h1, h2, h3, h4, h5, h6 {
+            page-break-after: avoid;
+          }
+
+          ul, ol, img, table, tr {
+            page-break-inside: avoid;
+          }
+
+          // TODO: to review
+          // img {
+          //   max-width: 100% !important;
+          // }
+
+          // Custom section
+          @page {
+            size: $print-page-size;
+          }
+
+          body {
+            min-width: $print-body-min-width !important;
+          }
+
+          .container {
+            min-width: $print-body-min-width !important;
+          }
+        }
+      }
+}
