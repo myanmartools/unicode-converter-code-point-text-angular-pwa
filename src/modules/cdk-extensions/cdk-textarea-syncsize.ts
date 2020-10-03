@@ -40,7 +40,6 @@ export class CdkTextareaSyncSize implements AfterViewInit, DoCheck, OnDestroy {
 
     private readonly _textareaElement: HTMLTextAreaElement;
 
-    // tslint:disable-next-line: no-unsafe-any
     @Input('cdkAutosizeMinRows')
     get minRows(): number {
         return this._minRows != null ? this._minRows : this.getMinRowsAutoHeight();
@@ -50,7 +49,6 @@ export class CdkTextareaSyncSize implements AfterViewInit, DoCheck, OnDestroy {
         this.setMinHeight();
     }
 
-    // tslint:disable-next-line: no-unsafe-any
     @Input('cdkAutosizeMaxRows')
     get maxRows(): number {
         return this._maxRows != null ? this._maxRows : 0;
@@ -60,7 +58,6 @@ export class CdkTextareaSyncSize implements AfterViewInit, DoCheck, OnDestroy {
         this.setMaxHeight();
     }
 
-    // tslint:disable-next-line: no-unsafe-any
     @Input('cdkTextareaSyncSize')
     get enabled(): boolean {
         return this._enabled;
@@ -82,7 +79,6 @@ export class CdkTextareaSyncSize implements AfterViewInit, DoCheck, OnDestroy {
         }
     }
 
-    // tslint:disable-next-line: no-unsafe-any
     @Input('secondCdkTextareaSyncSize')
     get secondCdkTextareaSyncSize(): CdkTextareaSyncSize | undefined {
         return this._secondCdkTextareaSyncSize;
