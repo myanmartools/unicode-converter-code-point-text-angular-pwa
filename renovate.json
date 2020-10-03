@@ -22,40 +22,6 @@
         "^@angular\/.*"
       ],
       "groupName": "angular"
-    },
-    {
-      "packagePatterns": [
-        "^@dagonmetric\/.*"
-      ],
-      "groupName": "dagonmetric"
-    },
-    {
-      "packagePatterns": [
-        "^@myanmartools\/.*"
-      ],
-      "groupName": "myanmartools"
-    },
-    {
-      "packagePatterns": [
-        "^@types\/.*"
-      ],
-      "groupName": "types"
-    },
-    {
-      "packagePatterns": ["^jasmine.*"],
-      "groupName": "jasmine"
-    },
-    {
-      "packagePatterns": ["^karma.*"],
-      "groupName": "karma"
-    },
-    {
-      "packagePatterns": ["^protractor.*"],
-      "groupName": "protractor"
-    },
-    {
-      "packageNames": ["typescript"],
-      "automerge": false
     }
   ]
 }
