@@ -20,7 +20,7 @@
     "build:app:prod": "ng build --prod",
     "build:server:prod": "ng run app:server:production",
     "build:universal:prod": "npm run build:app:prod && npm run build:server:prod",
-    "update:ngsw-config": "node_modules/.bin/ngsw-config dist/app ngsw-config.json",
+    "update:ngsw-config": "node_modules/.bin/ngsw-config dist/app/browser ngsw-config.json",
     "compile:prerender": "tsc -p tsconfig.prerender.json",
     "generate:prerender": "npm run compile:prerender && node dist/prerender && npm run update:ngsw-config",
     "copy-files": "node copy-files.js",
