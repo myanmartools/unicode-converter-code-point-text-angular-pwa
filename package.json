@@ -38,7 +38,7 @@
     "@angular/platform-browser": "^11.0.4",
     "@angular/platform-browser-dynamic": "^11.0.4",
     "@angular/platform-server": "^11.0.4",
-    "@angular/pwa": "^0.1100.3",
+    "@angular/pwa": "^0.1100.4",
     "@angular/router": "^11.0.4",
     "@angular/service-worker": "^11.0.4",
     "@dagonmetric/ng-cache": "^2.1.1",
@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.1100.3",
-    "@angular/cli": "^11.0.3",
+    "@angular/cli": "^11.0.4",
     "@angular/compiler-cli": "^11.0.4",
     "@angular/language-service": "^11.0.4",
     "@types/express": "^4.17.9",
