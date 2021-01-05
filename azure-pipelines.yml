@@ -5,29 +5,29 @@ jobs:
     steps:
       - task: UseNode@1
         inputs:
-          version: '12.x'
-        displayName: 'Use Node 12.x'
+          version: '14.x'
+        displayName: 'Use Node 14.x'
       - script: |
           npm ci
         displayName: 'Install dependencies'
       - script: |
-          npm run build --if-present
+          npm run lint --if-present
+        displayName: 'Run linting'
+      - script: |
+          npm run build
         displayName: "Run build"
       - script: |
           npm test --if-present
         displayName: 'Run test'
-      - script: |
-          npm run lint --if-present
-        displayName: 'Run linting'
-      - task: PublishPipelineArtifact@0
+      - task: PublishPipelineArtifact@1
         inputs:
           artifactName: 'dist'
           targetPath: 'dist'
         displayName: 'Publish build artifacts'
       - task: PublishTestResults@2
         inputs:
-          testRunTitle: zawgyi-unicode-converter
-          searchFolder: $(System.DefaultWorkingDirectory)/dist/junit
+          testRunTitle: JUnit
+          searchFolder: $(System.DefaultWorkingDirectory)/junit
           testResultsFormat: JUnit
           testResultsFiles: "**/TESTS*.xml"
         condition: succeededOrFailed()
