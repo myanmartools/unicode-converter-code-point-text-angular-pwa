@@ -72,7 +72,7 @@ export class LinkService {
 
         const selector = this.normalizeSelector(attrSelector);
 
-        return this._document.head.querySelector(selector);
+        return this._document.head.querySelector(selector) as HTMLLinkElement;
     }
 
     getTags(attrSelector: string): HTMLLinkElement[] {
