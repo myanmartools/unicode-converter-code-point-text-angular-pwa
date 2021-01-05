@@ -3,7 +3,7 @@
         <mat-form-field floatLabel="never">
             <textarea spellcheck="false" matInput placeholder="Code points or text" [(ngModel)]="sourceText"
                 [class.my-uni]="sourceFontEnc == 'uni'" [class.my-zg]="sourceFontEnc == 'zg'"
-                [style.font-family]="sourceFontEnc == 'mix' ? sourceFontCustom : null" cdkTextareaSyncSize
+                [style.font-family]="sourceFontEnc == 'mix' ? sourceFontCustom : null" [cdkTextareaSyncSize]="true"
                 #sourceTextareaSyncSize="cdkTextareaSyncSize"></textarea>
         </mat-form-field>
     </div>
@@ -12,7 +12,7 @@
             <textarea spellcheck="false" matInput placeholder="Formatted output" [ngModel]="outText"
                 [class.my-uni]="targetFontEnc == 'uni'" [class.my-zg]="targetFontEnc == 'zg'"
                 [style.font-family]="targetFontEnc == 'mix' ? targetFontCustom : null" [readonly]="!outText"
-                cdkTextareaSyncSize #outTextareaSyncSize="cdkTextareaSyncSize"></textarea>
+                [cdkTextareaSyncSize]="true" #outTextareaSyncSize="cdkTextareaSyncSize"></textarea>
         </mat-form-field>
     </div>
 </div>
